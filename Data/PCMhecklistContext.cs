@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using PMChecklist_PD_API.Models;
 
 namespace PMChecklist_PD_API.Models;
 
