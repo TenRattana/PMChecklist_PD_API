@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PMChecklist_PD_API.Models
 {
-    public class GroupUsers
+    public class CheckListOptions
     {
-        public string? GUserID { get; set; }
-        public string? GUserName { get; set; }
+        public string? CLOptionID { get; set; }
+        public string? CLOptionName { get; set; }
         public bool? IsActive { get; set; }
     }
 }

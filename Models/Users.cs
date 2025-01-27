@@ -5,19 +5,11 @@ namespace PMChecklist_PD_API.Models
 {
     public class Users
     {
-        [Key]
-        [Required]
-        public string UserID { get; set; } = null!;
-
-        [Required]
-        public string UserName { get; set; } = null!;
-
-        [Required]
-        public string GUserID { get; set; } = null!;
-
-        [DefaultValue(false)]
+        public string? UserID { get; set; }
+        public string? UserName { get; set; }
+        public string? GUserID { get; set; }
         public bool IsActive { get; set; }
 
-        public GroupUsers GroupUser { get; set; } = null!;
+        public GroupUsers? GroupUser { get; set; }
     }
 }
