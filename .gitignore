@@ -169,7 +169,7 @@ DocProject/Help/Html2
 DocProject/Help/html
 
 # Click-Once directory
-PMChecklst_PD_API/
+publish/
 
 # Publish Web Output
 *.[Pp]ublish.xml
@@ -350,3 +350,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+-enb
