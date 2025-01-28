@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 [ApiController]
 [Route("[controller]")]
 [Produces("application/json")]
-[Authorize(Roles = "SuperAdmin")]
+[Authorize(Policy = "SuperAdmins")]
+// [CustomRoleAuthorize("SuperAdmin")]
 public class GroupUsersController : ControllerBase
 {
     private readonly ILogger<GroupUsersController> _logger;
@@ -16,11 +17,9 @@ public class GroupUsersController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
     public IActionResult GetGroupUsers()
     {
         _logger.LogInformation("Access granted to GetGroupUsers API");
-
         return Ok("Group Users data");
     }
 }

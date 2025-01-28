@@ -23,11 +23,25 @@ public static class AuthorizationConfiguration
                 ValidIssuer = "PMChecklstIssuer",
                 ValidAudience = "PMChecklstAudience",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey.PadRight(32, '0'))),
-                RoleClaimType = ClaimTypes.Role
+                RoleClaimType = "Roles"
             };
         });
 
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+{
+    options.AddPolicy("SuperAdmins", policy =>
+        policy.RequireClaim("Permissions", "SuperAdmin"));
+
+    options.AddPolicy("Admin", policy =>
+        policy.RequireClaim("Permissions", "Admin"));
+
+    options.AddPolicy("User", policy =>
+        policy.RequireClaim("Permissions", "User"));
+
+    options.AddPolicy("GroupUser", policy =>
+        policy.RequireClaim("Permissions", "GroupUser"));
+
+});
 
     }
 }

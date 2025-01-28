@@ -12,18 +12,25 @@ public class Common
         _secretKey = configuration["SECRET_KEY"] ?? "PMChecklst_PD_API";
     }
 
-    public string GenerateJwtToken(string username, string role)
+    public string GenerateJwtToken(string username, string[] roles)
     {
         if (string.IsNullOrEmpty(username))
         {
             throw new ArgumentException("Username cannot be null or empty", nameof(username));
         }
 
-        var claims = new[] {
-            new Claim(JwtRegisteredClaimNames.Sub, username),
-            new Claim(ClaimTypes.Role, role)
-        };
+        var claims = new List<Claim>
+    {
+        new Claim(JwtRegisteredClaimNames.Sub, username),
+        new Claim("Roles", string.Join(",", roles))
+    };
 
+        string[] permissions = new[] { "Admin", "User", "SuperAdmin", "SuperUser" };
+
+        foreach (var permission in permissions)
+        {
+            claims.Add(new Claim("Permissions", permission));
+        }
 
         if (string.IsNullOrEmpty(_secretKey))
         {
@@ -43,4 +50,5 @@ public class Common
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
 }

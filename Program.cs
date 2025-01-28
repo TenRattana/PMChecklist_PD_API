@@ -23,32 +23,46 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
+// app.UseCors("AllowAllOrigins");app.UseCors(builder =>
+// {
+//     builder.WithOrigins("http://localhost:5170") 
+//            .AllowAnyMethod()
+//            .AllowAnyHeader()
+//            .AllowCredentials();
+// });
 
-app.UseAuthentication();  
-app.UseAuthorization();   
-
-app.UseCors("AllowAllOrigins");
+app.UseAuthentication();
+app.UseAuthorization(); 
 
 app.Use(async (context, next) =>
 {
-    var authHeader = context.Request.Headers["Authorization"].ToString();
+    var routeData = context.GetRouteData();
+    var controllerName = routeData?.Values["controller"]?.ToString();
 
-    if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
-    {
-        var token = authHeader.Substring("Bearer ".Length).Trim();
+    // if (controllerName == "GroupUsers")
+    // {
+    //     var authHeader = context.Request.Headers["Authorization"].ToString();
 
-        var handler = new JwtSecurityTokenHandler();
-        var jwtToken = handler.ReadJwtToken(token);
+    //     if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+    //     {
+    //         var token = authHeader.Substring("Bearer ".Length).Trim();
+    //         var handler = new JwtSecurityTokenHandler();
+    //         var jwtToken = handler.ReadJwtToken(token);
 
-        var username = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
-        var role = jwtToken?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+    //         var username = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
+    //         var rolesClaim = jwtToken?.Claims.FirstOrDefault(c => c.Type == "Roles")?.Value;
 
-        Console.WriteLine($"Token decoded: Username = {username}, Role = {role}");
-    }
+    //         if (!string.IsNullOrEmpty(rolesClaim))
+    //         {
+    //             var roles = rolesClaim.Split(',');
+    //         }
+    //     }
+    // }
 
     await next.Invoke();
 });
+
 
 app.MapControllers();
 

@@ -18,9 +18,10 @@ public static class SwaggerServiceConfiguration
             {
                 Name = "Authorization",
                 Type = SecuritySchemeType.ApiKey,
+                Scheme = "bearer",
+                BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "Enter your Bearer token in the format **'Bearer {token}'**",
-
+                Description = "Enter your Bearer token in the format 'Bearer {your token}'"
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement
