@@ -28,10 +28,10 @@ public class UsersController : ControllerBase
 
         var userDtos = users.Select(u => new UsersResources
         {
-            UserID = u.UserID,
-            UserName = u.UserName,
-            GUserID = u.GUserID,
-            GUserName = u.GroupUser.GUserName,
+            UserID = u.UserID!,
+            UserName = u.UserName!,
+            GUserID = u.GUserID!,
+            GUserName = u.GroupUser?.GUserName!,
             IsActive = u.IsActive
         }).ToList();
 

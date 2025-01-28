@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using PMChecklist_PD_API.Models;
 using System.Reflection;
 using DotNetEnv;
+using PMChecklist_PD_API.Services;
 
 public static class ConfigurationExtensions
 {
@@ -17,7 +18,6 @@ public static class ConfigurationExtensions
         services.AddScoped<Connection>();
         services.AddScoped<Common>();
         services.AddScoped<LdapService>();
-        
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddEndpointsApiExplorer();
 
@@ -51,7 +51,7 @@ public static class ConfigurationExtensions
             app.MapOpenApi();
         }
 
-        app.UseSwagger(options => 
+        app.UseSwagger(options =>
         {
             options.SerializeAsV2 = true;
         });

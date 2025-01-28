@@ -14,7 +14,6 @@ public class Common
 
     public string GenerateJwtToken(string username)
     {
-        // ตรวจสอบว่า username ไม่เป็นค่าว่าง
         if (string.IsNullOrEmpty(username))
         {
             throw new ArgumentException("Username cannot be null or empty", nameof(username));
@@ -26,7 +25,6 @@ public class Common
 
         var secretKey = _configuration["SECRET_KEY"] ?? Environment.GetEnvironmentVariable("SECRET_KEY");
 
-        // ตรวจสอบว่า SECRET_KEY ถูกตั้งค่าหรือไม่
         if (string.IsNullOrEmpty(secretKey))
         {
             throw new Exception("SECRET_KEY is not configured.");

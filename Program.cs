@@ -6,6 +6,7 @@ var app = builder.Build();
 
 app.ConfigureApp();
 
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

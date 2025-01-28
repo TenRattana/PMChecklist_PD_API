@@ -1,36 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
+using PMChecklist_PD_API.Services;
 using PMChecklist_PD_API.Models;
 
 public class LdapController : ControllerBase
 {
     private readonly LdapService _ldapService;
-    private readonly Common _common;
 
-    public LdapController(LdapService ldapService, Common common)
+    public LdapController(LdapService ldapService)
     {
         _ldapService = ldapService;
-        _common = common;
     }
 
-    [HttpPost("authenticate")]
-    public IActionResult Authenticate([FromForm] Ldap login)
+    [HttpGet("AuthenticateUser")]
+    public async Task<ActionResult<List<LdapUser>>> AuthenticateUser(string username, string password)
     {
-        bool isAuthenticated = _ldapService.AuthenticateUser(login.Username, login.Password);
-        if (isAuthenticated)
+        var users = await _ldapService.AuthenticateAsync(username, password);
+
+        if (users == null || !users.Any())
         {
-            var token = _common.GenerateJwtToken(login.Username);
-            return Ok(new { Token = token });
+            return NotFound("User not found.");
         }
-        else
-        {
-            return Unauthorized("Invalid credentials");
-        }
+
+        return Ok(users);
     }
 
-    [HttpGet("user-info")]
-    public IActionResult GetUserInfo([FromQuery] string username)
-    {
-        string userInfo = _ldapService.GetUserInfo(username);
-        return Ok(userInfo);
-    }
 }
+
+

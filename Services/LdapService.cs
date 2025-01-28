@@ -1,71 +1,96 @@
 using System;
-using System.DirectoryServices.Protocols;
-using System.Net;
-using System.Text;
+using System.Collections.Generic;
+using System.DirectoryServices;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using PMChecklist_PD_API.Models;
+using System.Runtime.InteropServices;
+using Microsoft.EntityFrameworkCore;
 
-public class LdapService
+namespace PMChecklist_PD_API.Services
 {
-    private readonly string _ldapServer = "10.99.100.5";
-    private readonly int _ldapPort = 389;
-    private readonly string _baseDn = "dc=kerrykfm01, dc=local";
-
-    public bool AuthenticateUser(string username, string password)
+    public class LdapService : ILdapAuthenticationService
     {
-        try
+        private readonly string _ldapServer;
+        private readonly string _ldapBaseDn;
+        private readonly PCMhecklistContext _context;
+
+        public LdapService(IConfiguration configuration, PCMhecklistContext context)
         {
-            using (var ldapConnection = new LdapConnection(new LdapDirectoryIdentifier(_ldapServer, _ldapPort)))
+            _context = context;
+            _ldapServer = configuration["LdapSettings:LdapServer"] ?? "LDAP://10.99.100.5";
+            _ldapBaseDn = configuration["LdapSettings:LdapBaseDn"] ?? "dc=kerrykfm01,dc=local";
+        }
+
+        public async Task<List<LdapUser>> AuthenticateAsync(string username, string password)
+        {
+            var ldapUrl = $"{_ldapServer}/{_ldapBaseDn}";
+            var userData = new List<LdapUser>();
+
+            try
             {
-                ldapConnection.Credential = new NetworkCredential(username, password);
-                ldapConnection.AuthType = AuthType.Basic;
-
-                ldapConnection.Bind();
-                return true;
-            }
-        }
-        catch (LdapException ex)
-        {
-            Console.WriteLine($"LDAP Authentication failed: {ex.Message}");
-            return false;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Unexpected error: {ex.Message}");
-            return false;
-        }
-    }
-
-
-    public string GetUserInfo(string username)
-    {
-        try
-        {
-            using (var ldapConnection = new LdapConnection(new LdapDirectoryIdentifier(_ldapServer, _ldapPort)))
-            {
-                ldapConnection.Bind();
-
-                var searchFilter = $"(&(objectClass=user)(sAMAccountName={username}))";
-                var request = new SearchRequest(_baseDn, searchFilter, SearchScope.Subtree, "cn", "title", "department");
-
-                var response = (SearchResponse)ldapConnection.SendRequest(request);
-
-                if (response.Entries.Count > 0)
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    var entry = response.Entries[0];
+                    using (var entry = new DirectoryEntry(ldapUrl, username, password))
+                    {
+                        using (var search = new DirectorySearcher(entry))
+                        {
+                            search.Filter = $"(SAMAccountName={username})";
+                            search.PropertiesToLoad.Add("samaccountname");
+                            search.PropertiesToLoad.Add("cn");
+                            search.PropertiesToLoad.Add("title");
+                            search.PropertiesToLoad.Add("department");
 
-                    string fullName = entry.Attributes["cn"]?.ToString() ?? "N/A";
-                    string title = entry.Attributes["title"]?.ToString() ?? "N/A";
-                    string department = entry.Attributes["department"]?.ToString() ?? "N/A";
+                            var result = search.FindOne();
 
-                    return $"Full Name: {fullName}, Title: {title}, Department: {department}";
+                            if (result != null)
+                            {
+                                var samAccountName = result.Properties["sAMAccountName"][0].ToString();
+                                var fullName = result.Properties["cn"][0].ToString();
+                                var position = result.Properties["title"][0].ToString();
+                                var department = result.Properties["department"][0].ToString();
+
+                                var users = await _context.Users
+                                    .Where(u => u.IsActive && u.UserName == fullName)
+                                    .Include(u => u.GroupUser)
+                                    .ToListAsync();
+
+                                if (users.Any())
+                                {
+                                    userData.Add(new LdapUser
+                                    {
+                                        UserName = samAccountName,
+                                        FullName = fullName,
+                                        Position = position,
+                                        Department = department,
+                                        UserID = users[0].UserID,
+                                        GUserID = users[0].GUserID,
+                                        GUserName = users[0].GroupUser?.GUserName
+                                    });
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"User {fullName} not found in the local database.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"User {username} not found in LDAP.");
+                            }
+                        }
+                    }
                 }
-
-                return "User not found";
+                else
+                {
+                    Console.WriteLine("DirectorySearcher is not supported on this platform.");
+                }
             }
-        }
-        catch (LdapException ex)
-        {
-            Console.WriteLine($"LDAP search failed: {ex.Message}");
-            return "Error during search";
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error during LDAP authentication: {ex.Message}");
+            }
+
+            return userData;
         }
     }
 }
