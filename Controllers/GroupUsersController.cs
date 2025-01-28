@@ -1,27 +1,26 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
-using PMChecklist_PD_API.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace PMChecklist_PD_API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Produces("application/json")]
+[Authorize(Roles = "SuperAdmin")]
 public class GroupUsersController : ControllerBase
 {
-    private readonly PCMhecklistContext _context;
+    private readonly ILogger<GroupUsersController> _logger;
 
-    public GroupUsersController(PCMhecklistContext context)
+    public GroupUsersController(ILogger<GroupUsersController> logger)
     {
-        _context = context;
+        _logger = logger;
     }
 
-    /// <summary>
-    /// Get All GroupUsers.
-    /// </summary>
-    /// <returns></returns>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GroupUsers>>> GetProducts()
+    [Authorize]
+    public IActionResult GetGroupUsers()
     {
-        return await _context.GroupUsers.ToListAsync();
+        _logger.LogInformation("Access granted to GetGroupUsers API");
+
+        return Ok("Group Users data");
     }
 }

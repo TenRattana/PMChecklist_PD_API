@@ -1,9 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using PMChecklist_PD_API.Models;
-using System.Reflection;
 using DotNetEnv;
-using PMChecklist_PD_API.Services;
 
 public static class ConfigurationExtensions
 {
@@ -11,13 +6,11 @@ public static class ConfigurationExtensions
     {
         Env.Load();
 
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
-        services.AddDbContext<PCMhecklistContext>(options => options.UseSqlServer(connectionString));
+        services.AddDatabaseServices(configuration);
 
         services.AddControllers();
         services.AddScoped<Connection>();
         services.AddScoped<Common>();
-        services.AddScoped<LdapService>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddEndpointsApiExplorer();
 
@@ -29,43 +22,10 @@ public static class ConfigurationExtensions
             });
         });
 
-        services.AddSwaggerGen(options =>
-        {
-            options.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Version = "v1",
-                Title = "PMChecklist Doc API",
-                Description = "ASP.NET Core Web API for managing PMChecklist",
-            });
+        services.AddSwaggerServices();
 
-            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-        });
-
+        services.AddLdapServices();
+        services.AuthorizationConfigurationServices(configuration);
     }
 
-    public static void ConfigureApp(this WebApplication app)
-    {
-        if (app.Environment.IsDevelopment())
-        {
-            app.MapOpenApi();
-        }
-
-        app.UseSwagger(options =>
-        {
-            options.SerializeAsV2 = true;
-        });
-
-        app.UseSwaggerUI(options =>
-        {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-            options.RoutePrefix = string.Empty;
-        });
-
-        app.UseCors("AllowAllOrigins");
-
-        app.UseHttpsRedirection();
-
-        app.UseAuthorization();
-    }
 }

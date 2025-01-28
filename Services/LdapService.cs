@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PMChecklist_PD_API.Services
 {
-    public class LdapService : ILdapAuthenticationService
+    public class LdapService 
     {
         private readonly string _ldapServer;
         private readonly string _ldapBaseDn;

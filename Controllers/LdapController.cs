@@ -2,13 +2,18 @@ using Microsoft.AspNetCore.Mvc;
 using PMChecklist_PD_API.Services;
 using PMChecklist_PD_API.Models;
 
+[ApiController]
+[Route("[controller]")]
+[Produces("application/json")]
 public class LdapController : ControllerBase
 {
     private readonly LdapService _ldapService;
+    private readonly Common _common;
 
-    public LdapController(LdapService ldapService)
+    public LdapController(LdapService ldapService, Common common)
     {
         _ldapService = ldapService;
+        _common = common;
     }
 
     [HttpGet("AuthenticateUser")]
@@ -21,7 +26,9 @@ public class LdapController : ControllerBase
             return NotFound("User not found.");
         }
 
-        return Ok(users);
+        var tokens = _common.GenerateJwtToken(username , users.First().GUserName!);
+
+        return Ok(new { tokens });
     }
 
 }

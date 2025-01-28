@@ -5,14 +5,14 @@ using System.Text;
 
 public class Common
 {
-    private readonly IConfiguration _configuration;
+    private readonly string _secretKey;
 
     public Common(IConfiguration configuration)
     {
-        _configuration = configuration;
+        _secretKey = configuration["SECRET_KEY"] ?? "PMChecklst_PD_API";
     }
 
-    public string GenerateJwtToken(string username)
+    public string GenerateJwtToken(string username, string role)
     {
         if (string.IsNullOrEmpty(username))
         {
@@ -20,24 +20,23 @@ public class Common
         }
 
         var claims = new[] {
-            new Claim(ClaimTypes.Name, username),
+            new Claim(JwtRegisteredClaimNames.Sub, username),
+            new Claim(ClaimTypes.Role, role)
         };
 
-        var secretKey = _configuration["SECRET_KEY"] ?? Environment.GetEnvironmentVariable("SECRET_KEY");
 
-        if (string.IsNullOrEmpty(secretKey))
+        if (string.IsNullOrEmpty(_secretKey))
         {
             throw new Exception("SECRET_KEY is not configured.");
         }
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
-
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey.PadRight(32, '0')));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
-            issuer: "your_issuer",        
-            audience: "your_audience",     
-            claims: claims,               
+            issuer: "PMChecklstIssuer",
+            audience: "PMChecklstAudience",
+            claims: claims,
             expires: DateTime.Now.AddHours(1),
             signingCredentials: credentials
         );

@@ -1,23 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
 using PMChecklist_PD_API.Models;
 using Microsoft.EntityFrameworkCore;
-using PMChecklist_PD_API.Resources;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PMChecklist_PD_API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Produces("application/json")]
+[Authorize(Roles = "SuperAdmin")]
 public class UsersController : ControllerBase
 {
     private readonly PCMhecklistContext _context;
+    private readonly Common _common;
 
-    public UsersController(PCMhecklistContext context)
+    public UsersController(PCMhecklistContext context , Common common)
     {
         _context = context;
+        _common = common;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<UsersResources>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<object>>> GetUsers()
     {
         var users = await _context.Users.Where(u => u.IsActive).Include(u => u.GroupUser).ToListAsync();
 
@@ -26,16 +30,9 @@ public class UsersController : ControllerBase
             return NotFound(); 
         }
 
-        var userDtos = users.Select(u => new UsersResources
-        {
-            UserID = u.UserID!,
-            UserName = u.UserName!,
-            GUserID = u.GUserID!,
-            GUserName = u.GroupUser?.GUserName!,
-            IsActive = u.IsActive
-        }).ToList();
+        var userDtos = _common.GenerateJwtToken(users.First().UserName!, "SuperAdmin");
 
-        return Ok(userDtos);
+        return Ok(new { userDtos });
     }
 
 
