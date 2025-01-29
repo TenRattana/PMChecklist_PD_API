@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PMChecklist_PD_API.Models;
 
 [ApiController]
 [Route("[controller]")]
@@ -8,11 +9,13 @@ using Microsoft.Extensions.Logging;
 [CustomRoleAuthorize("view_match_checklist_option")]
 public class MatchCheckListOptionController : ControllerBase
 {
-    private readonly ILogger<MatchCheckListOptionController> _logger;
+    private readonly Connection _connection;
+    private readonly PCMhecklistContext _context;
 
-    public MatchCheckListOptionController(ILogger<MatchCheckListOptionController> logger)
+    public MatchCheckListOptionController(Connection connection, PCMhecklistContext context)
     {
-        _logger = logger;
+        _connection = connection;
+        _context = context;
     }
 
     [HttpGet]

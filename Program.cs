@@ -12,6 +12,15 @@ builder.Host.UseNLog();
 builder.Logging.AddNLog();
 
 builder.Services.ConfigureServices(builder.Configuration);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin()  
+              .AllowAnyMethod()  
+              .AllowAnyHeader(); 
+    });
+});
 
 var app = builder.Build();
 
@@ -31,33 +40,12 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
+
 app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-// app.Use(async (context, next) =>
-// {
-//     var routeData = context.GetRouteData();
-//     var controllerName = routeData?.Values["controller"]?.ToString();
-
-//     if (!string.IsNullOrEmpty(controllerName) && controllerName.StartsWith("Bearer "))
-//     {
-//         var token = controllerName.Substring("Bearer ".Length).Trim();
-
-//         var handler = new JwtSecurityTokenHandler();
-//         var jwtToken = handler.ReadJwtToken(token);
-
-//         var username = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
-//         var role = jwtToken?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-//         var logger = LogManager.GetCurrentClassLogger();
-//         logger.Info($"Token decoded: Username = {username}, Role = {role}");
-//     }
-
-//     await next.Invoke();
-// });
 
 app.MapControllers();
 

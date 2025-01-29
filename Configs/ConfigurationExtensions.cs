@@ -9,18 +9,11 @@ public static class ConfigurationExtensions
         services.AddDatabaseServices(configuration);
 
         services.AddControllers();
-        services.AddScoped<Connection>();
+        services.AddSingleton<Connection>();
+
         services.AddScoped<Common>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddEndpointsApiExplorer();
-
-        services.AddCors(options =>
-        {
-            options.AddPolicy("AllowAllOrigins", policy =>
-            {
-                policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-            });
-        });
 
         services.AddSwaggerServices();
 

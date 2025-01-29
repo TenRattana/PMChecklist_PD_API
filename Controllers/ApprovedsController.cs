@@ -11,26 +11,28 @@ using PMChecklist_PD_API.Models;
 [CustomRoleAuthorize("view_approved")]
 public class ApprovedsController : ControllerBase
 {
-    private readonly ILogger<ApprovedsController> _logger;
+    private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
 
-    public ApprovedsController(ILogger<ApprovedsController> logger, PCMhecklistContext context)
+    public ApprovedsController(Connection connection, PCMhecklistContext context)
     {
+        _connection = connection;
         _context = context;
-        _logger = logger;
     }
+
 
     [HttpGet("/GetApproveds/{page}/{pageSize}")]
     public IActionResult GetApproveds(int page, int pageSize)
     {
         try
         {
-            var data = _context.ExpectedResult.FromSqlRaw("EXEC GetApprovedInPage @PageIndex = {0} , @PageSize = {1}", page, pageSize).ToList();
+            var data = _connection.QueryData<Menu>("SELECT TOP (1) * FROM AppConfig", new { });
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }

@@ -1,7 +1,6 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PMChecklist_PD_API.Models;
 
@@ -11,13 +10,13 @@ using PMChecklist_PD_API.Models;
 [CustomRoleAuthorize("view_login")]
 public class MenuController : ControllerBase
 {
-    private readonly ILogger<MenuController> _logger;
+    private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
 
-    public MenuController(ILogger<MenuController> logger, PCMhecklistContext context)
+    public MenuController(Connection connection, PCMhecklistContext context)
     {
+        _connection = connection;
         _context = context;
-        _logger = logger;
     }
 
     [HttpGet("/GetMenus")]
@@ -25,18 +24,28 @@ public class MenuController : ControllerBase
     {
         try
         {
-            var data = _context.Menu.FromSqlRaw("EXEC GetMenuPermission @GUserID = {0}", GUserID).ToList();
+            var data = _connection.QueryData<Menu>("EXEC GetMenuPermission @GUserID", new { GUserID });
 
             var result = new List<object>();
 
             foreach (var item in data)
             {
-                var parentMenuQuery = "EXEC GetMenuPermission @ParentMenuID = {0}, @GUserID = {1}";
-                var parentMenuData = _context.Menu.FromSqlRaw(parentMenuQuery, item.MenuID, GUserID).ToList();
+                var parentMenuData = _connection.QueryData<Menu>("EXEC GetMenuPermission @GUserID, @ParentMenuID", 
+                                                                new { GUserID, ParentMenuID = item.PermissionID });
 
                 var resultItem = new
                 {
-                    ...item,
+                    item.MenuID,
+                    item.MenuLabel,
+                    item.MenuPermission,
+                    item.PermissionStatus,
+                    item.NavigationTo,
+                    item.OrderNo,
+                    item.ParentMenuID,
+                    item.Path,
+                    item.Permission,
+                    item.PermissionID,
+                    item.Description,
                     ParentMenu = parentMenuData
                 };
 
@@ -47,9 +56,8 @@ public class MenuController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
-
 }
+

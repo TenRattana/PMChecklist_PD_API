@@ -10,26 +10,27 @@ using PMChecklist_PD_API.Models;
 [CustomRoleAuthorize("view_login")]
 public class DataTypesController : ControllerBase
 {
-    private readonly ILogger<DataTypesController> _logger;
+    private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
 
-    public DataTypesController(ILogger<DataTypesController> logger ,PCMhecklistContext context)
+    public DataTypesController(Connection connection, PCMhecklistContext context)
     {
+        _connection = connection;
         _context = context;
-        _logger = logger;
     }
 
     [HttpGet("/GetDataTypes")]
-    public async Task<ActionResult<DataTypes>> GetDataTypes()
+    public ActionResult<DataTypes> GetDataTypes()
     {
         try
         {
-            var data = await _context.DataTypes.Where(u => u.IsActive == true).ToListAsync();
+            var data = _connection.QueryData<DataTypes>("SELECT DTypeID, DTypeName, Icon, IsActive FROM DataTypes ORDER BY DTypeID", new { });
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }

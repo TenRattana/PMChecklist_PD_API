@@ -11,26 +11,45 @@ using PMChecklist_PD_API.Models;
 [CustomRoleAuthorize("view_login")]
 public class CheckListTypesController : ControllerBase
 {
-    private readonly ILogger<CheckListTypesController> _logger;
+    private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
 
-    public CheckListTypesController(ILogger<CheckListTypesController> logger, PCMhecklistContext context)
+    public CheckListTypesController(Connection connection, PCMhecklistContext context)
     {
-        _logger = logger;
+        _connection = connection;
         _context = context;
     }
 
     [HttpGet("/GetCheckListTypes")]
-    public async Task<ActionResult<CheckListTypes>> GetCheckListTypes()
+    public ActionResult<CheckListTypes> GetCheckListTypes()
     {
         try
         {
-            var data = await _context.CheckListTypes.Where(u => u.IsActive == true).ToListAsync();
+            var data = _connection.QueryData<CheckListTypes>("SELECT GTypeID , GTypeName , Icon , IsActive FROM GroupTypeCheckLists", new { });
+
+            var result = new List<object>();
+
+            foreach (var item in data)
+            {
+                var CheckListType = _connection.QueryData<CheckListTypes>("EXEC GetGroupTypeCheckListsInPage @ID", new { ID = item.GTypeID });
+
+                var resultItem = new
+                {
+                    item.GTypeID,
+                    item.GTypeName,
+                    item.Icon,
+                    item.IsActive,
+                    CheckListType
+                };
+
+                result.Add(resultItem);
+            }
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }

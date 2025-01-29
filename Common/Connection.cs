@@ -1,25 +1,84 @@
-using PMChecklist_PD_API.Models;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Collections.Generic;
+using Dapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 
 public class Connection
 {
-    private readonly PCMhecklistContext _context;
+    private readonly string _connectionString;
 
-    public Connection(PCMhecklistContext context)
+    public Connection(IConfiguration configuration)
     {
-        _context = context;
+        _connectionString = configuration.GetConnectionString("DefaultConnection") ?? 
+                            throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     }
 
-    public async Task<int> ExecuteData(string sqlQuery, params SqlParameter[] parameters)
+    private IDbConnection GetConnection()
     {
-        try
+        return new SqlConnection(_connectionString);
+    }
+
+    public IEnumerable<T> QueryData<T>(string sql, object? parameters = null)
+    {
+        parameters = parameters ?? new { };
+
+        using (var connection = GetConnection())
         {
-            return await _context.Database.ExecuteSqlRawAsync(sqlQuery, parameters);
+            connection.Open();
+            return connection.Query<T>(sql, parameters);
         }
-        catch (Exception ex)
+    }
+
+    public int Execute(string sql, object? parameters = null)
+    {
+        parameters = parameters ?? new { };
+
+        using (var connection = GetConnection())
         {
-            throw new Exception($"SQL execution failed: {ex.Message}", ex);
+            connection.Open();
+            return connection.Execute(sql, parameters);
+        }
+    }
+
+    public void ExecuteTransaction(Action<IDbConnection, IDbTransaction> action)
+    {
+        using (var connection = GetConnection())
+        using (var transaction = connection.BeginTransaction())
+        {
+            connection.Open();
+            try
+            {
+                action(connection, transaction);
+                transaction.Commit();
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
+        }
+    }
+
+    public TResult ExecuteTransaction<TResult>(Func<IDbConnection, IDbTransaction, TResult> action)
+    {
+        using (var connection = GetConnection())
+        using (var transaction = connection.BeginTransaction())
+        {
+            connection.Open();
+            try
+            {
+                var result = action(connection, transaction);
+                transaction.Commit();
+                return result;
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
     }
 }

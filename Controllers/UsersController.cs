@@ -11,13 +11,13 @@ namespace PMChecklist_PD_API.Controllers;
 [Authorize(Roles = "SuperAdmin")]
 public class UsersController : ControllerBase
 {
+    private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
-    private readonly Common _common;
 
-    public UsersController(PCMhecklistContext context , Common common)
+    public UsersController(Connection connection, PCMhecklistContext context)
     {
+        _connection = connection;
         _context = context;
-        _common = common;
     }
 
     [HttpGet]
@@ -27,7 +27,7 @@ public class UsersController : ControllerBase
 
         if (users == null || !users.Any())
         {
-            return NotFound(); 
+            return NotFound();
         }
 
         var userDtos = _common.GenerateJwtToken(users.First().UserName!, ["SuperAdmin"]);

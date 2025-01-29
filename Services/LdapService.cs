@@ -13,11 +13,12 @@ namespace PMChecklist_PD_API.Services
     {
         private readonly string _ldapServer;
         private readonly string _ldapBaseDn;
-        private readonly PCMhecklistContext _context;
+        private readonly Connection _connection;
 
-        public LdapService(IConfiguration configuration, PCMhecklistContext context)
+
+        public LdapService(IConfiguration configuration, Connection connection)
         {
-            _context = context;
+            _connection = connection;
             _ldapServer = configuration["LdapSettings:LdapServer"] ?? "LDAP://10.99.100.5";
             _ldapBaseDn = configuration["LdapSettings:LdapBaseDn"] ?? "dc=kerrykfm01,dc=local";
         }
@@ -52,35 +53,32 @@ namespace PMChecklist_PD_API.Services
                             var position = result.Properties["title"][0].ToString();
                             var department = result.Properties["department"][0].ToString();
 
-                            var users = await _context.Users
-                                .Where(u => u.IsActive && u.UserName == fullName)
-                                .Include(u => u.GroupUser)
-                                .ToListAsync();
 
-                            var sqlQuery = "SELECT p.PermissionName FROM GroupPermissions as gp INNER JOIN Permissions as p ON gp.PermissionID = p.PermissionID WHERE GuserID = {0} AND gp.IsActive = 1 AND gp.PermissionStatus = 1";
+                            var users = _connection.QueryData<Users>("SELECT g.UserID, gu.GUserID, gu.GUserName FROM Users as g LEFT JOIN GroupUsers as gu ON g.GUserID = gu.GUserID WHERE g.UserName = @cn", new { fullName }).ToList();
 
-                            var permissionNames = await _context.Permissions
-                                .FromSqlRaw(sqlQuery, users[0].GUserID)
-                                .Select(p => p.PermissionName)
-                                .ToListAsync();
-
-                            string[] permissionNamesArray = permissionNames.ToArray()!;
-
+                            var user = users.FirstOrDefault();
                             if (users.Any())
                             {
+                                var permissionNames = _connection.QueryData<string>(
+                                    "SELECT p.PermissionName FROM GroupPermissions as gp " +
+                                    "INNER JOIN Permissions as p ON gp.PermissionID = p.PermissionID " +
+                                    "WHERE gp.GUserID = @GUserID AND gp.IsActive = 1 AND gp.PermissionStatus = 1",
+                                    new { GUserID = user.GUserID })
+                                    .ToArray();
+
                                 userData.Add(new LdapUser
                                 {
                                     UserName = samAccountName,
                                     FullName = fullName,
                                     Position = position,
                                     Department = department,
-                                    UserID = users[0].UserID,
-                                    GUserID = users[0].GUserID,
-                                    GUserName = users[0].GroupUser?.GUserName,
-                                    Permissons = permissionNamesArray
+                                    UserID = user.UserID,
+                                    GUserID = user.GUserID,
+                                    GUserName = user.GUserName,
+                                    Permissions = permissionNames
                                 });
                             }
-                            Console.WriteLine(userData);
+
                         }
                     }
                 }

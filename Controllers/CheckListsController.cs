@@ -8,26 +8,27 @@ using PMChecklist_PD_API.Models;
 [CustomRoleAuthorize("view_checklist")]
 public class CheckListsController : ControllerBase
 {
-    private readonly ILogger<CheckListsController> _logger;
+    private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
 
-    public CheckListsController(ILogger<CheckListsController> logger, PCMhecklistContext context)
+    public CheckListsController(Connection connection, PCMhecklistContext context)
     {
+        _connection = connection;
         _context = context;
-        _logger = logger;
     }
 
     [HttpGet("/GetCheckLists/{page}/{pageSize}")]
     public ActionResult<CheckLists> GetCheckLists(int page, int pageSize)
     {
-        try
+         try
         {
-            var data = _context.CheckLists.FromSqlRaw("EXEC GetCheckListInPage @PageIndex = {0} , @PageSize = {1}", page, pageSize).ToList();
+            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @PageIndex , @PageSize", new { page, pageSize });
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -35,15 +36,15 @@ public class CheckListsController : ControllerBase
     [HttpGet("/SearchCheckLists/{Messages}")]
     public ActionResult<CheckLists> SearchCheckLists(string Messages)
     {
-        
-        try
+          try
         {
-            var data = _context.CheckLists.FromSqlRaw("EXEC SearchCheckListWithPagination @SearchTerm = {0}", Messages).ToList();
+            var data = _connection.QueryData<CheckListOptions>("EXEC SearchCheckListWithPagination @SearchTerm", new { SearchTerm = Messages });
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -51,29 +52,31 @@ public class CheckListsController : ControllerBase
     [HttpGet("/GetCheckList/{CListID}")]
     public ActionResult<CheckLists> GetCheckList(string CListID)
     {
-        try
+          try
         {
-            var data = _context.CheckLists.FromSqlRaw("EXEC GetCheckListInPage @ID = {0}", CListID).ToList();
+            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListInPage @ID", new { ID = CListID});
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
 
-    [HttpGet("/GetCheckListInForm/{Group_CListID}")]
-    public ActionResult<CheckLists> GetCheckListInForm(string Group_CListID)
+    [HttpGet("/GetCheckListInForm/{CListIDS}")]
+    public ActionResult<CheckLists> GetCheckListInForm(string CListIDS)
     {
-        try
+         try
         {
-            var data = _context.CheckLists.FromSqlRaw("EXEC GetCheckListInForm @ID = {0}", Group_CListID).ToList();
+            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListInForm @ID", new { ID = CListIDS });
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }

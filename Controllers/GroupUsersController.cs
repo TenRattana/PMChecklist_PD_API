@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PMChecklist_PD_API.Models;
 
 [ApiController]
 [Route("[controller]")]
@@ -8,11 +9,13 @@ using Microsoft.Extensions.Logging;
 [CustomRoleAuthorize("view_login")]
 public class GroupUsersController : ControllerBase
 {
-    private readonly ILogger<GroupUsersController> _logger;
+    private readonly Connection _connection;
+    private readonly PCMhecklistContext _context;
 
-    public GroupUsersController(ILogger<GroupUsersController> logger)
+    public GroupUsersController(Connection connection, PCMhecklistContext context)
     {
-        _logger = logger;
+        _connection = connection;
+        _context = context;
     }
 
     [HttpGet]

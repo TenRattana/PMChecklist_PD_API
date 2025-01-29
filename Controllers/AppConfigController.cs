@@ -8,28 +8,28 @@ using PMChecklist_PD_API.Models;
 [CustomRoleAuthorize("view_login", "view_home")]
 public class AppConfigController : ControllerBase
 {
-    private readonly ILogger<AppConfigController> _logger;
+
+    private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
 
-    public AppConfigController(ILogger<AppConfigController> logger, PCMhecklistContext context)
+    public AppConfigController(Connection connection, PCMhecklistContext context)
     {
+        _connection = connection;
         _context = context;
-        _logger = logger;
     }
 
     [HttpGet("/GetAppConfig")]
-    public async Task<ActionResult> GetAppConfig()
+    public ActionResult GetAppConfig()
     {
         try
         {
-            _logger.LogInformation("Fetching AppConfig data.");
+            var data = _connection.QueryData<Menu>("SELECT TOP (1) * FROM AppConfig", new { });
 
-            var data = await _context.AppConfig.ToListAsync();
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -75,7 +75,7 @@ public class AppConfigController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while saving app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while saving the data. Please try again later." });
         }
     }

@@ -8,13 +8,13 @@ using PMChecklist_PD_API.Models;
 [CustomRoleAuthorize("view_checklist_option")]
 public class CheckListOptionsController : ControllerBase
 {
-    private readonly ILogger<CheckListOptionsController> _logger;
+    private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
 
-    public CheckListOptionsController(ILogger<CheckListOptionsController> logger, PCMhecklistContext context)
+    public CheckListOptionsController(Connection connection, PCMhecklistContext context)
     {
+        _connection = connection;
         _context = context;
-        _logger = logger;
     }
 
     [HttpGet("/GetCheckListOptions/{page}/{pageSize}")]
@@ -22,12 +22,13 @@ public class CheckListOptionsController : ControllerBase
     {
         try
         {
-            var data = _context.CheckListOptions.FromSqlRaw("EXEC GetCheckListOptionInPage @PageIndex = {0} , @PageSize = {1}", page, pageSize).ToList();
+            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListOptionInPage @PageIndex , @PageSize", new { page, pageSize });
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -35,30 +36,32 @@ public class CheckListOptionsController : ControllerBase
     [HttpGet("/SearchCheckListOptions/{Messages}")]
     public ActionResult<object> SearchCheckListOptions(string Messages)
     {
-        
+
         try
         {
-            var data = _context.CheckListOptions.FromSqlRaw("EXEC SearchCheckListOptionsWithPagination @SearchTerm = {0}", Messages).ToList();
+            var data = _connection.QueryData<CheckListOptions>("EXEC SearchCheckListOptionsWithPagination @SearchTerm", new { SearchTerm = Messages });
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
 
-    [HttpGet("/GetCheckListOption/{GCLOptionID}")]
-    public ActionResult<CheckListOptions> GetCheckListOption(string GCLOptionID)
+    [HttpGet("/GetCheckListOption/{CLOptionID}")]
+    public ActionResult<CheckListOptions> GetCheckListOption(string CLOptionID)
     {
         try
         {
-            var data = _context.CheckListOptions.FromSqlRaw("EXEC  GetCheckListOptionInPage @ID = {0}", GCLOptionID).ToList();
+            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListOptionInPage @ID", new { ID = CLOptionID });
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching app config data.");
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
