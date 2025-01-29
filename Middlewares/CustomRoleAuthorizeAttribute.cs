@@ -23,18 +23,20 @@ public class CustomRoleAuthorizeAttribute : ActionFilterAttribute
 
         var token = authorizationHeader.Substring("Bearer ".Length).Trim();
 
-        var userRolesClaim = context.HttpContext.User.Claims
-            .FirstOrDefault(c => c.Type == "Permissions")?.Value;
+        var userPermissions = context.HttpContext.User.Claims
+            .Where(c => c.Type == "Permissions")  
+            .Select(c => c.Value)  
+            .ToArray();  
 
-        if (string.IsNullOrEmpty(userRolesClaim))
+        if (userPermissions == null || !userPermissions.Any())
         {
             context.Result = new ForbidResult();
             return;
         }
 
-        var userRoles = userRolesClaim.Split(',');
+      bool allRequiredPermissionsPresent = _requiredRoles.All(role => userPermissions.Contains(role));
 
-        if (!_requiredRoles.Any(role => userRoles.Contains(role)))
+        if (!allRequiredPermissionsPresent)
         {
             context.Result = new UnauthorizedResult();
             return;

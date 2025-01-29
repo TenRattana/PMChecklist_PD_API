@@ -1,7 +1,15 @@
+using NLog;
+using NLog.Web;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using NLog.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
+builder.Logging.AddNLog();
 
 builder.Services.ConfigureServices(builder.Configuration);
 
@@ -27,29 +35,29 @@ app.UseHttpsRedirection();
 app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();
-app.UseAuthorization(); 
+app.UseAuthorization();
 
+// app.Use(async (context, next) =>
+// {
+//     var routeData = context.GetRouteData();
+//     var controllerName = routeData?.Values["controller"]?.ToString();
 
-app.Use(async (context, next) =>
-{
-    var routeData = context.GetRouteData();
-    var controllerName = routeData?.Values["controller"]?.ToString();
+//     if (!string.IsNullOrEmpty(controllerName) && controllerName.StartsWith("Bearer "))
+//     {
+//         var token = controllerName.Substring("Bearer ".Length).Trim();
 
-    if (!string.IsNullOrEmpty(controllerName) && controllerName.StartsWith("Bearer "))
-    {
-        var token = controllerName.Substring("Bearer ".Length).Trim();
+//         var handler = new JwtSecurityTokenHandler();
+//         var jwtToken = handler.ReadJwtToken(token);
 
-        var handler = new JwtSecurityTokenHandler();
-        var jwtToken = handler.ReadJwtToken(token);
+//         var username = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
+//         var role = jwtToken?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
-        var username = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
-        var role = jwtToken?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+//         var logger = LogManager.GetCurrentClassLogger();
+//         logger.Info($"Token decoded: Username = {username}, Role = {role}");
+//     }
 
-        Console.WriteLine($"Token decoded: Username = {username}, Role = {role}");
-    }
-
-    await next.Invoke();
-});
+//     await next.Invoke();
+// });
 
 app.MapControllers();
 

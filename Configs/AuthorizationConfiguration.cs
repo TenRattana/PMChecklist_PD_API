@@ -14,6 +14,25 @@ public static class AuthorizationConfiguration
             options.RequireHttpsMetadata = false;
             options.SaveToken = true;
 
+            options.Events = new JwtBearerEvents
+            {
+                OnChallenge = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    context.Response.ContentType = "application/json";
+
+                    var response = new { message = "Unauthorized. Please provide a valid token." };
+                    return context.Response.WriteAsJsonAsync(response);
+                },
+                OnAuthenticationFailed = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    context.Response.ContentType = "application/json";
+                    var response = new { message = "Invalid token or token expired." };
+                    return context.Response.WriteAsJsonAsync(response);
+                }
+            };
+
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,

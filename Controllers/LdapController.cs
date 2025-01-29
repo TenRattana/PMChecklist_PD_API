@@ -17,9 +17,9 @@ public class LdapController : ControllerBase
     }
 
     [HttpGet("AuthenticateUser")]
-    public async Task<ActionResult<List<LdapUser>>> AuthenticateUser(string username, string password)
+    public async Task<ActionResult<List<LdapUser>>> AuthenticateUser(string UserName, string Password)
     {
-        var users = await _ldapService.AuthenticateAsync(username, password);
+        var users = await _ldapService.AuthenticateAsync(UserName, Password);
 
         if (users == null || !users.Any())
         {
