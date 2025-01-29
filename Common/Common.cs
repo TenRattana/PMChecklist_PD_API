@@ -20,14 +20,11 @@ public class Common
         }
 
         var claims = new List<Claim>
-    {
-        new Claim(JwtRegisteredClaimNames.Sub, username),
-        new Claim("Roles", string.Join(",", roles))
-    };
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, username)
+        };
 
-        string[] permissions = new[] { "Admin", "User", "SuperAdmin", "SuperUser" };
-
-        foreach (var permission in permissions)
+        foreach (var permission in roles)
         {
             claims.Add(new Claim("Permissions", permission));
         }

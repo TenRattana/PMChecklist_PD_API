@@ -25,10 +25,8 @@ public class LdapController : ControllerBase
         {
             return NotFound("User not found.");
         }
-
-        string[] roles = new[] { "Admin", "User", "SuperAdmin", "SuperUser" };
         
-        string token = _common.GenerateJwtToken(users.First().UserName!, roles);
+        string token = _common.GenerateJwtToken(users.First().UserName!, users.First().Permissons!);
 
         return Ok(new { token });
     }

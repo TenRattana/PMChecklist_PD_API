@@ -5,8 +5,7 @@ using Microsoft.Extensions.Logging;
 [ApiController]
 [Route("[controller]")]
 [Produces("application/json")]
-[Authorize(Policy = "SuperAdmins")]
-// [CustomRoleAuthorize("SuperAdmin")]
+[CustomRoleAuthorize("view_login")]
 public class GroupUsersController : ControllerBase
 {
     private readonly ILogger<GroupUsersController> _logger;

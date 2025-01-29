@@ -23,46 +23,33 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
-// app.UseHttpsRedirection();
-// app.UseCors("AllowAllOrigins");app.UseCors(builder =>
-// {
-//     builder.WithOrigins("http://localhost:5170") 
-//            .AllowAnyMethod()
-//            .AllowAnyHeader()
-//            .AllowCredentials();
-// });
+app.UseHttpsRedirection();
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();
 app.UseAuthorization(); 
+
 
 app.Use(async (context, next) =>
 {
     var routeData = context.GetRouteData();
     var controllerName = routeData?.Values["controller"]?.ToString();
 
-    // if (controllerName == "GroupUsers")
-    // {
-    //     var authHeader = context.Request.Headers["Authorization"].ToString();
+    if (!string.IsNullOrEmpty(controllerName) && controllerName.StartsWith("Bearer "))
+    {
+        var token = controllerName.Substring("Bearer ".Length).Trim();
 
-    //     if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
-    //     {
-    //         var token = authHeader.Substring("Bearer ".Length).Trim();
-    //         var handler = new JwtSecurityTokenHandler();
-    //         var jwtToken = handler.ReadJwtToken(token);
+        var handler = new JwtSecurityTokenHandler();
+        var jwtToken = handler.ReadJwtToken(token);
 
-    //         var username = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
-    //         var rolesClaim = jwtToken?.Claims.FirstOrDefault(c => c.Type == "Roles")?.Value;
+        var username = jwtToken?.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
+        var role = jwtToken?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
 
-    //         if (!string.IsNullOrEmpty(rolesClaim))
-    //         {
-    //             var roles = rolesClaim.Split(',');
-    //         }
-    //     }
-    // }
+        Console.WriteLine($"Token decoded: Username = {username}, Role = {role}");
+    }
 
     await next.Invoke();
 });
-
 
 app.MapControllers();
 

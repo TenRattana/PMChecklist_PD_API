@@ -15,7 +15,8 @@ namespace PMChecklist_PD_API.Models
         public DbSet<CheckListTypes> CheckListTypes { get; set; } = default!;
         public DbSet<GroupTypeCheckLists> GroupTypeCheckLists { get; set; } = default!;
         public DbSet<GroupCheckListOptions> GroupCheckListOptions { get; set; } = default!;
-
+        public DbSet<GroupPermission> GroupPermission { get; set; } = default!;
+        public DbSet<Permissions> Permissions { get; set; } = default!;
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

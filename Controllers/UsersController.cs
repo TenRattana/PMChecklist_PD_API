@@ -30,7 +30,7 @@ public class UsersController : ControllerBase
             return NotFound(); 
         }
 
-        var userDtos = _common.GenerateJwtToken(users.First().UserName!, "SuperAdmin");
+        var userDtos = _common.GenerateJwtToken(users.First().UserName!, ["SuperAdmin"]);
 
         return Ok(new { userDtos });
     }

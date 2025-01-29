@@ -33,7 +33,7 @@ namespace PMChecklist_PD_API.Models.Configurations
                 .HasDefaultValue(true)
                 .IsRequired(false);
 
-            builder.Property(gp => gp.CreateDate)
+            builder.Property(gp => gp.Create_Date)
                 .HasDefaultValueSql("getdate()")
                 .IsRequired(false);
         }

@@ -9,7 +9,7 @@ namespace PMChecklist_PD_API.Models
         public int PermissionID { get; set; }
         public bool? PermissionStatus { get; set; }
         public bool? IsActive { get; set; }
-        public DateTime? CreateDate { get; set; }
+        public DateTime? Create_Date { get; set; }
 
         public GroupUsers? GroupUser { get; set; }
 
