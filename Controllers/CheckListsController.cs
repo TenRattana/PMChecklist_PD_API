@@ -38,7 +38,7 @@ public class CheckListsController : ControllerBase
     {
           try
         {
-            var data = _connection.QueryData<CheckListOptions>("EXEC SearchCheckListWithPagination @SearchTerm", new { SearchTerm = Messages });
+            var data = _connection.QueryData<CheckLists>("EXEC SearchCheckListWithPagination @SearchTerm", new { SearchTerm = Messages });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -54,7 +54,7 @@ public class CheckListsController : ControllerBase
     {
           try
         {
-            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListInPage @ID", new { ID = CListID});
+            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @ID", new { ID = CListID});
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -70,7 +70,7 @@ public class CheckListsController : ControllerBase
     {
          try
         {
-            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListInForm @ID", new { ID = CListIDS });
+            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInForm @ID", new { ID = CListIDS });
 
             return Ok(new { status = true, message = "Select success", data });
         }

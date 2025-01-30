@@ -17,10 +17,4 @@ public class MatchCheckListController : ControllerBase
         _connection = connection;
         _context = context;
     }
-
-    [HttpGet]
-    public IActionResult GetGroupUsers()
-    {
-        return Ok("Group Users data");
-    }
 }

@@ -18,9 +18,38 @@ public class GroupUsersController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
-    public IActionResult GetGroupUsers()
+    [HttpGet("/GetGroupUsers")]
+    public ActionResult<GroupUsers> GetGroupUsers()
     {
-        return Ok("Group Users data");
+        
+        try
+        {
+            var data = _connection.QueryData<GroupUsers>("SELECT GUserID, GUserName, IsActive FROM GroupUsers ORDER BY GUserID", new { });
+
+            var result = new List<object>();
+
+            foreach (var item in data)
+            {
+                var Permissions = _connection.QueryData<Permissions>("SELECT gp.PermissionID, gp.PermissionStatus, gp.IsActive, p.Description as PermissionName From GroupPermissions as gp Inner join Permissions As p On p.PermissionID = gp.PermissionID WHERE gp.GUserID IN (@GuserID) AND gp.IsActive = 1", new { GuserID = item.GUserID! });
+
+                var resultItem = new
+                {
+                    item.GUserID,
+                    item.GUserName,
+                    item.IsActive,
+                    Permissions
+                };
+
+                result.Add(resultItem);
+            }
+
+            return Ok(new { status = true, message = "Select success", data });
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
+        }
     }
 }

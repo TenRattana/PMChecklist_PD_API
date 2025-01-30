@@ -23,7 +23,39 @@ public class FormsController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<ExpectedResult>("EXEC GetFormsInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<Forms>("EXEC GetFormsInPage @PageIndex , @PageSize", new { page, pageSize });
+
+            return Ok(new { status = true, message = "Select success", data });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
+        }
+    }
+
+    [HttpGet("/SearchForms/{Messages}")]
+    public IActionResult SearchForms(string Messages)
+    {
+        try
+        {
+            var data = _connection.QueryData<Forms>("EXEC SearchFormsPagination @SearchTerm ", new { SearchTerm = Messages });
+
+            return Ok(new { status = true, message = "Select success", data });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
+        }
+    }
+
+    [HttpGet("/GetForm/{FormID}")]
+    public IActionResult GetForm(string FormID)
+    {
+        try
+        {
+            var data = _connection.QueryData<Forms>("EXEC SearchFormsPagination @SearchTerm ", new { SearchTerm = FormID });
 
             return Ok(new { status = true, message = "Select success", data });
         }

@@ -20,11 +20,27 @@ public class ApprovedsController : ControllerBase
 
 
     [HttpGet("/GetApproveds/{page}/{pageSize}")]
-    public IActionResult GetApproveds(int page, int pageSize)
+    public ActionResult GetApproveds(int page, int pageSize)
     {
         try
         {
-            var data = _connection.QueryData<Menu>("SELECT TOP (1) * FROM AppConfig", new { });
+            var data = _connection.QueryData<Approveds>("EXEC GetApprovedInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
+
+            return Ok(new { status = true, message = "Select success", data });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
+        }
+    }
+
+    [HttpGet("/SearchApproveds/{Messages}")]
+    public ActionResult SearchApproveds(string Messages)
+    {
+        try
+        {
+            var data = _connection.QueryData<Approveds>("EXEC SearchApprovedWithPagination @SearchTerm", new { SearchTerm = Messages });
 
             return Ok(new { status = true, message = "Select success", data });
         }

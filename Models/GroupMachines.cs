@@ -8,9 +8,8 @@ namespace PMChecklist_PD_API.Models
         public string? GMachineID { get; set; }
         public string? GMachineName { get; set; }
         public string? Description { get; set; }
-        public string? ScheduleID { get; set; }
         public bool IsActive { get; set; }
-
-        public TimeSchedules? TimeSchedule { get; set; }
+        public bool Disables { get; set; }
+        public int RowNum { get; set; }
     }
 }

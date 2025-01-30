@@ -24,7 +24,7 @@ public class GroupCheckListOptionsController : ControllerBase
     {
          try
         {
-            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInPage @PageIndex , @PageSize", new { page, pageSize });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -40,7 +40,7 @@ public class GroupCheckListOptionsController : ControllerBase
     {
           try
         {
-            var data = _connection.QueryData<CheckListOptions>("EXEC SearchCheckListWithPagination @SearchTerm", new { SearchTerm = Messages });
+            var data = _connection.QueryData<GroupCheckListOptions>("EXEC SearchGroupCheckListOptionsWithPagination @SearchTerm", new { SearchTerm = Messages });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -56,7 +56,7 @@ public class GroupCheckListOptionsController : ControllerBase
     {
           try
         {
-            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListInPage @ID", new { ID = GCLOptionID});
+            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInPage @ID", new { ID = GCLOptionID});
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -67,12 +67,12 @@ public class GroupCheckListOptionsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetGroupCheckListOptionInForm/{CListIDS}")]
-    public ActionResult<CheckLists> GetGroupCheckListOptionInForm(string CListIDS)
+    [HttpGet("/GetGroupCheckListOptionInForm/{GCLOptionIDS}")]
+    public ActionResult<CheckLists> GetGroupCheckListOptionInForm(string GCLOptionIDS)
     {
          try
         {
-            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListInForm @ID", new { ID = CListIDS });
+            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInForm @ID", new { ID = GCLOptionIDS });
 
             return Ok(new { status = true, message = "Select success", data });
         }

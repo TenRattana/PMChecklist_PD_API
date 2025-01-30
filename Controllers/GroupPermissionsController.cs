@@ -17,10 +17,4 @@ public class GroupPermissionsController : ControllerBase
         _connection = connection;
         _context = context;
     }
-
-    [HttpGet]
-    public IActionResult GetGroupUsers()
-    {
-        return Ok("Group Users data");
-    }
 }

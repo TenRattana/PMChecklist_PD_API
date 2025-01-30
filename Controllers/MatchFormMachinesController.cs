@@ -1,29 +1,28 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using PMChecklist_PD_API.Models;
 
 [ApiController]
 [Route("[controller]")]
 [Produces("application/json")]
-[CustomRoleAuthorize("view_machine_group")]
-public class GroupMachinesController : ControllerBase
+[CustomRoleAuthorize("view_checklist")]
+public class MatchFormMachinesController : ControllerBase
 {
     private readonly Connection _connection;
     private readonly PCMhecklistContext _context;
 
-    public GroupMachinesController(Connection connection, PCMhecklistContext context)
+    public MatchFormMachinesController(Connection connection, PCMhecklistContext context)
     {
         _connection = connection;
         _context = context;
     }
 
-    [HttpGet("/GetGroupMachines/{page}/{pageSize}")]
-    public ActionResult<GroupMachines> GetGroupMachines(int page, int pageSize)
+    [HttpGet("/GetMatchFormMachines/{page}/{pageSize}")]
+    public ActionResult<MatchFormMachine> GetMatchFormMachines(int page, int pageSize)
     {
          try
         {
-            var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<MatchFormMachine>("EXEC GetMatchFormMachinesInPage @PageIndex , @PageSize", new { page, pageSize });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -34,12 +33,12 @@ public class GroupMachinesController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchGroupMachines/{Messages}")]
-    public ActionResult<GroupMachines> SearchGroupMachines(string Messages)
+    [HttpGet("/SearchMatchFormMachine/{Messages}")]
+    public ActionResult<MatchFormMachine> SearchMatchFormMachine(string Messages)
     {
           try
         {
-            var data = _connection.QueryData<GroupMachines>("EXEC SearchGroupMachinesWithPagination @SearchTerm", new { SearchTerm = Messages });
+            var data = _connection.QueryData<MatchFormMachine>("EXEC SearchMatchFormMachineWithPagination @SearchTerm", new { SearchTerm = Messages });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -50,12 +49,12 @@ public class GroupMachinesController : ControllerBase
         }
     }
 
-    [HttpGet("/GetGroupMachine/{GMachineID}")]
-    public ActionResult<GroupMachines> GetGroupMachine(string GMachineID)
+    [HttpGet("/GetMatchFormMachine/{MachineID}")]
+    public ActionResult<MatchFormMachine> GetMatchFormMachine(string MachineID)
     {
           try
         {
-            var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @ID", new { ID = GMachineID});
+            var data = _connection.QueryData<MatchFormMachine>("EXEC GetMatchFormMachinesInPage @ID", new { ID = MachineID});
 
             return Ok(new { status = true, message = "Select success", data });
         }

@@ -18,9 +18,51 @@ public class MachinesController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
-    public IActionResult GetGroupUsers()
+    [HttpGet("/GetMachines/{page}/{pageSize}")]
+    public ActionResult<Machines> GetMachines(int page, int pageSize)
     {
-        return Ok("Group Users data");
+        try
+        {
+            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @PageIndex , @PageSize", new { page, pageSize });
+
+            return Ok(new { status = true, message = "Select success", data });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
+        }
+    }
+
+    [HttpGet("/SearchMachines/{Messages}")]
+    public ActionResult<Machines> SearchMachines(string Messages)
+    {
+        try
+        {
+            var data = _connection.QueryData<Machines>("EXEC SearchMachinesWithPagination @SearchTerm", new { SearchTerm = Messages });
+
+            return Ok(new { status = true, message = "Select success", data });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
+        }
+    }
+
+    [HttpGet("/GetMachine/{MachineID}")]
+    public ActionResult<GroupMachines> GetMachine(string MachineID)
+    {
+        try
+        {
+            var data = _connection.QueryData<GroupMachines>("EXEC GetMachinesInPage @ID", new { ID = MachineID });
+
+            return Ok(new { status = true, message = "Select success", data });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
+        }
     }
 }

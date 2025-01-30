@@ -10,5 +10,7 @@ namespace PMChecklist_PD_API.Models
         public string? FormName { get; set; }
         public string? Description { get; set; }
         public bool IsActive { get; set; }
+        public bool Disables { get; set; }
+        public int RowNum { get; set; }
     }
 }

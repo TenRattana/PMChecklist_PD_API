@@ -8,5 +8,7 @@ namespace PMChecklist_PD_API.Models
         public string? CLOptionID { get; set; }
         public string? CLOptionName { get; set; }
         public bool? IsActive { get; set; }
+        public bool Disables { get; set; }
+        public int RowNum { get; set; }
     }
 }

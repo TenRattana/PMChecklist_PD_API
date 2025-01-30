@@ -19,6 +19,8 @@ namespace PMChecklist_PD_API.Models
         public DbSet<GroupPermission> GroupPermission { get; set; } = default!;
         public DbSet<Permissions> Permissions { get; set; } = default!;
         public DbSet<ExpectedResult> ExpectedResult { get; set; } = default!;
+        public DbSet<Approveds> Approveds { get; set; } = default!;
+        public DbSet<GroupMachines> GroupMachines { get; set; } = default!;
         public DbSet<Menu> Menu { get; set; } = default!;
         
     }

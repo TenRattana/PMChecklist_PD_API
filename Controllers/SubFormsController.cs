@@ -18,9 +18,20 @@ public class SubFormsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
-    public IActionResult GetGroupUsers()
+    [HttpGet("/GetSubForms")]
+    public ActionResult<SubForms> GetSubForms()
     {
-        return Ok("Group Users data");
+         try
+        {
+            var data = _connection.QueryData<SubForms>("SELECT SFormID, FormID, SFormName, Columns, DisplayOrder FROM SubForms ORDER BY SFormID", new { });
+
+            return Ok(new { status = true, message = "Select success", data });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
+        }
     }
+
 }

@@ -8,7 +8,6 @@ namespace PMChecklist_PD_API.Models
         public string? SFormID { get; set; }
         public string? FormID { get; set; }
         public string? SFormName { get; set; }
-        public bool? Number { get; set; }
         public byte Columns { get; set; }
         public byte DisplayOrder { get; set; }
     }
