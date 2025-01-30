@@ -12,12 +12,10 @@ using PMChecklist_PD_API.Models;
 public class ApprovedsController : ControllerBase
 {
     private readonly Connection _connection;
-    private readonly PCMhecklistContext _context;
 
-    public ApprovedsController(Connection connection, PCMhecklistContext context)
+    public ApprovedsController(Connection connection)
     {
         _connection = connection;
-        _context = context;
     }
 
 

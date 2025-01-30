@@ -51,12 +51,12 @@ public class GroupCheckListOptionsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetCheckList/{CListID}")]
-    public ActionResult<CheckLists> GetCheckList(string CListID)
+    [HttpGet("/GetGroupCheckListOption/{GCLOptionID}")]
+    public ActionResult<CheckLists> GetGroupCheckListOption(string GCLOptionID)
     {
           try
         {
-            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListInPage @ID", new { ID = CListID});
+            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListInPage @ID", new { ID = GCLOptionID});
 
             return Ok(new { status = true, message = "Select success", data });
         }

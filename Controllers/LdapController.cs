@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using PMChecklist_PD_API.Services;
 using PMChecklist_PD_API.Models;
 
 [ApiController]
-[Route("[controller]")]
 [Produces("application/json")]
 public class LdapController : ControllerBase
 {
@@ -16,17 +14,23 @@ public class LdapController : ControllerBase
         _common = common;
     }
 
+    /// <summary>
+    /// Authenticate User and return a JWT token.
+    /// </summary>
+    /// <param name="UserName"></param>
+    /// <param name="Password"></param>
+    /// <returns></returns>
     [HttpGet("AuthenticateUser")]
-    public async Task<ActionResult<List<LdapUser>>> AuthenticateUser(string UserName, string Password)
+    public ActionResult<List<object>> AuthenticateUser(string UserName, string Password)
     {
-        var users = await _ldapService.AuthenticateAsync(UserName, Password);
+        var users =  _ldapService.AuthenticateAsync(UserName, Password);
 
-        if (users == null || !users.Any())
+        if (users == null)
         {
             return NotFound("User not found.");
         }
         
-        string token = _common.GenerateJwtToken(users.First().UserName!, users.First().Permissions!);
+        string token = _common.GenerateJwtToken(users);
 
         return Ok(new { token });
     }

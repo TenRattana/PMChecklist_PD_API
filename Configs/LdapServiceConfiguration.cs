@@ -1,4 +1,3 @@
-using PMChecklist_PD_API.Services;
 
 public static class LdapServiceConfiguration
 {

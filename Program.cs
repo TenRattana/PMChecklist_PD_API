@@ -1,15 +1,9 @@
-using NLog;
-using NLog.Web;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using NLog.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
-builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-builder.Host.UseNLog();
-builder.Logging.AddNLog();
 
 builder.Services.ConfigureServices(builder.Configuration);
 builder.Services.AddCors(options =>

@@ -23,7 +23,7 @@ public class AppConfigController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<Menu>("SELECT TOP (1) * FROM AppConfig", new { });
+            var data = _connection.QueryData<AppConfig>("SELECT TOP (1) * FROM AppConfig", new { });
 
             return Ok(new { status = true, message = "Select success", data });
         }

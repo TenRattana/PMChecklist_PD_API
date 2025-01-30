@@ -10,14 +10,13 @@ public static class ConfigurationExtensions
 
         services.AddControllers();
         services.AddSingleton<Connection>();
-
         services.AddScoped<Common>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddEndpointsApiExplorer();
 
         services.AddSwaggerServices();
-
         services.AddLdapServices();
+
         services.AuthorizationConfigurationServices(configuration);
     }
 

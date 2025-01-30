@@ -26,6 +26,7 @@ public static class AuthorizationConfiguration
                 },
                 OnAuthenticationFailed = context =>
                 {
+                    
                     context.Response.StatusCode = 401;
                     context.Response.ContentType = "application/json";
                     var response = new { message = "Invalid token or token expired." };

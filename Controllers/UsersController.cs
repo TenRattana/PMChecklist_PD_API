@@ -21,19 +21,8 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<object>>> GetUsers()
+    public IActionResult GetUsers()
     {
-        var users = await _context.Users.Where(u => u.IsActive).Include(u => u.GroupUser).ToListAsync();
-
-        if (users == null || !users.Any())
-        {
-            return NotFound();
-        }
-
-        var userDtos = _common.GenerateJwtToken(users.First().UserName!, ["SuperAdmin"]);
-
-        return Ok(new { userDtos });
+        return Ok("Group Users data");
     }
-
-
 }

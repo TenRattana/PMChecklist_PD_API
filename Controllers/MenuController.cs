@@ -19,7 +19,7 @@ public class MenuController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetMenus")]
+    [HttpPost("/GetMenus")]
     public ActionResult<object> GetMenus(string GUserID)
     {
         try
@@ -56,6 +56,7 @@ public class MenuController : ControllerBase
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }

@@ -21,12 +21,5 @@ namespace PMChecklist_PD_API.Models
         public DbSet<ExpectedResult> ExpectedResult { get; set; } = default!;
         public DbSet<Menu> Menu { get; set; } = default!;
         
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PCMhecklistContext).Assembly);
-        }
     }
 }

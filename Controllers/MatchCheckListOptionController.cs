@@ -21,7 +21,6 @@ public class MatchCheckListOptionController : ControllerBase
     [HttpGet]
     public IActionResult GetGroupUsers()
     {
-        _logger.LogInformation("Access granted to GetGroupUsers API");
         return Ok("Group Users data");
     }
 }
