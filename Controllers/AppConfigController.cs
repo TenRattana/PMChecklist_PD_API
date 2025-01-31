@@ -25,6 +25,11 @@ public class AppConfigController : ControllerBase
         {
             var data = _connection.QueryData<AppConfig>("SELECT TOP (1) * FROM AppConfig", new { });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)

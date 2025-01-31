@@ -23,7 +23,12 @@ public class MachinesController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -41,6 +46,11 @@ public class MachinesController : ControllerBase
         {
             var data = _connection.QueryData<Machines>("EXEC SearchMachinesWithPagination @SearchTerm", new { SearchTerm = Messages });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
@@ -56,6 +66,11 @@ public class MachinesController : ControllerBase
         try
         {
             var data = _connection.QueryData<GroupMachines>("EXEC GetMachinesInPage @ID", new { ID = MachineID });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }

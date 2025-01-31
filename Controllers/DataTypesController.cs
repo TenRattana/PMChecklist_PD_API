@@ -26,6 +26,11 @@ public class DataTypesController : ControllerBase
         {
             var data = _connection.QueryData<DataTypes>("SELECT DTypeID, DTypeName, Icon, IsActive FROM DataTypes ORDER BY DTypeID", new { });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)

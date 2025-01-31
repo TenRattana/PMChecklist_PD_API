@@ -20,9 +20,14 @@ public class MatchFormMachinesController : ControllerBase
     [HttpGet("/GetMatchFormMachines/{page}/{pageSize}")]
     public ActionResult<MatchFormMachine> GetMatchFormMachines(int page, int pageSize)
     {
-         try
+        try
         {
-            var data = _connection.QueryData<MatchFormMachine>("EXEC GetMatchFormMachinesInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<MatchFormMachine>("EXEC GetMatchFormMachinesInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -36,9 +41,14 @@ public class MatchFormMachinesController : ControllerBase
     [HttpGet("/SearchMatchFormMachine/{Messages}")]
     public ActionResult<MatchFormMachine> SearchMatchFormMachine(string Messages)
     {
-          try
+        try
         {
             var data = _connection.QueryData<MatchFormMachine>("EXEC SearchMatchFormMachineWithPagination @SearchTerm", new { SearchTerm = Messages });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -52,9 +62,14 @@ public class MatchFormMachinesController : ControllerBase
     [HttpGet("/GetMatchFormMachine/{MachineID}")]
     public ActionResult<MatchFormMachine> GetMatchFormMachine(string MachineID)
     {
-          try
+        try
         {
-            var data = _connection.QueryData<MatchFormMachine>("EXEC GetMatchFormMachinesInPage @ID", new { ID = MachineID});
+            var data = _connection.QueryData<MatchFormMachine>("EXEC GetMatchFormMachinesInPage @ID", new { ID = MachineID });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }

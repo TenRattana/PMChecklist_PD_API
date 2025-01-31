@@ -21,9 +21,14 @@ public class GroupMachinesController : ControllerBase
     [HttpGet("/GetGroupMachines/{page}/{pageSize}")]
     public ActionResult<GroupMachines> GetGroupMachines(int page, int pageSize)
     {
-         try
+        try
         {
-            var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -37,9 +42,14 @@ public class GroupMachinesController : ControllerBase
     [HttpGet("/SearchGroupMachines/{Messages}")]
     public ActionResult<GroupMachines> SearchGroupMachines(string Messages)
     {
-          try
+        try
         {
             var data = _connection.QueryData<GroupMachines>("EXEC SearchGroupMachinesWithPagination @SearchTerm", new { SearchTerm = Messages });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -53,9 +63,14 @@ public class GroupMachinesController : ControllerBase
     [HttpGet("/GetGroupMachine/{GMachineID}")]
     public ActionResult<GroupMachines> GetGroupMachine(string GMachineID)
     {
-          try
+        try
         {
-            var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @ID", new { ID = GMachineID});
+            var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @ID", new { ID = GMachineID });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }

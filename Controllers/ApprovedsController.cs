@@ -26,6 +26,11 @@ public class ApprovedsController : ControllerBase
         {
             var data = _connection.QueryData<Approveds>("EXEC GetApprovedInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
@@ -41,6 +46,11 @@ public class ApprovedsController : ControllerBase
         try
         {
             var data = _connection.QueryData<Approveds>("EXEC SearchApprovedWithPagination @SearchTerm", new { SearchTerm = Messages });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }

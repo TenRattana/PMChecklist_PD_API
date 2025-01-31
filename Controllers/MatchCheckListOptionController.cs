@@ -48,6 +48,11 @@ public class MatchCheckListOptionController : ControllerBase
                 result.Add(resultItem);
             }
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             return Ok(new { status = true, message = "Select success", data });
 
         }
@@ -86,6 +91,11 @@ public class MatchCheckListOptionController : ControllerBase
                 };
 
                 result.Add(resultItem);
+            }
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
             }
 
             return Ok(new { status = true, message = "Select success", data });
@@ -130,6 +140,11 @@ public class MatchCheckListOptionController : ControllerBase
                 };
 
                 result.Add(resultItem);
+            }
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
             }
 
             return Ok(new { status = true, message = "Select success", data });

@@ -24,6 +24,11 @@ public class CheckListOptionsController : ControllerBase
         {
             var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListOptionInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
@@ -41,6 +46,11 @@ public class CheckListOptionsController : ControllerBase
         {
             var data = _connection.QueryData<CheckListOptions>("EXEC SearchCheckListOptionsWithPagination @SearchTerm", new { SearchTerm = Messages });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
@@ -51,29 +61,28 @@ public class CheckListOptionsController : ControllerBase
     }
 
     [HttpGet("/GetCheckListOption/{CLOptionID}")]
-public ActionResult<CheckListOptions> GetCheckListOption(string CLOptionID)
-{
-    try
+    public ActionResult<CheckListOptions> GetCheckListOption(string CLOptionID)
     {
-        if (string.IsNullOrEmpty(CLOptionID))
+        try
         {
-            return BadRequest(new { status = false, message = "Invalid CLOptionID." });
+            if (string.IsNullOrEmpty(CLOptionID))
+            {
+                return BadRequest(new { status = false, message = "Invalid CLOptionID." });
+            }
+
+            var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListOptionInPage @ID = @CLOptionID", new { CLOptionID });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
+            return Ok(new { status = true, message = "Select success", data });
         }
-
-        var data = _connection.QueryData<CheckListOptions>("EXEC GetCheckListOptionInPage @ID = @CLOptionID", new { CLOptionID });
-
-        if (data == null || !data.Any())
+        catch (Exception ex)
         {
-            return NotFound(new { status = false, message = "No data found." });
+            Console.WriteLine($"Error occurred with CLOptionID: {CLOptionID}. Exception: {ex.Message}");
+            return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
-
-        return Ok(new { status = true, message = "Select success", data });
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error occurred with CLOptionID: {CLOptionID}. Exception: {ex.Message}"); 
-        return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
-    }
-}
-
 }

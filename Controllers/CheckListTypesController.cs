@@ -27,6 +27,11 @@ public class CheckListTypesController : ControllerBase
         {
             var data = _connection.QueryData<CheckListTypes>("SELECT GTypeID , GTypeName , Icon , IsActive FROM GroupTypeCheckLists", new { });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             var result = new List<object>();
 
             foreach (var item in data)

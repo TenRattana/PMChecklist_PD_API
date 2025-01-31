@@ -23,7 +23,12 @@ public class FormsController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<Forms>("EXEC GetFormsInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<Forms>("EXEC GetFormsInPage @PageIndex , @PageSize",  new { PageIndex = page, PageSize = pageSize });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -41,6 +46,11 @@ public class FormsController : ControllerBase
         {
             var data = _connection.QueryData<Forms>("EXEC SearchFormsPagination @SearchTerm ", new { SearchTerm = Messages });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
@@ -56,6 +66,11 @@ public class FormsController : ControllerBase
         try
         {
             var data = _connection.QueryData<Forms>("EXEC SearchFormsPagination @SearchTerm ", new { SearchTerm = FormID });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }

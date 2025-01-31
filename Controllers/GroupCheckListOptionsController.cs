@@ -18,13 +18,18 @@ public class GroupCheckListOptionsController : ControllerBase
         _context = context;
     }
 
- 
+
     [HttpGet("/GetGroupCheckListOptions/{page}/{pageSize}")]
     public ActionResult<GroupCheckListOptions> GetGroupCheckListOptions(int page, int pageSize)
     {
-         try
+        try
         {
-            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -38,9 +43,14 @@ public class GroupCheckListOptionsController : ControllerBase
     [HttpGet("/SearchGroupCheckLists/{Messages}")]
     public ActionResult<CheckLists> SearchGroupCheckLists(string Messages)
     {
-          try
+        try
         {
             var data = _connection.QueryData<GroupCheckListOptions>("EXEC SearchGroupCheckListOptionsWithPagination @SearchTerm", new { SearchTerm = Messages });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -54,9 +64,14 @@ public class GroupCheckListOptionsController : ControllerBase
     [HttpGet("/GetGroupCheckListOption/{GCLOptionID}")]
     public ActionResult<CheckLists> GetGroupCheckListOption(string GCLOptionID)
     {
-          try
+        try
         {
-            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInPage @ID", new { ID = GCLOptionID});
+            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInPage @ID", new { ID = GCLOptionID });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -70,9 +85,14 @@ public class GroupCheckListOptionsController : ControllerBase
     [HttpGet("/GetGroupCheckListOptionInForm/{GCLOptionIDS}")]
     public ActionResult<CheckLists> GetGroupCheckListOptionInForm(string GCLOptionIDS)
     {
-         try
+        try
         {
             var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInForm @ID", new { ID = GCLOptionIDS });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }

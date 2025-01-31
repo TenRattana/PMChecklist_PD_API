@@ -20,9 +20,14 @@ public class CheckListsController : ControllerBase
     [HttpGet("/GetCheckLists/{page}/{pageSize}")]
     public ActionResult<CheckLists> GetCheckLists(int page, int pageSize)
     {
-         try
+        try
         {
-            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @PageIndex , @PageSize",  new { PageIndex = page, PageSize = pageSize });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -36,9 +41,14 @@ public class CheckListsController : ControllerBase
     [HttpGet("/SearchCheckLists/{Messages}")]
     public ActionResult<CheckLists> SearchCheckLists(string Messages)
     {
-          try
+        try
         {
             var data = _connection.QueryData<CheckLists>("EXEC SearchCheckListWithPagination @SearchTerm", new { SearchTerm = Messages });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -52,9 +62,14 @@ public class CheckListsController : ControllerBase
     [HttpGet("/GetCheckList/{CListID}")]
     public ActionResult<CheckLists> GetCheckList(string CListID)
     {
-          try
+        try
         {
-            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @ID", new { ID = CListID});
+            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @ID", new { ID = CListID });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -68,9 +83,14 @@ public class CheckListsController : ControllerBase
     [HttpGet("/GetCheckListInForm/{CListIDS}")]
     public ActionResult<CheckLists> GetCheckListInForm(string CListIDS)
     {
-         try
+        try
         {
             var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInForm @ID", new { ID = CListIDS });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }

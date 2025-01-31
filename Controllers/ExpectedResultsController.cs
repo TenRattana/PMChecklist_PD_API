@@ -25,8 +25,12 @@ public class ExpectedResultsController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<ExpectedResult>("EXEC GetExpectedResultInPage @PageIndex , @PageSize", new { page, pageSize });
+            var data = _connection.QueryData<ExpectedResult>("EXEC GetExpectedResultInPage @PageIndex , @PageSize",  new { PageIndex = page, PageSize = pageSize });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
             return Ok(new { status = true, message = "Select success", data });
         }
         catch (Exception ex)
@@ -42,6 +46,11 @@ public class ExpectedResultsController : ControllerBase
         try
         {
             var data = _connection.QueryData<ExpectedResult>("EXEC SearchExpectedResultWithPagination @SearchTerm", new { SearchTerm = Messages });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -66,6 +75,11 @@ public class ExpectedResultsController : ControllerBase
                 {
                     Console.WriteLine($"{column.Key}: {column.Value}");
                 }
+            }
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
             }
 
             return Ok(new { status = true, message = "Select success", data });

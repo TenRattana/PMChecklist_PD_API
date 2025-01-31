@@ -21,9 +21,14 @@ public class SubFormsController : ControllerBase
     [HttpGet("/GetSubForms")]
     public ActionResult<SubForms> GetSubForms()
     {
-         try
+        try
         {
             var data = _connection.QueryData<SubForms>("SELECT SFormID, FormID, SFormName, Columns, DisplayOrder FROM SubForms ORDER BY SFormID", new { });
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
 
             return Ok(new { status = true, message = "Select success", data });
         }

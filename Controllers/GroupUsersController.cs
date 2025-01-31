@@ -21,7 +21,7 @@ public class GroupUsersController : ControllerBase
     [HttpGet("/GetGroupUsers")]
     public ActionResult<GroupUsers> GetGroupUsers()
     {
-        
+
         try
         {
             var data = _connection.QueryData<GroupUsers>("SELECT GUserID, GUserName, IsActive FROM GroupUsers ORDER BY GUserID", new { });
@@ -41,6 +41,11 @@ public class GroupUsersController : ControllerBase
                 };
 
                 result.Add(resultItem);
+            }
+
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
             }
 
             return Ok(new { status = true, message = "Select success", data });
