@@ -21,11 +21,11 @@ public class CheckListTypesController : ControllerBase
     }
 
     [HttpGet("/GetCheckListTypes")]
-    public ActionResult<CheckListTypes> GetCheckListTypes()
+    public ActionResult<GroupTypeCheckLists> GetCheckListTypes()
     {
         try
         {
-            var data = _connection.QueryData<CheckListTypes>("SELECT GTypeID , GTypeName , Icon , IsActive FROM GroupTypeCheckLists", new { });
+            var data = _connection.QueryData<GroupTypeCheckLists>("SELECT GTypeID , GTypeName , Icon , IsActive FROM GroupTypeCheckLists", new { });
 
             if (data == null || !data.Any())
             {
@@ -36,7 +36,8 @@ public class CheckListTypesController : ControllerBase
 
             foreach (var item in data)
             {
-                var CheckListType = _connection.QueryData<CheckListTypes>("EXEC GetGroupTypeCheckListsInPage @ID", new { ID = item.GTypeID });
+                var GTypeID = item.GTypeID;
+                var CheckListTypes = _connection.QueryData<CheckListTypes>("EXEC GetGroupTypeCheckListsInPage @ID", new { ID = GTypeID });
 
                 var resultItem = new
                 {
@@ -44,13 +45,13 @@ public class CheckListTypesController : ControllerBase
                     item.GTypeName,
                     item.Icon,
                     item.IsActive,
-                    CheckListType
+                    CheckListTypes
                 };
 
                 result.Add(resultItem);
             }
 
-            return Ok(new { status = true, message = "Select success", data });
+            return Ok(new { status = true, message = "Select success", data = result });
         }
         catch (Exception ex)
         {

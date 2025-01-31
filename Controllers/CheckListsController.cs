@@ -64,7 +64,7 @@ public class CheckListsController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @ID", new { ID = CListID });
+            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInPage @ID = @CListID", new { CListID });
 
             if (data == null || !data.Any())
             {
@@ -85,7 +85,7 @@ public class CheckListsController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInForm @ID", new { ID = CListIDS });
+            var data = _connection.QueryData<CheckLists>("EXEC GetCheckListInForm @ID = @CListIDS", new { CListIDS });
 
             if (data == null || !data.Any())
             {

@@ -62,20 +62,11 @@ public class ExpectedResultsController : ControllerBase
     }
 
     [HttpGet("/GetExpectedResult/{TableID}")]
-    public ActionResult GetExpectedResult(string TableID)
+    public ActionResult<ExpectedTable> GetExpectedResult(string TableID)
     {
         try
         {
-            var data = _connection.QueryData<ExpectedTable>("EXEC GetExpectedResultTable @ID", new { ID = TableID });
-
-            foreach (var item in data)
-            {
-                dynamic columns = item.DynamicColumns;
-                foreach (var column in columns)
-                {
-                    Console.WriteLine($"{column.Key}: {column.Value}");
-                }
-            }
+            var data = _connection.QueryData<dynamic>("EXEC GetExpectedResultTable @ID", new { ID = TableID });
 
             if (data == null || !data.Any())
             {

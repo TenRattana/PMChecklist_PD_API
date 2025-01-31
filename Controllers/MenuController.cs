@@ -26,11 +26,17 @@ public class MenuController : ControllerBase
         {
             var data = _connection.QueryData<Menu>("EXEC GetMenuPermission @GUserID", new { GUserID });
 
+            if (data == null || !data.Any())
+            {
+                return NotFound(new { status = false, message = "No data found." });
+            }
+
             var result = new List<object>();
 
             foreach (var item in data)
             {
-                var parentMenuData = _connection.QueryData<Menu>("EXEC GetMenuPermission @GUserID, @ParentMenuID", new { GUserID, ParentMenuID = item.PermissionID });
+                var ParentMenuID = item.PermissionID;
+                var parentMenuData = _connection.QueryData<Menu>("EXEC GetMenuPermission @GUserID, @ParentMenuID", new { GUserID, ParentMenuID });
 
                 var resultItem = new
                 {
@@ -49,11 +55,6 @@ public class MenuController : ControllerBase
                 };
 
                 result.Add(resultItem);
-            }
-
-            if (data == null || !data.Any())
-            {
-                return NotFound(new { status = false, message = "No data found." });
             }
 
             return Ok(new { status = true, message = "Select success", data = result });

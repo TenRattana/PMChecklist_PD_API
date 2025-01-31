@@ -66,7 +66,7 @@ public class GroupCheckListOptionsController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInPage @ID", new { ID = GCLOptionID });
+            var data = _connection.QueryData<GroupCheckListOptions>("EXEC GetGroupCheckListOptionInPage @ID = @GCLOptionID", new { GCLOptionID });
 
             if (data == null || !data.Any())
             {
@@ -83,7 +83,7 @@ public class GroupCheckListOptionsController : ControllerBase
     }
 
     [HttpGet("/GetGroupCheckListOptionInForm/{GCLOptionIDS}")]
-    public ActionResult<CheckLists> GetGroupCheckListOptionInForm(string GCLOptionIDS)
+    public ActionResult<CheckLists> GetGroupCheckListOptionInForm(string[] GCLOptionIDS)
     {
         try
         {
