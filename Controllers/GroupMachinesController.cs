@@ -65,7 +65,7 @@ public class GroupMachinesController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @ID", new { ID = GMachineID });
+            var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @ID = @GMachineID", new { GMachineID });
 
             if (data == null || !data.Any())
             {
@@ -79,5 +79,11 @@ public class GroupMachinesController : ControllerBase
             Console.WriteLine(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
+    }
+
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody] string value)
+    {
+        
     }
 }

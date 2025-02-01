@@ -18,6 +18,10 @@ public class AppConfigController : ControllerBase
         _context = context;
     }
 
+    /// <summary>
+    /// Select a data display name app and prefix app.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("/GetAppConfig")]
     public ActionResult GetAppConfig()
     {
@@ -39,6 +43,11 @@ public class AppConfigController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Create a new AppConfig with the provided details and save it to the database.
+    /// </summary>
+    /// <param name="value">The AppConfig object containing the configuration data to be saved.</param>
+    /// <returns>A status message indicating whether the AppConfig was created successfully or not.</returns>
     [HttpPost("/SaveAppConfig")]
     public async Task<ActionResult> SaveAppConfig([FromBody] AppConfig value)
     {

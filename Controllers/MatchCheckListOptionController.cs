@@ -23,7 +23,7 @@ public class MatchCheckListOptionController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<MatchCheckListOption>("EXEC GetMachinesInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
+            var data = _connection.QueryData<MatchCheckListOption>("EXEC GetMatchGroupCheckListAndOptionInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
 
             var result = new List<object>();
 
@@ -53,7 +53,7 @@ public class MatchCheckListOptionController : ControllerBase
                 return NotFound(new { status = false, message = "No data found." });
             }
 
-            return Ok(new { status = true, message = "Select success", data });
+            return Ok(new { status = true, message = "Select success", data = result });
 
         }
         catch (Exception ex)
@@ -64,7 +64,7 @@ public class MatchCheckListOptionController : ControllerBase
     }
 
     [HttpGet("/SearchMatchCheckListOptions/{Messages}")]
-    public ActionResult<Machines> SearchMatchCheckListOptions(string Messages)
+    public ActionResult<MatchCheckListOption> SearchMatchCheckListOptions(string Messages)
     {
         try
         {
@@ -98,7 +98,7 @@ public class MatchCheckListOptionController : ControllerBase
                 return NotFound(new { status = false, message = "No data found." });
             }
 
-            return Ok(new { status = true, message = "Select success", data });
+            return Ok(new { status = true, message = "Select success", data = result });
         }
         catch (Exception ex)
         {
@@ -108,22 +108,26 @@ public class MatchCheckListOptionController : ControllerBase
     }
 
     [HttpGet("/GetMatchCheckListOption/{MCLOptionID}/{mode}")]
-    public ActionResult<Machines> GetMatchCheckListOption(string MCLOptionID, bool mode)
+    public ActionResult<MatchCheckListOption> GetMatchCheckListOption(string MCLOptionID, bool mode)
     {
         try
         {
-            var data = _connection.QueryData<MatchCheckListOption>("EXEC GetMatchGroupCheckListAndOptionInPage @ID", new { ID = MCLOptionID });
+            var data = _connection.QueryData<MatchCheckListOption>("EXEC GetMatchGroupCheckListAndOptionInPage @ID = @MCLOptionID", new { MCLOptionID });
 
             var result = new List<object>();
 
             foreach (var item in data)
             {
-                var query = "Select clo.CLOptionID, clo.CLOptionName, clo.IsActive From MatchCheckListOption As mclo INNER JOIN CheckListOptions As clo On mclo.CLOptionID = clo.CLOptionID Where mclo.MCLOptionID In (@MCLOptionID) ";
+                var query = "Select clo.CLOptionID, clo.CLOptionName, clo.IsActive From MatchCheckListOption As mclo INNER JOIN CheckListOptions As clo On mclo.CLOptionID = clo.CLOptionID Where mclo.GCLOptionID IN (@ID)";
+
                 if (mode)
                 {
-                    query = string.Concat(query, "AND mclo.IsActive = 'True'");
+                    query = string.Concat(query, " AND mclo.IsActive = 'True'");
                 }
-                var CheckListOptions = _connection.QueryData<CheckListOptions>(query, new { MCLOptionID = item.MCLOptionID! });
+
+                var ID = item.GCLOptionID;
+
+                var CheckListOptions = _connection.QueryData<CheckListOptions>(query, new { ID });
 
                 var resultItem = new
                 {
@@ -147,7 +151,7 @@ public class MatchCheckListOptionController : ControllerBase
                 return NotFound(new { status = false, message = "No data found." });
             }
 
-            return Ok(new { status = true, message = "Select success", data });
+            return Ok(new { status = true, message = "Select success", data = result });
         }
         catch (Exception ex)
         {

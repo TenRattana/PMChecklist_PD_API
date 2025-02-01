@@ -65,7 +65,7 @@ public class MachinesController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<GroupMachines>("EXEC GetMachinesInPage @ID", new { ID = MachineID });
+            var data = _connection.QueryData<GroupMachines>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID });
 
             if (data == null || !data.Any())
             {

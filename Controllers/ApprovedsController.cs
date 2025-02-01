@@ -18,7 +18,9 @@ public class ApprovedsController : ControllerBase
         _connection = connection;
     }
 
-
+    /// <summary>
+    /// Select a data Approved from database with page and pagesize.
+    /// </summary>
     [HttpGet("/GetApproveds/{page}/{pageSize}")]
     public ActionResult GetApproveds(int page, int pageSize)
     {
@@ -40,6 +42,9 @@ public class ApprovedsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Select a data Approved from database with searching.
+    /// </summary>
     [HttpGet("/SearchApproveds/{Messages}")]
     public ActionResult SearchApproveds(string Messages)
     {

@@ -64,7 +64,7 @@ public class MatchFormMachinesController : ControllerBase
     {
         try
         {
-            var data = _connection.QueryData<MatchFormMachine>("EXEC GetMatchFormMachinesInPage @ID", new { ID = MachineID });
+            var data = _connection.QueryData<MatchFormMachine>("EXEC GetMatchFormMachinesInPage @ID = @MachineID", new { MachineID });
 
             if (data == null || !data.Any())
             {
