@@ -66,8 +66,8 @@ public class LdapService
 
                             userData.Add(new LdapUser
                             {
-                                UserName = samAccountName,
-                                FullName = fullName,
+                                SAccout = samAccountName,
+                                UserName = fullName,
                                 Position = position,
                                 Department = department,
                                 UserID = user.UserID,

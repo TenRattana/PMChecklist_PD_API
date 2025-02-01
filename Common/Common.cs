@@ -24,8 +24,9 @@ public class Common
 
     var claims = new List<Claim>
     {
-        new Claim(JwtRegisteredClaimNames.Sub, user.UserID!),         
-        new Claim(JwtRegisteredClaimNames.Name, user.UserName!),         
+        new Claim("UserID", user.UserID!),         
+        new Claim("SAccout", user.UserID!),         
+        new Claim("UserName", user.UserName!),         
         new Claim("Department", user.Department!),                    
         new Claim("Position", user.Position!),                         
         new Claim("GUserID", user.GUserID!),                            
