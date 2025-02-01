@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 
 public class LogService
 {
@@ -36,19 +37,14 @@ public class LogService
         _logger = logger;
     }
 
-    public void LogInfo(Log value)
+    public void LogInfo(string Title , StringBuilder Message)
     {
-        if (value == null)
-        {
-            throw new ArgumentNullException(nameof(value), "Log value cannot be null.");
-        }
-
-        var formattedMessage = $"Title : {value.Title} \n " +
+        var formattedMessage = $"Title : {Title} \n " +
                                $"User : {_User} \n " +
                                $"IP Address : {_IP} \n " +
                                $"Date : {DateTime.Now:yyyy-MM-dd HH:mm:ss} \n " +
                                $"Host : {_Host} \n " +
-                               $"Message : {value.Messages}";
+                               $"Message : {Message}";
 
         try
         {
@@ -56,7 +52,7 @@ public class LogService
 
             _connection.Execute(strSQL, new
             {
-                Title = value.Title!,
+                Title = Title!,
                 Author = _User,
                 Messages = formattedMessage,
                 Type = "Info"
@@ -70,19 +66,14 @@ public class LogService
         }
     }
 
-    public void LogError(Log value)
+    public void LogError(string Title , string Message)
     {
-        if (value == null)
-        {
-            throw new ArgumentNullException(nameof(value), "Log value cannot be null.");
-        }
-
-        var formattedMessage = $"Title: {value.Title} \n " +
+        var formattedMessage = $"Title: {Title} \n " +
                                $"User: {_User} \n " +
                                $"IP Address: {_IP} \n " +
                                $"Date: {DateTime.Now:yyyy-MM-dd HH:mm:ss} \n " +
                                $"Host: {_Host} \n " +
-                               $"Error Message: {value.Messages}";
+                               $"Error Message: {Message}";
 
         try
         {
@@ -90,7 +81,7 @@ public class LogService
 
             _connection.Execute(strSQL, new
             {
-                Title = value.Title!,
+                Title = Title!,
                 Author = _User, 
                 Messages = formattedMessage,
                 Type = "Error"
