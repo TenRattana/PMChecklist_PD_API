@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using PMChecklist_PD_API.Models;
 
@@ -31,10 +32,7 @@ public class GroupMachinesController : ControllerBase
         {
             var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize }).ToList();
 
-            if (data == null || !data.Any())
-            {
-                return NotFound(new { status = false, message = "No data found." });
-            }
+            if (data == null || !data.Any()) return NotFound(new { status = false, message = "No data found." });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -52,10 +50,7 @@ public class GroupMachinesController : ControllerBase
         {
             var data = _connection.QueryData<GroupMachines>("EXEC SearchGroupMachinesWithPagination @SearchTerm", new { SearchTerm = Messages }).ToList();
 
-            if (data == null || !data.Any())
-            {
-                return NotFound(new { status = false, message = "No data found." });
-            }
+            if (data == null || !data.Any()) return NotFound(new { status = false, message = "No data found." });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -73,22 +68,13 @@ public class GroupMachinesController : ControllerBase
 
         try
         {
-            if (string.IsNullOrWhiteSpace(GMachineID))
-            {
-                errors.Add("The group machine id field is required.");
-            }
+            if (string.IsNullOrWhiteSpace(GMachineID)) errors.Add("The group machine id field is required.");
 
-            if (errors.Any())
-            {
-                return BadRequest(new { errors });
-            }
+            if (errors.Any()) return BadRequest(new { errors });
 
             var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @ID = @GMachineID", new { GMachineID }).FirstOrDefault();
 
-            if (data == null)
-            {
-                return NotFound(new { status = false, message = "No data found." });
-            }
+            if (data == null) return NotFound(new { status = false, message = "No data found." });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -97,6 +83,47 @@ public class GroupMachinesController : ControllerBase
             _logService.LogError("Error occurred while fetching group machine.", ex.ToString());
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
+    }
+
+    [HttpPost("SaveGroupMachine")]
+    public IActionResult SaveGroupMachine([FromBody] GroupMachines groupMachine)
+    {
+        if (!ModelState.IsValid)
+        {
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+            return BadRequest(new { errors });
+        }
+
+        try
+        {
+            var exists = _connection.QueryData<dynamic>("SELECT CASE WHEN EXISTS (SELECT 1 FROM GroupMachines WHERE GMachineName = @GMachineName AND GMachineID NOT IN (@GMachineID)) THEN 1 ELSE 0 END AS NameCount",
+            new { GMachineID = groupMachine.GMachineID ?? "", GMachineName = groupMachine.GMachineName! }).FirstOrDefault();
+
+            if (exists != null && Convert.ToInt32(exists!.NameCount) == 1) return BadRequest(new { message = "The group machine name already exists." });
+
+            var data = _connection.QueryData<dynamic>("EXEC GetGroupMachinesInPage @ID = @GMachineID", new { GMachineID = groupMachine.GMachineID ?? "" }).FirstOrDefault();
+
+            if (data != null && Convert.ToInt32(data!.NameCount) == 1)
+            {
+                var Status = Convert.ToBoolean(data!.IsActive);
+
+                if (Status != groupMachine.IsActive) return BadRequest(new { message = "Change ststus not successful.." });
+            }
+
+            return Ok(new
+            {
+                groupMachine.GMachineID,
+                groupMachine.GMachineName,
+                groupMachine.Description,
+                groupMachine.IsActive
+            });
+        }
+        catch (Exception ex)
+        {
+            _logService.LogError("Error occurred while changing group machine status.", ex.ToString());
+            return StatusCode(500, new { message = "An error occurred while processing the request.", exception = ex.Message });
+        }
+
     }
 
     [HttpPost("ChangeGroupMachine/{GMachineID}")]
@@ -108,17 +135,11 @@ public class GroupMachinesController : ControllerBase
 
         try
         {
-            if (string.IsNullOrWhiteSpace(GMachineID))
-            {
-                errors.Add("The group machine id field is required.");
-            }
+            if (string.IsNullOrWhiteSpace(GMachineID)) errors.Add("The group machine id field is required.");
 
             var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @ID = @GMachineID", new { GMachineID }).FirstOrDefault();
 
-            if (data == null)
-            {
-                errors.Add("The group machine id field does not exist in the database.");
-            }
+            if (data == null) errors.Add("The group machine id field does not exist in the database.");
 
             else
             {
@@ -132,23 +153,14 @@ public class GroupMachinesController : ControllerBase
                     logs.AppendLine($"Group machine name: {data.GMachineName}");
                     logs.AppendLine($"IsActive: {status}");
                 }
-                else
-                {
-                    errors.Add("Change status not successful.");
-                }
+                else errors.Add("Change status not successful.");
             }
 
-            if (errors.Any())
-            {
-                return BadRequest(new { errors });
-            }
+            if (errors.Any()) return BadRequest(new { errors });
 
             var result = _groupMachineService.ChangeGroupMachine(GMachineID, status, logs);
 
-            if (result.Any(r => !r.Item2))
-            {
-                return StatusCode(500, new { message = "Failed to change the status.", logs = logs.ToString() });
-            }
+            if (result.Any(r => !r.Item2)) return StatusCode(500, new { message = "Failed to change the status.", logs = logs.ToString() });
 
             return Ok(new { message = "Status changed successfully.", logs = logs.ToString() });
         }
@@ -167,17 +179,12 @@ public class GroupMachinesController : ControllerBase
 
         try
         {
-            if (string.IsNullOrWhiteSpace(GMachineID))
-            {
-                errors.Add("The group machine id field is required.");
-            }
+            if (string.IsNullOrWhiteSpace(GMachineID)) errors.Add("The group machine id field is required.");
 
             var data = _connection.QueryData<GroupMachines>("EXEC GetGroupMachinesInPage @ID = @GMachineID", new { GMachineID }).FirstOrDefault();
 
-            if (data == null)
-            {
-                errors.Add("The group machine id field does not exist in the database.");
-            }
+            if (data == null) errors.Add("The group machine id field does not exist in the database.");
+
             else
             {
                 var delete = Convert.ToBoolean(data.Deletes);
@@ -188,23 +195,14 @@ public class GroupMachinesController : ControllerBase
                     logs.AppendLine($"Group machine id : {data.GMachineID}");
                     logs.AppendLine($"Group machine name : {data.GMachineName}");
                 }
-                else
-                {
-                    errors.Add("Delete not successful.");
-                }
+                else errors.Add("Delete not successful.");
             }
 
-            if (errors.Any())
-            {
-                return BadRequest(new { errors });
-            }
+            if (errors.Any()) return BadRequest(new { errors });
 
             var result = _groupMachineService.DeleteGroupMachine(GMachineID, logs);
 
-            if (result.Any(r => !r.Item2))
-            {
-                return StatusCode(500, new { message = "Failed to change the status.", logs = logs.ToString() });
-            }
+            if (result.Any(r => !r.Item2)) return StatusCode(500, new { message = "Failed to change the status.", logs = logs.ToString() });
 
             return Ok(new { message = "Status changed successfully.", logs = logs.ToString() });
         }
