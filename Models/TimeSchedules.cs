@@ -6,10 +6,15 @@ namespace PMChecklist_PD_API.Models
     public class TimeSchedules
     {
         public string? ScheduleID { get; set; }
+        [Required(ErrorMessage = "The time schedule name is required.")]
+        [StringLength(100, ErrorMessage = "The time schedule name must be at most 100 characters.")]
         public string? ScheduleName { get; set; }
         public string? TypeSchedule { get; set; }
+        [Required(ErrorMessage = "The track field is required.")]
         public bool? Tracking { get; set; }
+        [Required(ErrorMessage = "The custom field is required.")]
         public bool? Custom { get; set; }
+        [Required(ErrorMessage = "The status field is required.")]
         public bool? IsActive { get; set; }
     }
 }

@@ -13,6 +13,7 @@ public static class ConfigurationExtensions
         services.AddScoped<LogService>();
         services.AddScoped<Common>();
         services.AddScoped<GroupMachineService>();
+        services.AddScoped<MachineService>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddEndpointsApiExplorer();
 

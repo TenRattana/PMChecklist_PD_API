@@ -6,18 +6,17 @@ using System.Data.SqlClient;
 using Dapper;
 using System.Data;
 
-public class GroupMachineService
+public class MachineService
 {
     private readonly Connection _connection;
     private readonly LogService _logger;
 
-    public GroupMachineService(Connection connection, LogService logger)
+    public MachineService(Connection connection, LogService logger)
     {
         _connection = connection;
         _logger = logger;
     }
-
-    public List<Tuple<string, bool>> SaveGroupMachine(string GMachineID, bool status, StringBuilder logs = null!)
+    public List<Tuple<string, bool>> SaveMachine(string MachineID, bool status, StringBuilder logs = null!)
     {
         var resultList = new List<Tuple<string, bool>>();
 
@@ -28,19 +27,19 @@ public class GroupMachineService
 
         try
         {
-            var strSQL = "UPDATE GroupMachines SET IsActive = @IsActive WHERE GMachineID = @GMachineID";
+            var strSQL = "UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID";
 
             var parameters = new
             {
                 IsActive = !status,
-                GMachineID = GMachineID!
+                MachineID = MachineID!
             };
 
             _connection.Execute(strSQL, parameters);
             logs.AppendLine($"NewIsActive : {!status}");
 
             resultList.Add(Tuple.Create("Change field status successful", true));
-            _logger.LogInfo("Change Success : Change Status Data - Group Machine", logs);
+            _logger.LogInfo("Change Success : Change Status Data - Machine", logs);
         }
         catch (Exception ex)
         {
@@ -51,8 +50,7 @@ public class GroupMachineService
         return resultList;
     }
 
-
-    public List<Tuple<string, bool>> ChangeGroupMachine(string GMachineID, bool status, StringBuilder logs = null!)
+    public List<Tuple<string, bool>> ChangeMachine(string MachineID, bool status, StringBuilder logs = null!)
     {
         var resultList = new List<Tuple<string, bool>>();
 
@@ -63,19 +61,19 @@ public class GroupMachineService
 
         try
         {
-            var strSQL = "UPDATE GroupMachines SET IsActive = @IsActive WHERE GMachineID = @GMachineID";
+            var strSQL = "UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID";
 
             var parameters = new
             {
                 IsActive = !status,
-                GMachineID = GMachineID!
+                MachineID = MachineID!
             };
 
             _connection.Execute(strSQL, parameters);
             logs.AppendLine($"NewIsActive : {!status}");
 
             resultList.Add(Tuple.Create("Change field status successful", true));
-            _logger.LogInfo("Change Success : Change Status Data - Group Machine", logs);
+            _logger.LogInfo("Change Success : Change Status Data - Machine", logs);
         }
         catch (Exception ex)
         {
@@ -86,7 +84,7 @@ public class GroupMachineService
         return resultList;
     }
 
-    public List<Tuple<string, bool>> DeleteGroupMachine(string GMachineID, StringBuilder logs = null!)
+    public List<Tuple<string, bool>> DeleteMachine(string MachineID, StringBuilder logs = null!)
     {
         var resultList = new List<Tuple<string, bool>>();
 
@@ -97,17 +95,17 @@ public class GroupMachineService
 
         try
         {
-            var strSQL = "DELETE FROM GroupMachines WHERE GMachineID = @GMachineID";
+            var strSQL = "DELETE FROM Machines WHERE MachineID = @MachineID";
 
             var parameters = new
             {
-                GMachineID = GMachineID!
+                MachineID = MachineID!
             };
 
             _connection.Execute(strSQL, parameters);
 
             resultList.Add(Tuple.Create("Delete success", true));
-            _logger.LogInfo("Delete Success : Delete Data - Group Machine ", logs);
+            _logger.LogInfo("Delete Success : Delete Data - Machine ", logs);
         }
         catch (Exception ex)
         {

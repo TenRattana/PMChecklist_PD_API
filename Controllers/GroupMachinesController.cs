@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.Logging;
 using PMChecklist_PD_API.Models;
 
 [ApiController]
@@ -149,9 +143,9 @@ public class GroupMachinesController : ControllerBase
                     status = Convert.ToBoolean(data.IsActive);
                     logs.AppendLine("Change Status");
                     logs.AppendLine("----------------------------------------------------");
-                    logs.AppendLine($"Group machine id: {data.GMachineID}");
-                    logs.AppendLine($"Group machine name: {data.GMachineName}");
-                    logs.AppendLine($"IsActive: {status}");
+
+                    string[] propertiesToLog = { "GMachineID", "GMachineName", "IsActive" };
+                    _logService.AppendObjectPropertiesToLog(ref logs, data, propertiesToLog);
                 }
                 else errors.Add("Change status not successful.");
             }
@@ -192,8 +186,9 @@ public class GroupMachinesController : ControllerBase
                 {
                     logs.AppendLine("Delete Data");
                     logs.AppendLine("----------------------------------------------------");
-                    logs.AppendLine($"Group machine id : {data.GMachineID}");
-                    logs.AppendLine($"Group machine name : {data.GMachineName}");
+
+                    string[] propertiesToLog = { "GMachineID", "GMachineName" };
+                    _logService.AppendObjectPropertiesToLog(ref logs, data, propertiesToLog);
                 }
                 else errors.Add("Delete not successful.");
             }

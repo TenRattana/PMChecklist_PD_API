@@ -7,6 +7,7 @@ namespace PMChecklist_PD_API.Models
     {
         public string? GUserID { get; set; }
         public string? GUserName { get; set; }
+        [Required(ErrorMessage = "The status field is required.")]
         public bool? IsActive { get; set; }
 
         public Permissions? Permissions { get; set; }

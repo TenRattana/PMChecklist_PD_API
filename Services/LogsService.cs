@@ -18,7 +18,7 @@ public class LogService
     public LogService(Connection connection, ILogger<LogService> logger, IHttpContextAccessor httpContextAccessor)
     {
         _Host = httpContextAccessor.HttpContext?.Request.Headers["Host"].FirstOrDefault() ?? "Unknown Host";
-        _IP = httpContextAccessor.HttpContext?.Request.Headers["X-Forwarded-For"].FirstOrDefault() ?? 
+        _IP = httpContextAccessor.HttpContext?.Request.Headers["X-Forwarded-For"].FirstOrDefault() ??
               httpContextAccessor.HttpContext?.Connection?.RemoteIpAddress?.ToString() ?? "Unknown IP";
 
         var authorizationHeader = httpContextAccessor.HttpContext?.Request.Headers["Authorization"].FirstOrDefault();
@@ -26,18 +26,18 @@ public class LogService
         {
             var userName = httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "UserName")?.Value;
 
-            _User = userName ?? "Unknown User";  
+            _User = userName ?? "Unknown User";
         }
         else
         {
-            _User = "Unknown User"; 
+            _User = "Unknown User";
         }
 
         _connection = connection;
         _logger = logger;
     }
 
-    public void LogInfo(string Title , StringBuilder Message)
+    public void LogInfo(string Title, StringBuilder Message)
     {
         var formattedMessage = $"Title : {Title} \n " +
                                $"User : {_User} \n " +
@@ -66,7 +66,7 @@ public class LogService
         }
     }
 
-    public void LogError(string Title , string Message)
+    public void LogError(string Title, string Message)
     {
         var formattedMessage = $"Title: {Title} \n " +
                                $"User: {_User} \n " +
@@ -82,7 +82,7 @@ public class LogService
             _connection.Execute(strSQL, new
             {
                 Title = Title!,
-                Author = _User, 
+                Author = _User,
                 Messages = formattedMessage,
                 Type = "Error"
             });
@@ -94,4 +94,26 @@ public class LogService
             throw new Exception("Database insert failed for LogError: " + sqlEx.Message);
         }
     }
+
+    public void AppendObjectPropertiesToLog(ref StringBuilder logs, object data, string[] propertiesToLog)
+    {
+        if (data == null)
+        {
+            logs.AppendLine("Data is null.");
+            return;
+        }
+
+        var properties = data.GetType().GetProperties();
+        foreach (var property in properties)
+        {
+            var propertyName = property.Name;
+
+            if (propertiesToLog.Contains(propertyName))
+            {
+                var propertyValue = property.GetValue(data) ?? "null"; 
+                logs.AppendLine($"{propertyName}: {propertyValue}");
+            }
+        }
+    }
+
 }
