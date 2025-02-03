@@ -26,10 +26,7 @@ public class MachinesController : ControllerBase
         {
             var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
 
-            if (data == null || !data.Any())
-            {
-                return NotFound(new { status = false, message = "No data found." });
-            }
+            if (data == null || !data.Any()) return NotFound(new { status = false, message = "No data found." });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -47,10 +44,7 @@ public class MachinesController : ControllerBase
         {
             var data = _connection.QueryData<Machines>("EXEC SearchMachinesWithPagination @SearchTerm", new { SearchTerm = Messages });
 
-            if (data == null || !data.Any())
-            {
-                return NotFound(new { status = false, message = "No data found." });
-            }
+            if (data == null || !data.Any()) return NotFound(new { status = false, message = "No data found." });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -74,10 +68,7 @@ public class MachinesController : ControllerBase
 
             var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID });
 
-            if (data == null || !data.Any())
-            {
-                return NotFound(new { status = false, message = "No data found." });
-            }
+            if (data == null || !data.Any()) return NotFound(new { status = false, message = "No data found." });
 
             return Ok(new { status = true, message = "Select success", data });
         }
@@ -101,15 +92,8 @@ public class MachinesController : ControllerBase
 
             if (exists != null)
             {
-                if (Convert.ToInt32(exists!.NameCount) == 1)
-                {
-                    errors.Add("The machine name already exists.");
-                }
-
-                if (Convert.ToInt32(exists!.CodeCount) == 1)
-                {
-                    errors.Add("The machine code already exists.");
-                }
+                if (Convert.ToInt32(exists!.NameCount) == 1) errors.Add("The machine name already exists.");
+                if (Convert.ToInt32(exists!.CodeCount) == 1) errors.Add("The machine code already exists.");
             }
 
             var MachineID = machine.MachineID! ?? "";

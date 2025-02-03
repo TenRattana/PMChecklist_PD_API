@@ -24,10 +24,7 @@ public class GroupMachineService
     {
         var resultList = new List<Tuple<string, bool>>();
 
-        if (logs == null)
-        {
-            logs = new StringBuilder();
-        }
+        if (logs == null) logs = new StringBuilder();
 
         try
         {
@@ -66,7 +63,7 @@ public class GroupMachineService
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            _logger.LogActionError(ex);
             resultList.Add(Tuple.Create("Save data not successful", false));
         }
 
@@ -74,34 +71,23 @@ public class GroupMachineService
     }
 
 
-    public List<Tuple<string, bool>> ChangeGroupMachine(string GMachineID, bool status, StringBuilder logs = null!)
+    public List<Tuple<string, bool>> ChangeGroupMachine(string GMachineID, bool Status, StringBuilder logs = null!)
     {
         var resultList = new List<Tuple<string, bool>>();
 
-        if (logs == null)
-        {
-            logs = new StringBuilder();
-        }
+        if (logs == null) logs = new StringBuilder();
 
         try
         {
-            var strSQL = "UPDATE GroupMachines SET IsActive = @IsActive WHERE GMachineID = @GMachineID";
-
-            var parameters = new
-            {
-                IsActive = !status,
-                GMachineID = GMachineID!
-            };
-
-            _connection.Execute(strSQL, parameters);
-            logs.AppendLine($"NewIsActive : {!status}");
+            _connection.Execute("UPDATE GroupMachines SET IsActive = @IsActive WHERE GMachineID = @GMachineID", new { IsActive = !Status, GMachineID });
+            logs.AppendLine($"NewIsActive : {!Status}");
 
             resultList.Add(Tuple.Create("Change field status successful", true));
             _logger.LogInfo("Change Success : Change Status Data - Group Machine", logs);
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            _logger.LogActionError(ex);
             resultList.Add(Tuple.Create("Change status not successful", false));
         }
 
@@ -112,28 +98,18 @@ public class GroupMachineService
     {
         var resultList = new List<Tuple<string, bool>>();
 
-        if (logs == null)
-        {
-            logs = new StringBuilder();
-        }
+        if (logs == null) logs = new StringBuilder();
 
         try
         {
-            var strSQL = "DELETE FROM GroupMachines WHERE GMachineID = @GMachineID";
-
-            var parameters = new
-            {
-                GMachineID = GMachineID!
-            };
-
-            _connection.Execute(strSQL, parameters);
+            _connection.Execute("DELETE FROM GroupMachines WHERE GMachineID = @GMachineID", new { GMachineID });
 
             resultList.Add(Tuple.Create("Delete success", true));
             _logger.LogInfo("Delete Success : Delete Data - Group Machine ", logs);
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            _logger.LogActionError(ex);
             resultList.Add(Tuple.Create("Delete not successful", false));
         }
 

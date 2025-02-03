@@ -91,10 +91,7 @@ public class GroupMachinesController : ControllerBase
             var exists = _connection.QueryData<dynamic>("SELECT CASE WHEN EXISTS (SELECT 1 FROM GroupMachines WHERE GMachineName = @GMachineName AND GMachineID NOT IN (@GMachineID)) THEN 1 ELSE 0 END AS NameCount",
             new { GMachineID = groupMachine.GMachineID ?? "", GMachineName = groupMachine.GMachineName! }).FirstOrDefault();
 
-            if (exists?.NameCount != null && Convert.ToInt32(exists!.NameCount) == 1)
-            {
-                errors.Add("The group machine name already exists.");
-            }
+            if (exists?.NameCount != null && Convert.ToInt32(exists!.NameCount) == 1) errors.Add("The group machine name already exists.");
 
             var GMachineID = groupMachine.GMachineID! ?? "";
 

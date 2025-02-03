@@ -64,41 +64,30 @@ public class MachineService
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            _logger.LogActionError(ex);
             resultList.Add(Tuple.Create("Save data not successful", false));
         }
 
         return resultList;
     }
 
-    public List<Tuple<string, bool>> ChangeMachine(string MachineID, bool status, StringBuilder logs = null!)
+    public List<Tuple<string, bool>> ChangeMachine(string MachineID, bool Status, StringBuilder logs = null!)
     {
         var resultList = new List<Tuple<string, bool>>();
 
-        if (logs == null)
-        {
-            logs = new StringBuilder();
-        }
+        if (logs == null) logs = new StringBuilder();
 
         try
         {
-            var strSQL = "UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID";
-
-            var parameters = new
-            {
-                IsActive = !status,
-                MachineID = MachineID!
-            };
-
-            _connection.Execute(strSQL, parameters);
-            logs.AppendLine($"NewIsActive : {!status}");
+            _connection.Execute("UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID", new { IsActive = !Status, MachineID });
+            logs.AppendLine($"NewIsActive : {!Status}");
 
             resultList.Add(Tuple.Create("Change field status successful", true));
             _logger.LogInfo("Change Success : Change Status Data - Machine", logs);
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            _logger.LogActionError(ex);
             resultList.Add(Tuple.Create("Change status not successful", false));
         }
 
@@ -109,28 +98,18 @@ public class MachineService
     {
         var resultList = new List<Tuple<string, bool>>();
 
-        if (logs == null)
-        {
-            logs = new StringBuilder();
-        }
+        if (logs == null) logs = new StringBuilder();
 
         try
         {
-            var strSQL = "DELETE FROM Machines WHERE MachineID = @MachineID";
-
-            var parameters = new
-            {
-                MachineID = MachineID!
-            };
-
-            _connection.Execute(strSQL, parameters);
+            _connection.Execute("DELETE FROM Machines WHERE MachineID = @MachineID", new { MachineID });
 
             resultList.Add(Tuple.Create("Delete success", true));
             _logger.LogInfo("Delete Success : Delete Data - Machine ", logs);
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
+            _logger.LogActionError(ex);
             resultList.Add(Tuple.Create("Delete not successful", false));
         }
 
