@@ -44,7 +44,7 @@ public class LogService
                                $"IP Address : {_IP} \n " +
                                $"Date : {DateTime.Now:yyyy-MM-dd HH:mm:ss} \n " +
                                $"Host : {_Host} \n " +
-                               $"Message : {Message}";
+                               $"{Message}";
 
         try
         {
@@ -66,14 +66,21 @@ public class LogService
         }
     }
 
-    public void LogError(string Title, string Message)
+    public void LogError(string Title, List<string> Messages, StringBuilder Message = null!)
     {
+        var logMessage = Title;
+
+        foreach (var kvp in Messages)
+        {
+            logMessage += $"{Environment.NewLine} {kvp}";
+        }
+
         var formattedMessage = $"Title: {Title} \n " +
                                $"User: {_User} \n " +
                                $"IP Address: {_IP} \n " +
                                $"Date: {DateTime.Now:yyyy-MM-dd HH:mm:ss} \n " +
                                $"Host: {_Host} \n " +
-                               $"Error Message: {Message}";
+                               $"{logMessage} \n {Message}";
 
         try
         {
@@ -82,6 +89,38 @@ public class LogService
             _connection.Execute(strSQL, new
             {
                 Title = Title!,
+                Author = _User,
+                Messages = formattedMessage,
+                Type = "Error"
+            });
+
+            _logger.LogError($"Error Log Inserted: {formattedMessage}");
+        }
+        catch (SqlException sqlEx)
+        {
+            throw new Exception("Database insert failed for LogError: " + sqlEx.Message);
+        }
+    }
+
+    public void LogActionError(Exception exception)
+    {
+        var errorTitle = exception.Message.Replace("'", "''");
+        var stackTrace = string.IsNullOrEmpty(exception.StackTrace) ? "" : exception.StackTrace.Replace("'", "''");
+
+        var formattedMessage = $"Title: {errorTitle} \n " +
+                               $"User: {_User} \n " +
+                               $"IP Address: {_IP} \n " +
+                               $"Date: {DateTime.Now:yyyy-MM-dd HH:mm:ss} \n " +
+                               $"Host: {_Host} \n " +
+                               $"{stackTrace}";
+
+        try
+        {
+            var strSQL = "INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type)";
+
+            _connection.Execute(strSQL, new
+            {
+                Title = errorTitle,
                 Author = _User,
                 Messages = formattedMessage,
                 Type = "Error"
@@ -104,16 +143,18 @@ public class LogService
         }
 
         var properties = data.GetType().GetProperties();
+
         foreach (var property in properties)
         {
             var propertyName = property.Name;
 
             if (propertiesToLog.Contains(propertyName))
             {
-                var propertyValue = property.GetValue(data) ?? "null"; 
+                var propertyValue = property.GetValue(data) ?? "null";
                 logs.AppendLine($"{propertyName}: {propertyValue}");
             }
         }
+        logs.AppendLine("----------------------------------------------------");
     }
 
 }

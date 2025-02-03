@@ -1,4 +1,5 @@
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PMChecklist_PD_API.Models;
 
@@ -10,11 +11,11 @@ public class GroupMachinesController : ControllerBase
 {
     private readonly Connection _connection;
     private readonly GroupMachineService _groupMachineService;
-    private readonly LogService _logService;
+    private readonly LogService _logger;
 
-    public GroupMachinesController(Connection connection, GroupMachineService groupMachineService, LogService logService)
+    public GroupMachinesController(Connection connection, GroupMachineService groupMachineService, LogService logger)
     {
-        _logService = logService;
+        _logger = logger;
         _groupMachineService = groupMachineService;
         _connection = connection;
     }
@@ -32,7 +33,7 @@ public class GroupMachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while fetching group machines.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -50,7 +51,7 @@ public class GroupMachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while searching group machines.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -74,7 +75,7 @@ public class GroupMachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while fetching group machine.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -82,42 +83,57 @@ public class GroupMachinesController : ControllerBase
     [HttpPost("SaveGroupMachine")]
     public IActionResult SaveGroupMachine([FromBody] GroupMachines groupMachine)
     {
-        if (!ModelState.IsValid)
-        {
-            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-            return BadRequest(new { errors });
-        }
+        var logs = new StringBuilder();
+        var errors = new List<string>();
 
         try
         {
             var exists = _connection.QueryData<dynamic>("SELECT CASE WHEN EXISTS (SELECT 1 FROM GroupMachines WHERE GMachineName = @GMachineName AND GMachineID NOT IN (@GMachineID)) THEN 1 ELSE 0 END AS NameCount",
             new { GMachineID = groupMachine.GMachineID ?? "", GMachineName = groupMachine.GMachineName! }).FirstOrDefault();
 
-            if (exists != null && Convert.ToInt32(exists!.NameCount) == 1) return BadRequest(new { message = "The group machine name already exists." });
-
-            var data = _connection.QueryData<dynamic>("EXEC GetGroupMachinesInPage @ID = @GMachineID", new { GMachineID = groupMachine.GMachineID ?? "" }).FirstOrDefault();
-
-            if (data != null && Convert.ToInt32(data!.NameCount) == 1)
+            if (exists?.NameCount != null && Convert.ToInt32(exists!.NameCount) == 1)
             {
-                var Status = Convert.ToBoolean(data!.IsActive);
-
-                if (Status != groupMachine.IsActive) return BadRequest(new { message = "Change ststus not successful.." });
+                errors.Add("The group machine name already exists.");
             }
 
-            return Ok(new
+            var GMachineID = groupMachine.GMachineID! ?? "";
+
+            var data = _connection.QueryData<dynamic>("EXEC GetGroupMachinesInPage @ID = @GMachineID", new { GMachineID }).FirstOrDefault();
+
+            if (data != null)
             {
-                groupMachine.GMachineID,
-                groupMachine.GMachineName,
-                groupMachine.Description,
-                groupMachine.IsActive
-            });
+                var status = Convert.ToBoolean(data!.IsActive);
+                var disable = Convert.ToBoolean(data.Disables);
+
+                if (disable && status != groupMachine.IsActive)
+                {
+                    logs.AppendLine($"Disable : {disable} -> Can't change status.");
+                    errors.Add("Change status not successful.");
+                }
+            }
+
+            if (errors.Any())
+            {
+                logs.AppendLine("----------------------------------------------------");
+                logs.AppendLine($"Group machine id : {groupMachine.GMachineID}");
+                logs.AppendLine($"Group machine name : {groupMachine.GMachineName}");
+                logs.AppendLine("----------------------------------------------------");
+
+                _logger.LogError("Save Not Success : Group Machine", errors, logs);
+                return BadRequest(new { errors = errors! });
+            }
+
+            var result = _groupMachineService.SaveGroupMachine(groupMachine, logs);
+
+            if (result.Any(r => !r.Item2)) return StatusCode(500, new { message = result.FirstOrDefault()?.Item1, status = result.FirstOrDefault()?.Item2 });
+
+            return Ok(new { message = "Status changed successfully.", logs = logs.ToString() });
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while changing group machine status.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { message = "An error occurred while processing the request.", exception = ex.Message });
         }
-
     }
 
     [HttpPost("ChangeGroupMachine/{GMachineID}")]
@@ -144,8 +160,7 @@ public class GroupMachinesController : ControllerBase
                     logs.AppendLine("Change Status");
                     logs.AppendLine("----------------------------------------------------");
 
-                    string[] propertiesToLog = { "GMachineID", "GMachineName", "IsActive" };
-                    _logService.AppendObjectPropertiesToLog(ref logs, data, propertiesToLog);
+                    _logger.AppendObjectPropertiesToLog(ref logs, data!, new string[] { "GMachineID", "GMachineName", "IsActive" });
                 }
                 else errors.Add("Change status not successful.");
             }
@@ -160,7 +175,7 @@ public class GroupMachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while changing group machine status.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { message = "An error occurred while processing the request.", exception = ex.Message });
         }
     }
@@ -187,8 +202,7 @@ public class GroupMachinesController : ControllerBase
                     logs.AppendLine("Delete Data");
                     logs.AppendLine("----------------------------------------------------");
 
-                    string[] propertiesToLog = { "GMachineID", "GMachineName" };
-                    _logService.AppendObjectPropertiesToLog(ref logs, data, propertiesToLog);
+                    _logger.AppendObjectPropertiesToLog(ref logs, data!, new string[] { "GMachineID", "GMachineName" });
                 }
                 else errors.Add("Delete not successful.");
             }
@@ -203,7 +217,7 @@ public class GroupMachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while changing group machine status.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { message = "An error occurred while processing the request.", exception = ex.Message });
         }
     }

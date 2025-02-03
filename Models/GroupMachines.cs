@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PMChecklist_PD_API.Models
@@ -14,8 +15,8 @@ namespace PMChecklist_PD_API.Models
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "The status field is required.")]
+        [DefaultValue(false)]
         public bool? IsActive { get; set; }  
-
         public bool Disables { get; set; }
         public bool Deletes { get; set; }
         public int RowNum { get; set; }

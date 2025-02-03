@@ -9,13 +9,13 @@ using PMChecklist_PD_API.Models;
 public class MachinesController : ControllerBase
 {
     private readonly Connection _connection;
-    private readonly LogService _logService;
+    private readonly LogService _logger;
     private readonly MachineService _machineService;
 
-    public MachinesController(Connection connection, PCMhecklistContext context, LogService logService, MachineService machineService)
+    public MachinesController(Connection connection, PCMhecklistContext context, LogService logger, MachineService machineService)
     {
         _connection = connection;
-        _logService = logService;
+        _logger = logger;
         _machineService = machineService;
     }
 
@@ -35,7 +35,7 @@ public class MachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while fetching group machine.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -56,13 +56,13 @@ public class MachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while fetching group machine.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
 
     [HttpGet("/GetMachine/{MachineID}")]
-    public ActionResult<GroupMachines> GetMachine(string MachineID)
+    public ActionResult<Machines> GetMachine(string MachineID)
     {
         var errors = new List<string>();
 
@@ -72,7 +72,7 @@ public class MachinesController : ControllerBase
 
             if (errors.Any()) return BadRequest(new { errors });
 
-            var data = _connection.QueryData<GroupMachines>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID });
+            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID });
 
             if (data == null || !data.Any())
             {
@@ -83,7 +83,7 @@ public class MachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while fetching group machine.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { status = false, message = "An error occurred while fetching the data. Please try again later." });
         }
     }
@@ -91,11 +91,8 @@ public class MachinesController : ControllerBase
     [HttpPost("SaveMachine")]
     public IActionResult SaveMachine([FromBody] Machines machine)
     {
-        if (!ModelState.IsValid)
-        {
-            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-            return BadRequest(new { errors });
-        }
+        var logs = new StringBuilder();
+        var errors = new List<string>();
 
         try
         {
@@ -104,33 +101,56 @@ public class MachinesController : ControllerBase
 
             if (exists != null)
             {
-                if (Convert.ToInt32(exists!.NameCount) == 1) return BadRequest(new { message = "The machine name already exists." });
-                if (Convert.ToInt32(exists!.CodeCount) == 1) return BadRequest(new { message = "The machine code already exists." });
+                if (Convert.ToInt32(exists!.NameCount) == 1)
+                {
+                    errors.Add("The machine name already exists.");
+                }
+
+                if (Convert.ToInt32(exists!.CodeCount) == 1)
+                {
+                    errors.Add("The machine code already exists.");
+                }
             }
 
-            var data = _connection.QueryData<dynamic>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID = machine.MachineID ?? "" }).FirstOrDefault();
+            var MachineID = machine.MachineID! ?? "";
 
-            if (data != null && Convert.ToInt32(data!.NameCount) == 1)
+            var data = _connection.QueryData<dynamic>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID }).FirstOrDefault();
+
+            if (data != null)
             {
-                var Status = Convert.ToBoolean(data!.IsActive);
+                var status = Convert.ToBoolean(data!.IsActive);
+                var disable = Convert.ToBoolean(data.Disables);
 
-                if (Status != machine.IsActive) return BadRequest(new { message = "Change ststus not successful.." });
+                if (disable && status != machine.IsActive)
+                {
+                    logs.AppendLine($"Disable : {disable} -> Can't change status.");
+                    errors.Add("Change status not successful.");
+                }
             }
 
-            return Ok(new
+            if (errors.Any())
             {
-                machine.GMachineID,
-                machine.MachineName,
-                machine.MachineCode,
-                machine.IsActive
-            });
+                logs.AppendLine("----------------------------------------------------");
+                logs.AppendLine($"Machine id : {machine.MachineID}");
+                logs.AppendLine($"Machine name : {machine.MachineName}");
+                logs.AppendLine($"Machine code : {machine.MachineCode}");
+                logs.AppendLine("----------------------------------------------------");
+
+                _logger.LogError("Save Not Success : Machine", errors, logs);
+                return BadRequest(new { errors = errors! });
+            }
+
+            var result = _machineService.SaveMachine(machine, logs);
+
+            if (result.Any(r => !r.Item2)) return StatusCode(500, new { message = result.FirstOrDefault()?.Item1, status = result.FirstOrDefault()?.Item2 });
+
+            return Ok(new { message = "Status changed successfully.", logs = logs.ToString() });
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while changing group machine status.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { message = "An error occurred while processing the request.", exception = ex.Message });
         }
-
     }
 
     [HttpPost("ChangeMachine/{MachineID}")]
@@ -157,8 +177,7 @@ public class MachinesController : ControllerBase
                     logs.AppendLine("Change Status");
                     logs.AppendLine("----------------------------------------------------");
 
-                    string[] propertiesToLog = { "MachineID", "MachineName", "IsActive" };
-                    _logService.AppendObjectPropertiesToLog(ref logs, data, propertiesToLog);
+                    _logger.AppendObjectPropertiesToLog(ref logs, data!, new string[] { "MachineID", "MachineName", "IsActive" });
                 }
                 else errors.Add("Change status not successful.");
             }
@@ -173,7 +192,7 @@ public class MachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while changing group machine status.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { message = "An error occurred while processing the request.", exception = ex.Message });
         }
     }
@@ -188,7 +207,7 @@ public class MachinesController : ControllerBase
         {
             if (string.IsNullOrWhiteSpace(MachineID)) errors.Add("The machine id field is required.");
 
-            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @ID = @GMachineID", new { MachineID }).FirstOrDefault();
+            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID }).FirstOrDefault();
 
             if (data == null) errors.Add("The machine id field does not exist in the database.");
 
@@ -200,8 +219,7 @@ public class MachinesController : ControllerBase
                     logs.AppendLine("Delete Data");
                     logs.AppendLine("----------------------------------------------------");
 
-                    string[] propertiesToLog = { "MachineID", "MachineName" };
-                    _logService.AppendObjectPropertiesToLog(ref logs, data, propertiesToLog);
+                    _logger.AppendObjectPropertiesToLog(ref logs, data!, new string[] { "MachineID", "MachineName" });
                 }
                 else errors.Add("Delete not successful.");
             }
@@ -216,7 +234,7 @@ public class MachinesController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logService.LogError("Error occurred while changing group machine status.", ex.ToString());
+            _logger.LogActionError(ex);
             return StatusCode(500, new { message = "An error occurred while processing the request.", exception = ex.Message });
         }
     }
