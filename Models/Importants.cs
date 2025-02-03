@@ -10,7 +10,6 @@ namespace PMChecklist_PD_API.Models
         public string? Value { get; set; }
         public float? MinLength { get; set; }
         public float? MaxLength { get; set; }
-
         public MatchCheckList? MatchCheckList { get; set; }
     }
 }

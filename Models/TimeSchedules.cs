@@ -11,10 +11,13 @@ namespace PMChecklist_PD_API.Models
         public string? ScheduleName { get; set; }
         public string? TypeSchedule { get; set; }
         [Required(ErrorMessage = "The track field is required.")]
+        [DefaultValue(false)]
         public bool? Tracking { get; set; }
         [Required(ErrorMessage = "The custom field is required.")]
+        [DefaultValue(false)]
         public bool? Custom { get; set; }
         [Required(ErrorMessage = "The status field is required.")]
+        [DefaultValue(false)]
         public bool? IsActive { get; set; }
     }
 }
