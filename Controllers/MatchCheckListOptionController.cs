@@ -18,7 +18,7 @@ public class MatchCheckListOptionController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetMatchCheckListOptions/{page}/{pageSize}")]
+    [HttpGet("GetMatchCheckListOptions/{page}/{pageSize}")]
     public ActionResult<MatchCheckListOption> GetMatchCheckListOptions(int page, int pageSize)
     {
         try
@@ -63,7 +63,7 @@ public class MatchCheckListOptionController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchMatchCheckListOptions/{Messages}")]
+    [HttpGet("SearchMatchCheckListOptions/{Messages}")]
     public ActionResult<MatchCheckListOption> SearchMatchCheckListOptions(string Messages)
     {
         try
@@ -107,7 +107,7 @@ public class MatchCheckListOptionController : ControllerBase
         }
     }
 
-    [HttpGet("/GetMatchCheckListOption/{MCLOptionID}/{mode}")]
+    [HttpGet("GetMatchCheckListOption/{MCLOptionID}/{mode}")]
     public ActionResult<MatchCheckListOption> GetMatchCheckListOption(string MCLOptionID, bool mode)
     {
         try

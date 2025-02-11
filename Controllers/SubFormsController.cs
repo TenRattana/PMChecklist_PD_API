@@ -18,7 +18,7 @@ public class SubFormsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetSubForms")]
+    [HttpGet("GetSubForms")]
     public ActionResult<SubForms> GetSubForms()
     {
         try

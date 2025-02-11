@@ -19,7 +19,7 @@ public class GroupCheckListOptionsController : ControllerBase
     }
 
 
-    [HttpGet("/GetGroupCheckListOptions/{page}/{pageSize}")]
+    [HttpGet("GetGroupCheckListOptions/{page}/{pageSize}")]
     public ActionResult<GroupCheckListOptions> GetGroupCheckListOptions(int page, int pageSize)
     {
         try
@@ -40,7 +40,7 @@ public class GroupCheckListOptionsController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchGroupCheckLists/{Messages}")]
+    [HttpGet("SearchGroupCheckLists/{Messages}")]
     public ActionResult<CheckLists> SearchGroupCheckLists(string Messages)
     {
         try
@@ -61,7 +61,7 @@ public class GroupCheckListOptionsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetGroupCheckListOption/{GCLOptionID}")]
+    [HttpGet("GetGroupCheckListOption/{GCLOptionID}")]
     public ActionResult<CheckLists> GetGroupCheckListOption(string GCLOptionID)
     {
         try
@@ -82,7 +82,7 @@ public class GroupCheckListOptionsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetGroupCheckListOptionInForm/{GCLOptionIDS}")]
+    [HttpGet("GetGroupCheckListOptionInForm/{GCLOptionIDS}")]
     public ActionResult<CheckLists> GetGroupCheckListOptionInForm(string[] GCLOptionIDS)
     {
         try

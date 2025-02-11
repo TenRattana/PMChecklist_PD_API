@@ -17,7 +17,7 @@ public class CheckListOptionsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetCheckListOptions/{page}/{pageSize}")]
+    [HttpGet("GetCheckListOptions/{page}/{pageSize}")]
     public ActionResult<CheckListOptions> GetCheckListOptions(int page, int pageSize)
     {
         try
@@ -38,7 +38,7 @@ public class CheckListOptionsController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchCheckListOptions/{Messages}")]
+    [HttpGet("SearchCheckListOptions/{Messages}")]
     public ActionResult<CheckListOptions> SearchCheckListOptions(string Messages)
     {
 
@@ -60,7 +60,7 @@ public class CheckListOptionsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetCheckListOption/{CLOptionID}")]
+    [HttpGet("GetCheckListOption/{CLOptionID}")]
     public ActionResult<CheckListOptions> GetCheckListOption(string CLOptionID)
     {
         try

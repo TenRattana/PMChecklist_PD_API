@@ -17,7 +17,7 @@ public class MatchFormMachinesController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetMatchFormMachines/{page}/{pageSize}")]
+    [HttpGet("GetMatchFormMachines/{page}/{pageSize}")]
     public ActionResult<MatchFormMachine> GetMatchFormMachines(int page, int pageSize)
     {
         try
@@ -38,7 +38,7 @@ public class MatchFormMachinesController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchMatchFormMachine/{Messages}")]
+    [HttpGet("SearchMatchFormMachine/{Messages}")]
     public ActionResult<MatchFormMachine> SearchMatchFormMachine(string Messages)
     {
         try
@@ -59,7 +59,7 @@ public class MatchFormMachinesController : ControllerBase
         }
     }
 
-    [HttpGet("/GetMatchFormMachine/{MachineID}")]
+    [HttpGet("GetMatchFormMachine/{MachineID}")]
     public ActionResult<MatchFormMachine> GetMatchFormMachine(string MachineID)
     {
         try

@@ -20,7 +20,7 @@ public class CheckListTypesController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetCheckListTypes")]
+    [HttpGet("GetCheckListTypes")]
     public ActionResult<GroupTypeCheckLists> GetCheckListTypes()
     {
         try

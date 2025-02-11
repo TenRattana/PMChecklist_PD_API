@@ -8,7 +8,11 @@ public static class ConfigurationExtensions
 
         services.AddDatabaseServices(configuration);
 
-        services.AddControllers();
+        services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null; 
+            });
+
         services.AddSingleton<Connection>();
 
         services.AddScoped<LogService>();
@@ -23,6 +27,7 @@ public static class ConfigurationExtensions
         services.AddScoped<MatchCheckListOptionService>();
         services.AddScoped<MatchFormMachineService>();
         services.AddScoped<ExpectedResultService>();
+        services.AddScoped<TimeSchedulesService>();
 
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddEndpointsApiExplorer();

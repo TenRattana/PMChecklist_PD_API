@@ -1,8 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PMChecklist_PD_API.Models;
 
 [ApiController]
+[Route("[controller]")]
 [Produces("application/json")]
 public class LdapController : ControllerBase
 {
@@ -21,6 +23,7 @@ public class LdapController : ControllerBase
     /// <param name="UserName"></param>
     /// <param name="Password"></param>
     /// <returns></returns>
+    [AllowAnonymous]
     [HttpGet("AuthenticateUser")]
     public ActionResult<List<object>> AuthenticateUser(string UserName, string Password)
     {
@@ -28,7 +31,7 @@ public class LdapController : ControllerBase
 
         if (users == null)
         {
-            return NotFound("User not found.");
+            return Unauthorized();
         }
 
         string token = _common.GenerateJwtToken(users);
@@ -36,13 +39,22 @@ public class LdapController : ControllerBase
         return Ok(new { token });
     }
 
-    [HttpPost("refresh")]
-    public IActionResult Refresh([FromBody] RefreshTokenRequest request)
+    [AllowAnonymous]
+    [HttpGet("RefreshToken")]
+    public ActionResult<List<object>> Refresh(string RefreshToken)
     {
+        RefreshToken = Uri.UnescapeDataString(RefreshToken);
+        RefreshToken = RefreshToken.Replace("\"", "");
+
+        if (string.IsNullOrWhiteSpace(RefreshToken) || !(RefreshToken.Split('.').Length == 3))
+        {
+            return Unauthorized(new { message = "Invalid token format" });
+        }
+
         JwtSecurityToken? claims = null;
         try
         {
-            claims = new JwtSecurityTokenHandler().ReadJwtToken(request.AccessToken);
+            claims = new JwtSecurityTokenHandler().ReadJwtToken(RefreshToken);
         }
         catch (Exception ex)
         {
@@ -61,25 +73,16 @@ public class LdapController : ControllerBase
             SAccout = claims.Claims.FirstOrDefault(c => c.Type == "SAccout")?.Value,
             UserName = claims.Claims.FirstOrDefault(c => c.Type == "UserName")?.Value,
             Position = claims.Claims.FirstOrDefault(c => c.Type == "Position")?.Value,
-            Department = claims.Claims.FirstOrDefault(c => c.Type == "Department")?.Value,
+            DepartMent = claims.Claims.FirstOrDefault(c => c.Type == "DepartMent")?.Value,
             UserID = claims.Claims.FirstOrDefault(c => c.Type == "UserID")?.Value,
             GUserID = claims.Claims.FirstOrDefault(c => c.Type == "GUserID")?.Value,
             GUserName = claims.Claims.FirstOrDefault(c => c.Type == "GUserName")?.Value,
-            Permissions = claims.Claims.FirstOrDefault(c => c.Type == "Permissions")?.Value?.Split(',') ?? new string[] { }
+            Permissions = claims.Claims.Where(c => c.Type == "Permissions").Select(c => c.Value).ToArray() ?? new string[] { }
         });
 
-        var principal = _common.GenerateJwtToken(userData);
+        var token = _common.GenerateJwtToken(userData);
 
-        var newRefreshToken = _common.GenerateRefreshToken();
-
-        return Ok(new { RefreshToken = newRefreshToken });
+        return Ok(new { RefreshToken = token });
     }
 }
-
-public class RefreshTokenRequest
-{
-    public string? AccessToken { get; set; }
-    public string? RefreshToken { get; set; }
-}
-
 

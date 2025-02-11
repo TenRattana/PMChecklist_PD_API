@@ -19,7 +19,7 @@ public class DataTypesController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetDataTypes")]
+    [HttpGet("GetDataTypes")]
     public ActionResult<DataTypes> GetDataTypes()
     {
         try

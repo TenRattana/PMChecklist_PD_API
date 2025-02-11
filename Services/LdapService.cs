@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.DirectoryServices;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
 using PMChecklist_PD_API.Models;
 using System.Runtime.InteropServices;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
 
 public class LdapService
 {
@@ -13,12 +10,11 @@ public class LdapService
     private readonly string _ldapBaseDn;
     private readonly Connection _connection;
 
-
     public LdapService(IConfiguration configuration, Connection connection)
     {
         _connection = connection;
-        _ldapServer = configuration["LdapSettings:LdapServer"] ?? "LDAP://10.99.100.5";
-        _ldapBaseDn = configuration["LdapSettings:LdapBaseDn"] ?? "dc=kerrykfm01,dc=local";
+        _ldapServer = configuration["LdapSettings:LdapServer"]!;
+        _ldapBaseDn = configuration["LdapSettings:LdapBaseDn"]!;
     }
 
     public List<LdapUser> AuthenticateAsync(string username, string password)
@@ -30,63 +26,64 @@ public class LdapService
         {
             try
             {
-                using (var entry = new DirectoryEntry(ldapUrl, username, password))
+                var entry = new DirectoryEntry(ldapUrl, username, password);
+                object nativeObject = entry.NativeObject;
+
+                var search = new DirectorySearcher(entry);
+
+                search.Filter = $"(SAMAccountName={username})";
+                search.PropertiesToLoad.Add("sAMAccountName");
+                search.PropertiesToLoad.Add("cn");
+                search.PropertiesToLoad.Add("title");
+                search.PropertiesToLoad.Add("department");
+
+                var result = search.FindOne();
+
+                if (result != null)
                 {
-                    object nativeObject = entry.NativeObject;
+                    var samAccountName = result.Properties["sAMAccountName"][0].ToString();
+                    var fullName = result.Properties["cn"][0].ToString();
+                    var position = result.Properties["title"][0].ToString();
+                    var department = result.Properties["department"][0].ToString();
 
-                    var search = new DirectorySearcher(entry);
+                    var users = _connection.QueryData<Users>("SELECT g.UserID, gu.GUserID, gu.GUserName FROM Users as g LEFT JOIN GroupUsers as gu ON g.GUserID = gu.GUserID WHERE g.UserName = @cn", new { cn = fullName }).ToList();
 
-                    search.Filter = $"(SAMAccountName={username})";
-                    search.PropertiesToLoad.Add("sAMAccountName");
-                    search.PropertiesToLoad.Add("cn");
-                    search.PropertiesToLoad.Add("title");
-                    search.PropertiesToLoad.Add("department");
-
-                    var result = search.FindOne();
-
-                    if (result != null)
+                    var user = users.FirstOrDefault();
+                    if (users.Any())
                     {
-                        var samAccountName = result.Properties["sAMAccountName"][0].ToString();
-                        var fullName = result.Properties["cn"][0].ToString();
-                        var position = result.Properties["title"][0].ToString();
-                        var department = result.Properties["department"][0].ToString();
+                        var permissionNames = _connection.QueryData<string>(
+                            "SELECT p.PermissionName FROM GroupPermissions as gp " +
+                            "INNER JOIN Permissions as p ON gp.PermissionID = p.PermissionID " +
+                            "WHERE gp.GUserID = @GUserID AND gp.IsActive = 1 AND gp.PermissionStatus = 1",
+                            new { GUserID = user!.GUserID! })
+                            .ToArray();
 
-
-                        var users = _connection.QueryData<Users>("SELECT g.UserID, gu.GUserID, gu.GUserName FROM Users as g LEFT JOIN GroupUsers as gu ON g.GUserID = gu.GUserID WHERE g.UserName = @cn", new { cn = fullName }).ToList();
-
-                        var user = users.FirstOrDefault();
-                        if (users.Any())
+                        userData.Add(new LdapUser
                         {
-                            var permissionNames = _connection.QueryData<string>(
-                                "SELECT p.PermissionName FROM GroupPermissions as gp " +
-                                "INNER JOIN Permissions as p ON gp.PermissionID = p.PermissionID " +
-                                "WHERE gp.GUserID = @GUserID AND gp.IsActive = 1 AND gp.PermissionStatus = 1",
-                                new { GUserID = user!.GUserID! })
-                                .ToArray();
-
-                            userData.Add(new LdapUser
-                            {
-                                SAccout = samAccountName,
-                                UserName = fullName,
-                                Position = position,
-                                Department = department,
-                                UserID = user.UserID,
-                                GUserID = user.GUserID,
-                                GUserName = user.GUserName,
-                                Permissions = permissionNames
-                            });
-                        }
-
+                            SAccout = samAccountName,
+                            UserName = fullName,
+                            Position = position,
+                            DepartMent = department,
+                            UserID = user.UserID,
+                            GUserID = user.GUserID,
+                            GUserName = user.GUserName,
+                            Permissions = permissionNames
+                        });
                     }
                 }
             }
-            catch (Exception)
+            catch (DirectoryServicesCOMException ex)
             {
+                Console.WriteLine($"LDAP Connection Error: {ex.Message}");
+                return userData;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected LDAP error: {ex.Message}");
                 return userData;
             }
         }
 
         return userData;
     }
-
 }

@@ -22,6 +22,7 @@ namespace PMChecklist_PD_API.Models
         public DbSet<Approveds> Approveds { get; set; } = default!;
         public DbSet<GroupMachines> GroupMachines { get; set; } = default!;
         public DbSet<Menu> Menu { get; set; } = default!;
+        public DbSet<Machines> Machines { get; set; } = default!;
         
     }
 }

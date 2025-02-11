@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PMChecklist_PD_API.Models;
@@ -19,7 +20,7 @@ public class MenuController : ControllerBase
         _context = context;
     }
 
-    [HttpPost("/GetMenus")]
+    [HttpGet("GetMenus")]
     public ActionResult<object> GetMenus(string GUserID)
     {
         try

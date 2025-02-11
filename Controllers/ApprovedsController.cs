@@ -21,7 +21,7 @@ public class ApprovedsController : ControllerBase
     /// <summary>
     /// Select a data Approved from database with page and pagesize.
     /// </summary>
-    [HttpGet("/GetApproveds/{page}/{pageSize}")]
+    [HttpGet("GetApproveds/{page}/{pageSize}")]
     public ActionResult GetApproveds(int page, int pageSize)
     {
         try
@@ -45,7 +45,7 @@ public class ApprovedsController : ControllerBase
     /// <summary>
     /// Select a data Approved from database with searching.
     /// </summary>
-    [HttpGet("/SearchApproveds/{Messages}")]
+    [HttpGet("SearchApproveds/{Messages}")]
     public ActionResult SearchApproveds(string Messages)
     {
         try

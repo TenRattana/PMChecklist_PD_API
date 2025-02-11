@@ -28,9 +28,9 @@ public class Common
         var claims = new List<Claim>
     {
         new Claim("UserID", user.UserID!),
-        new Claim("SAccout", user.UserID!),
+        new Claim("SAccout", user.SAccout!),
         new Claim("UserName", user.UserName!),
-        new Claim("Department", user.Department!),
+        new Claim("DepartMent", user.DepartMent!),
         new Claim("Position", user.Position!),
         new Claim("GUserID", user.GUserID!),
         new Claim("GUserName", user.GUserName!),

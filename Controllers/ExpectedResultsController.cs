@@ -20,7 +20,7 @@ public class ExpectedResultsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetExpectedResults/{page}/{pageSize}")]
+    [HttpGet("GetExpectedResults/{page}/{pageSize}")]
     public IActionResult GetExpectedResults(int page, int pageSize)
     {
         try
@@ -40,7 +40,7 @@ public class ExpectedResultsController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchExpectedResults/{Messages}")]
+    [HttpGet("SearchExpectedResults/{Messages}")]
     public ActionResult SearchExpectedResults(string Messages)
     {
         try
@@ -61,7 +61,7 @@ public class ExpectedResultsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetExpectedResult/{TableID}")]
+    [HttpGet("GetExpectedResult/{TableID}")]
     public ActionResult<ExpectedTable> GetExpectedResult(string TableID)
     {
         try

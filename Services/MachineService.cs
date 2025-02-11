@@ -23,41 +23,77 @@ public class MachineService
     {
         var resultList = new List<Tuple<string, bool>>();
 
-        if (logs == null)
-        {
-            logs = new StringBuilder();
-        }
+        if (logs == null) logs = new StringBuilder();
 
         try
         {
-            var before = _connection.QueryData<Machines>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID = machines.MachineID! }).FirstOrDefault();
-
             if (!String.IsNullOrEmpty(machines.MachineID))
             {
-                logs.AppendLine("Change Data - Before");
-                logs.AppendLine("----------------------------------------------------");
-
-                _logger.AppendObjectPropertiesToLog(ref logs, before!, new string[] { "MachineID", "GMachineID", "MachineName", "Description", "IsActive", "Building", "Floor", "Area" });
-
-                var strSQL = "UPDATE Machines SET GMachineID = @GMachineID ,MachineName = @MachineName ,Description = NULLIF(@Description, '') ,IsActive = @IsActive ,MachineCode = @MachineCode ,Building = NULLIF(@Building, '') ,Floor = NULLIF(@Floor, '') ,Area = NULLIF(@Area, '') WHERE MachineID = @MachineID";
-                _connection.Execute(strSQL, new { GMachineID = machines.GMachineID!, MachineName = machines.MachineName!, Description = machines.Description!, IsActive = machines.IsActive!, MachineCode = machines.MachineCode!, Building = machines.Building!, Floor = machines.Floor!, Area = machines.Area!, MachineID = machines.MachineID! });
+                var strSQL = @"
+                UPDATE Machines 
+                SET GMachineID = @GMachineID,
+                    MachineName = @MachineName,
+                    Description = NULLIF(@Description, ''),
+                    IsActive = @IsActive,
+                    MachineCode = @MachineCode,
+                    Building = NULLIF(@Building, ''),
+                    Floor = NULLIF(@Floor, ''),
+                    Area = NULLIF(@Area, '')
+                WHERE MachineID = @MachineID";
+                _connection.Execute(strSQL, new
+                {
+                    GMachineID = machines.GMachineID,
+                    MachineName = machines.MachineName,
+                    Description = machines.Description,
+                    IsActive = machines.IsActive,
+                    MachineCode = machines.MachineCode,
+                    Building = machines.Building,
+                    Floor = machines.Floor,
+                    Area = machines.Area,
+                    MachineID = machines.MachineID
+                });
             }
             else
             {
-                var prefix = _connection.QueryData<dynamic>("SELECT TOP(1) PF_Machine AS Prefix FROM AppConfig", new { }).FirstOrDefault();
+                var prefix = _connection.QueryData<dynamic>("SELECT TOP(1) PF_Machine AS Prefix FROM AppConfig").FirstOrDefault();
                 var max = _common.GetMaxID("Machines", "MachineID", $"{prefix!.Prefix}%") + 1;
                 var formattedId = _common.FormattedId(prefix!.Prefix, max);
 
-                var strSQL = "INSERT INTO Machines (MachineID , GMachineID , MachineName , Description , IsActive , MachineCode , Building , Floor , Area) VALUES (@MachineID ,@GMachineID ,@MachineName ,NULLIF(@Description,''), @IsActive ,@MachineCode ,NULLIF(@Building, '') ,NULLIF(@Floor, '') ,NULLIF(@Area, ''))";
-                _connection.Execute(strSQL, new { GMachineID = machines.GMachineID!, MachineName = machines.MachineName!, Description = machines.Description!, IsActive = machines.IsActive!, MachineCode = machines.MachineCode!, Building = machines.Building!, Floor = machines.Floor!, Area = machines.Area!, MachineID = formattedId });
+                var strSQL = @"
+                INSERT INTO Machines (MachineID, GMachineID, MachineName, Description, IsActive, MachineCode, Building, Floor, Area) 
+                VALUES (@MachineID, @GMachineID, @MachineName, NULLIF(@Description, ''), @IsActive, @MachineCode, NULLIF(@Building, ''), NULLIF(@Floor, ''), NULLIF(@Area, ''))";
+                _connection.Execute(strSQL, new
+                {
+                    GMachineID = machines.GMachineID,
+                    MachineName = machines.MachineName,
+                    Description = machines.Description,
+                    IsActive = machines.IsActive,
+                    MachineCode = machines.MachineCode,
+                    Building = machines.Building,
+                    Floor = machines.Floor,
+                    Area = machines.Area,
+                    MachineID = formattedId
+                });
+
                 machines.MachineID = formattedId;
             }
 
             logs.AppendLine("Update Data");
             logs.AppendLine("----------------------------------------------------");
 
-            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID = machines.MachineID! }).FirstOrDefault();
-            _logger.AppendObjectPropertiesToLog(ref logs, data!, new string[] { "MachineID", "GMachineID", "MachineName", "Description", "IsActive", "Building", "Floor", "Area" });
+            var data = new
+            {
+                MachineID = machines.MachineID,
+                GMachineID = machines.GMachineID,
+                MachineName = machines.MachineName,
+                Description = machines.Description,
+                IsActive = machines.IsActive,
+                Building = machines.Building,
+                Floor = machines.Floor,
+                Area = machines.Area
+            };
+
+            _logger.AppendObjectPropertiesToLog(ref logs, data, new string[] { "MachineID", "GMachineID", "MachineName", "Description", "IsActive", "Building", "Floor", "Area" });
             _logger.LogInfo("Save Success : Save Data - Machine", logs);
 
             resultList.Add(Tuple.Create("Save data successful", true));

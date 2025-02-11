@@ -18,7 +18,7 @@ public class FormsController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetForms/{page}/{pageSize}")]
+    [HttpGet("GetForms/{page}/{pageSize}")]
     public IActionResult GetForms(int page, int pageSize)
     {
         try
@@ -39,7 +39,7 @@ public class FormsController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchForms/{Messages}")]
+    [HttpGet("SearchForms/{Messages}")]
     public IActionResult SearchForms(string Messages)
     {
         try
@@ -60,7 +60,7 @@ public class FormsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetForm/{FormID}")]
+    [HttpGet("GetForm/{FormID}")]
     public IActionResult GetForm(string FormID)
     {
         try

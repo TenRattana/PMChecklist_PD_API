@@ -18,7 +18,7 @@ public class GroupUsersController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("/GetGroupUsers")]
+    [HttpGet("GetGroupUsers")]
     public ActionResult<GroupUsers> GetGroupUsers()
     {
 

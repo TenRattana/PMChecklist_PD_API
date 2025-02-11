@@ -19,7 +19,7 @@ public class MachinesController : ControllerBase
         _machineService = machineService;
     }
 
-    [HttpGet("/GetMachines/{page}/{pageSize}")]
+    [HttpGet("GetMachines")]
     public ActionResult<Machines> GetMachines(int page, int pageSize)
     {
         try
@@ -37,7 +37,7 @@ public class MachinesController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchMachines/{Messages}")]
+    [HttpGet("SearchMachines")]
     public ActionResult<Machines> SearchMachines(string Messages)
     {
         try
@@ -55,7 +55,7 @@ public class MachinesController : ControllerBase
         }
     }
 
-    [HttpGet("/GetMachine/{MachineID}")]
+    [HttpGet("GetMachine")]
     public ActionResult<Machines> GetMachine(string MachineID)
     {
         var errors = new List<string>();
@@ -96,7 +96,7 @@ public class MachinesController : ControllerBase
                 if (Convert.ToInt32(exists!.CodeCount) == 1) errors.Add("The machine code already exists.");
             }
 
-            var MachineID = machine.MachineID! ?? "";
+            var MachineID = machine.MachineID ?? "";
 
             var data = _connection.QueryData<dynamic>("EXEC GetMachinesInPage @ID = @MachineID", new { MachineID }).FirstOrDefault();
 
@@ -109,6 +109,12 @@ public class MachinesController : ControllerBase
                 {
                     logs.AppendLine($"Disable : {disable} -> Can't change status.");
                     errors.Add("Change status not successful.");
+                }
+                else
+                {
+                    logs.AppendLine("Change Data - Before");
+                    logs.AppendLine("----------------------------------------------------");
+                    _logger.AppendObjectPropertiesToLog(ref logs, data!, new string[] { "MachineID", "GMachineID", "MachineName", "Description", "IsActive", "Building", "Floor", "Area" });
                 }
             }
 
@@ -137,7 +143,7 @@ public class MachinesController : ControllerBase
         }
     }
 
-    [HttpPost("ChangeMachine/{MachineID}")]
+    [HttpPut("ChangeMachine/{MachineID}")]
     public IActionResult ChangeMachine(string MachineID)
     {
         var errors = new List<string>();

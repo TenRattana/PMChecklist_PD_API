@@ -20,7 +20,7 @@ public class CheckListsController : ControllerBase
         _connection = connection;
     }
 
-    [HttpGet("/GetCheckLists/{page}/{pageSize}")]
+    [HttpGet("GetCheckLists/{page}/{pageSize}")]
     public ActionResult<CheckLists> GetCheckLists(int page, int pageSize)
     {
         try
@@ -38,7 +38,7 @@ public class CheckListsController : ControllerBase
         }
     }
 
-    [HttpGet("/SearchCheckLists/{Messages}")]
+    [HttpGet("SearchCheckLists/{Messages}")]
     public ActionResult<CheckLists> SearchCheckLists(string Messages)
     {
         try
@@ -56,7 +56,7 @@ public class CheckListsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetCheckList/{CListID}")]
+    [HttpGet("GetCheckList/{CListID}")]
     public ActionResult<CheckLists> GetCheckList(string CListID)
     {
         var errors = new List<string>();
@@ -80,7 +80,7 @@ public class CheckListsController : ControllerBase
         }
     }
 
-    [HttpGet("/GetCheckListInForm/{CListIDS}")]
+    [HttpGet("GetCheckListInForm/{CListIDS}")]
     public ActionResult<CheckLists> GetCheckListInForm(string CListIDS)
     {
         try
