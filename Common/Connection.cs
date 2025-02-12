@@ -5,15 +5,19 @@ using System.Collections.Generic;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
+using Serilog;
+using System.Diagnostics;
 
 public class Connection
 {
     private readonly string _connectionString;
+    private readonly ILogger<dynamic> _logger;
 
-    public Connection(IConfiguration configuration)
+    public Connection(IConfiguration configuration, ILogger<dynamic> logger)
     {
-        _connectionString = configuration.GetConnectionString("DefaultConnection") ?? 
+        _connectionString = configuration.GetConnectionString("DefaultConnection") ??
                             throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     private IDbConnection GetConnection()
@@ -25,10 +29,17 @@ public class Connection
     {
         parameters = parameters ?? new { };
 
+        var stopwatch = Stopwatch.StartNew();
+
         using (var connection = GetConnection())
         {
             connection.Open();
-            return connection.Query<T>(sql, parameters);
+            var result = connection.Query<T>(sql, parameters);
+
+            stopwatch.Stop();
+            _logger.LogInformation("Command Executed Successfully: {SQL} with Parameters: {@Parameters} in {ElapsedMilliseconds} ms", sql, parameters, stopwatch.ElapsedMilliseconds);
+
+            return result;
         }
     }
 
@@ -36,10 +47,17 @@ public class Connection
     {
         parameters = parameters ?? new { };
 
+        var stopwatch = Stopwatch.StartNew();
+
         using (var connection = GetConnection())
         {
             connection.Open();
-            return connection.Execute(sql, parameters);
+            var result = connection.Execute(sql, parameters);
+
+            stopwatch.Stop();
+            _logger.LogInformation("Command Executed Successfully: {SQL} with Parameters: {@Parameters} in {ElapsedMilliseconds} ms", sql, parameters, stopwatch.ElapsedMilliseconds);
+
+            return result;
         }
     }
 
@@ -51,12 +69,20 @@ public class Connection
             connection.Open();
             try
             {
+                _logger.LogInformation("Starting Transaction");
+
+                var stopwatch = Stopwatch.StartNew();
                 action(connection, transaction);
+
                 transaction.Commit();
+
+                stopwatch.Stop();
+                _logger.LogInformation("Transaction Committed Successfully in {ElapsedMilliseconds} ms", stopwatch.ElapsedMilliseconds);
             }
-            catch
+            catch (Exception ex)
             {
                 transaction.Rollback();
+                _logger.LogError(ex, "Transaction Failed and Rolled Back");
                 throw;
             }
         }
@@ -70,13 +96,22 @@ public class Connection
             connection.Open();
             try
             {
+                _logger.LogInformation("Starting Transaction");
+
+                var stopwatch = Stopwatch.StartNew();
                 var result = action(connection, transaction);
+
                 transaction.Commit();
+
+                stopwatch.Stop();
+                _logger.LogInformation("Transaction Committed Successfully in {ElapsedMilliseconds} ms", stopwatch.ElapsedMilliseconds);
+
                 return result;
             }
-            catch
+            catch (Exception ex)
             {
                 transaction.Rollback();
+                _logger.LogError(ex, "Transaction Failed and Rolled Back");
                 throw;
             }
         }

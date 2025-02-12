@@ -8,7 +8,7 @@ namespace PMChecklist_PD_API.Models
 
         public DbSet<GroupUsers> GroupUsers { get; set; } = default!;
         public DbSet<Users> Users { get; set; } = default!;
-        public DbSet<Log> Logs { get; set; } = default!;
+        public DbSet<Log_db> Logs { get; set; } = default!;
         public DbSet<AppConfig> AppConfig { get; set; } = default!;
         public DbSet<CheckLists> CheckLists { get; set; } = default!;
         public DbSet<CheckListOptions> CheckListOptions { get; set; } = default!;

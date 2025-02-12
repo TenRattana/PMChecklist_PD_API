@@ -1,0 +1,28 @@
+@page
+@model LogsModel
+
+<h2>Logs</h2>
+
+<div class="log-container">
+    @Html.Raw(Model.LogContent)
+</div>
+
+<style>
+    .log-container {
+        background-color: #1e1e1e; 
+        color: #dcdcdc; 
+        font-family: 'Courier New', monospace; 
+        font-size: 14px;
+        padding: 20px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    .log-container .log-code {
+        background-color: #2d2d2d;
+        color: #9cdcfe;
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
+</style>

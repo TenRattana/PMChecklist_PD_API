@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PMChecklist_PD_API.Models
 {
-    public class Log
+    public class Log_db
     {
         [Key]
         public int Id { get; set; }
