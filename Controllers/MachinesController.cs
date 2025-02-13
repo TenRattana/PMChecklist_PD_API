@@ -19,12 +19,12 @@ public class MachinesController : ControllerBase
         _machineService = machineService;
     }
 
-    [HttpGet("GetMachines")]
-    public ActionResult<Machines> GetMachines(int page, int pageSize)
+    [HttpPost("GetMachines/{page}/{pageSize}")]
+    public ActionResult GetMachines(int page, int pageSize)
     {
         try
         {
-            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @PageIndex , @PageSize", new { PageIndex = page, PageSize = pageSize });
+            var data = _connection.QueryData<Machines>("EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize", new { page, pageSize });
 
             if (data == null || !data.Any()) return NotFound(new { status = false, message = "No data found." });
 
@@ -37,12 +37,12 @@ public class MachinesController : ControllerBase
         }
     }
 
-    [HttpGet("SearchMachines")]
-    public ActionResult<Machines> SearchMachines(string Messages)
+    [HttpPost("SearchMachines/{Messages}")]
+    public ActionResult SearchMachines(string Messages)
     {
         try
         {
-            var data = _connection.QueryData<Machines>("EXEC SearchMachinesWithPagination @SearchTerm", new { SearchTerm = Messages });
+            var data = _connection.QueryData<Machines>("EXEC SearchMachinesWithPagination @SearchTerm = @Messages", new { Messages });
 
             if (data == null || !data.Any()) return NotFound(new { status = false, message = "No data found." });
 
@@ -55,8 +55,8 @@ public class MachinesController : ControllerBase
         }
     }
 
-    [HttpGet("GetMachine")]
-    public ActionResult<Machines> GetMachine(string MachineID)
+    [HttpPost("GetMachine/{MachineID}")]
+    public ActionResult GetMachine(string MachineID)
     {
         var errors = new List<string>();
 
@@ -80,7 +80,7 @@ public class MachinesController : ControllerBase
     }
 
     [HttpPost("SaveMachine")]
-    public IActionResult SaveMachine([FromBody] Machines machine)
+    public ActionResult SaveMachine([FromBody] Machines machine)
     {
         var logs = new StringBuilder();
         var errors = new List<string>();
@@ -143,8 +143,8 @@ public class MachinesController : ControllerBase
         }
     }
 
-    [HttpPut("ChangeMachine/{MachineID}")]
-    public IActionResult ChangeMachine(string MachineID)
+    [HttpPost("ChangeMachine/{MachineID}")]
+    public ActionResult ChangeMachine(string MachineID)
     {
         var errors = new List<string>();
         var logs = new StringBuilder();
@@ -187,8 +187,8 @@ public class MachinesController : ControllerBase
         }
     }
 
-    [HttpDelete("DeleteMachine/{MachineID}")]
-    public IActionResult DeleteMachine(string MachineID)
+    [HttpPost("DeleteMachine/{MachineID}")]
+    public ActionResult DeleteMachine(string MachineID)
     {
         var errors = new List<string>();
         var logs = new StringBuilder();

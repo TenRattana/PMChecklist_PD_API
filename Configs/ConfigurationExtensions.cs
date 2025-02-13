@@ -7,10 +7,11 @@ public static class ConfigurationExtensions
         Env.Load();
 
         services.AddDatabaseServices(configuration);
+        services.AddSingleton<DapperContext>();
 
         services.AddControllers().AddJsonOptions(options =>
             {
-                options.JsonSerializerOptions.PropertyNamingPolicy = null; 
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
 
         services.AddSingleton<Connection>();

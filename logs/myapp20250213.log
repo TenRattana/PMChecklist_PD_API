@@ -1,0 +1,933 @@
+2025-02-13 08:13:14.785 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 423 ms
+2025-02-13 08:15:13.667 +07:00 [INF] Command Executed Successfully: SELECT g.UserID, gu.GUserID, gu.GUserName FROM Users as g LEFT JOIN GroupUsers as gu ON g.GUserID = gu.GUserID WHERE g.UserName = @cn with Parameters: {"cn":"Rattana Chomwihok"} in 418 ms
+2025-02-13 08:15:13.780 +07:00 [INF] Command Executed Successfully: SELECT p.PermissionName FROM GroupPermissions as gp INNER JOIN Permissions as p ON gp.PermissionID = p.PermissionID WHERE gp.GUserID = @GUserID AND gp.IsActive = 1 AND gp.PermissionStatus = 1 with Parameters: {"GUserID":"GU01"} in 46 ms
+2025-02-13 08:15:13.895 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 12 ms
+2025-02-13 08:15:13.929 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 46 ms
+2025-02-13 08:15:13.944 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 13 ms
+2025-02-13 08:15:13.958 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 12 ms
+2025-02-13 08:15:13.968 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 10 ms
+2025-02-13 08:15:13.980 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 11 ms
+2025-02-13 08:15:13.991 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 10 ms
+2025-02-13 08:15:14.003 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 11 ms
+2025-02-13 08:15:14.004 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 1 ms
+2025-02-13 08:15:14.005 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 08:15:14.006 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 08:15:14.007 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 08:15:14.008 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 08:15:14.009 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 08:15:14.010 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 08:15:14.011 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 08:15:16.548 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 6 ms
+2025-02-13 08:15:16.587 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 37 ms
+2025-02-13 08:15:16.594 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 6 ms
+2025-02-13 08:15:16.660 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 0 ms
+2025-02-13 08:15:16.660 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 0 ms
+2025-02-13 08:15:16.661 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 0 ms
+2025-02-13 08:15:16.661 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 08:15:16.664 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 0 ms
+2025-02-13 08:15:16.665 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 08:15:16.667 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 1 ms
+2025-02-13 08:15:16.673 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 5 ms
+2025-02-13 08:15:16.683 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 9 ms
+2025-02-13 08:15:16.689 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 5 ms
+2025-02-13 08:17:56.249 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 126 ms
+2025-02-13 08:54:41.903 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000094"} in 1576 ms
+2025-02-13 08:54:50.139 +07:00 [INF] Command Executed Successfully: EXEC GetGroupMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":100} in 35 ms
+2025-02-13 08:54:50.148 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm with Parameters: {"SearchTerm":"V1_Test"} in 19 ms
+2025-02-13 09:24:38.473 +07:00 [INF] Command Executed Successfully: SELECT g.UserID, gu.GUserID, gu.GUserName FROM Users as g LEFT JOIN GroupUsers as gu ON g.GUserID = gu.GUserID WHERE g.UserName = @cn with Parameters: {"cn":"Rattana Chomwihok"} in 436 ms
+2025-02-13 09:24:38.529 +07:00 [INF] Command Executed Successfully: SELECT p.PermissionName FROM GroupPermissions as gp INNER JOIN Permissions as p ON gp.PermissionID = p.PermissionID WHERE gp.GUserID = @GUserID AND gp.IsActive = 1 AND gp.PermissionStatus = 1 with Parameters: {"GUserID":"GU01"} in 7 ms
+2025-02-13 09:24:38.867 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 4 ms
+2025-02-13 09:24:38.875 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 10 ms
+2025-02-13 09:24:38.882 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 6 ms
+2025-02-13 09:24:38.889 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 5 ms
+2025-02-13 09:24:38.897 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 7 ms
+2025-02-13 09:24:38.903 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 5 ms
+2025-02-13 09:24:38.908 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 4 ms
+2025-02-13 09:24:38.914 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 5 ms
+2025-02-13 09:24:38.918 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 3 ms
+2025-02-13 09:24:38.923 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 4 ms
+2025-02-13 09:24:38.928 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 5 ms
+2025-02-13 09:24:38.932 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 3 ms
+2025-02-13 09:24:38.936 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 3 ms
+2025-02-13 09:24:38.940 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 3 ms
+2025-02-13 09:24:38.944 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 3 ms
+2025-02-13 09:24:38.945 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 09:25:25.169 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 6321 ms
+2025-02-13 09:25:47.529 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 23 ms
+2025-02-13 09:25:47.540 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 24 ms
+2025-02-13 09:25:47.543 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 2 ms
+2025-02-13 09:25:47.547 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 2 ms
+2025-02-13 09:25:47.548 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 09:25:47.549 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 09:25:47.549 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 09:25:47.549 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 09:25:47.550 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 09:25:47.550 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 09:25:47.550 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 09:25:47.551 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 09:25:47.552 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 09:25:47.552 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 09:25:47.552 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 09:25:47.552 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 09:25:48.486 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 7 ms
+2025-02-13 09:25:48.508 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 20 ms
+2025-02-13 09:25:48.519 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 9 ms
+2025-02-13 09:25:48.625 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 5 ms
+2025-02-13 09:25:48.629 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 4 ms
+2025-02-13 09:25:48.636 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 6 ms
+2025-02-13 09:25:48.640 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 4 ms
+2025-02-13 09:25:48.650 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 7 ms
+2025-02-13 09:25:48.653 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 09:25:48.660 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 5 ms
+2025-02-13 09:25:48.666 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 5 ms
+2025-02-13 09:25:48.677 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 10 ms
+2025-02-13 09:25:48.686 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 8 ms
+2025-02-13 09:27:54.930 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 447 ms
+2025-02-13 09:27:54.946 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 415 ms
+2025-02-13 09:27:55.004 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 19 ms
+2025-02-13 09:27:55.115 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 109 ms
+2025-02-13 09:27:55.139 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 23 ms
+2025-02-13 09:27:55.158 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 18 ms
+2025-02-13 09:27:55.166 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 7 ms
+2025-02-13 09:27:55.171 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 5 ms
+2025-02-13 09:27:55.177 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 5 ms
+2025-02-13 09:27:55.185 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 7 ms
+2025-02-13 09:27:55.193 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 7 ms
+2025-02-13 09:27:55.202 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 7 ms
+2025-02-13 09:27:55.209 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 6 ms
+2025-02-13 09:27:55.217 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 8 ms
+2025-02-13 09:27:55.224 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 6 ms
+2025-02-13 09:27:55.231 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 6 ms
+2025-02-13 09:27:56.030 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 9 ms
+2025-02-13 09:27:56.135 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 103 ms
+2025-02-13 09:27:56.281 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 145 ms
+2025-02-13 09:27:56.368 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 9 ms
+2025-02-13 09:27:56.372 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 3 ms
+2025-02-13 09:27:56.379 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 6 ms
+2025-02-13 09:27:56.386 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 6 ms
+2025-02-13 09:27:56.399 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 9 ms
+2025-02-13 09:27:56.404 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 5 ms
+2025-02-13 09:27:56.431 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 26 ms
+2025-02-13 09:27:56.436 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 4 ms
+2025-02-13 09:27:56.446 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 9 ms
+2025-02-13 09:27:56.451 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 5 ms
+2025-02-13 09:28:01.444 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 159 ms
+2025-02-13 09:29:17.971 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 394 ms
+2025-02-13 09:29:17.991 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 411 ms
+2025-02-13 09:29:18.018 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 11 ms
+2025-02-13 09:29:18.027 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 8 ms
+2025-02-13 09:29:18.038 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 10 ms
+2025-02-13 09:29:18.046 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 7 ms
+2025-02-13 09:29:18.054 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 8 ms
+2025-02-13 09:29:18.055 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 09:29:18.055 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 09:29:18.056 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 09:29:18.056 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 09:29:18.056 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 09:29:18.057 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 09:29:18.057 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 09:29:18.057 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 09:29:18.058 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 09:29:23.387 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 646 ms
+2025-02-13 09:31:42.486 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 482 ms
+2025-02-13 09:31:42.486 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 459 ms
+2025-02-13 09:31:42.550 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 10 ms
+2025-02-13 09:31:42.559 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 7 ms
+2025-02-13 09:31:42.566 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 7 ms
+2025-02-13 09:31:42.572 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 5 ms
+2025-02-13 09:31:42.572 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 09:31:42.573 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 09:31:42.573 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 09:31:42.574 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 09:31:42.574 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 09:31:42.574 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 09:31:42.575 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 09:31:42.575 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 09:31:42.576 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 09:31:42.576 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 09:31:48.166 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 270 ms
+2025-02-13 09:32:13.336 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 17 ms
+2025-02-13 09:32:13.351 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 32 ms
+2025-02-13 09:32:13.353 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 2 ms
+2025-02-13 09:32:13.354 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 0 ms
+2025-02-13 09:32:13.355 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 09:32:13.355 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 09:32:13.355 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 09:32:13.356 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 09:32:13.357 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 09:32:13.357 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 09:32:13.358 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 09:32:13.359 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 09:32:13.359 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 09:32:13.360 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 09:32:13.360 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 09:32:13.360 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 09:32:13.498 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 3 ms
+2025-02-13 09:32:13.521 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 22 ms
+2025-02-13 09:32:13.528 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 6 ms
+2025-02-13 09:32:13.617 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 2 ms
+2025-02-13 09:32:13.619 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 0 ms
+2025-02-13 09:32:13.620 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 1 ms
+2025-02-13 09:32:13.621 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 09:32:13.626 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 0 ms
+2025-02-13 09:32:13.626 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 09:32:13.627 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 0 ms
+2025-02-13 09:32:13.627 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 09:32:13.627 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 0 ms
+2025-02-13 09:32:13.628 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 0 ms
+2025-02-13 09:32:15.514 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 138 ms
+2025-02-13 09:35:16.517 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 12 ms
+2025-02-13 09:35:16.519 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 14 ms
+2025-02-13 09:35:16.525 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 6 ms
+2025-02-13 09:35:16.531 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 5 ms
+2025-02-13 09:35:16.537 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 5 ms
+2025-02-13 09:35:16.543 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 6 ms
+2025-02-13 09:35:16.554 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 10 ms
+2025-02-13 09:35:16.559 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 4 ms
+2025-02-13 09:35:16.563 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 3 ms
+2025-02-13 09:35:16.567 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 4 ms
+2025-02-13 09:35:16.573 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 5 ms
+2025-02-13 09:35:16.577 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 4 ms
+2025-02-13 09:35:16.581 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 3 ms
+2025-02-13 09:35:16.586 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 4 ms
+2025-02-13 09:35:16.592 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 5 ms
+2025-02-13 09:35:16.596 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 4 ms
+2025-02-13 09:35:20.674 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 2 ms
+2025-02-13 09:35:20.680 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 6 ms
+2025-02-13 09:35:20.684 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 3 ms
+2025-02-13 09:35:20.688 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 3 ms
+2025-02-13 09:35:20.692 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 3 ms
+2025-02-13 09:35:20.696 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 4 ms
+2025-02-13 09:35:20.699 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 2 ms
+2025-02-13 09:35:20.703 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 3 ms
+2025-02-13 09:35:20.707 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 09:35:20.717 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 9 ms
+2025-02-13 09:35:20.720 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 09:35:20.727 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 6 ms
+2025-02-13 09:35:20.732 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 4 ms
+2025-02-13 09:35:24.080 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 241 ms
+2025-02-13 09:38:53.400 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 523 ms
+2025-02-13 09:38:53.393 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 529 ms
+2025-02-13 09:38:53.462 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 10 ms
+2025-02-13 09:38:53.470 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 6 ms
+2025-02-13 09:38:53.476 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 5 ms
+2025-02-13 09:38:53.482 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 5 ms
+2025-02-13 09:38:53.487 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 4 ms
+2025-02-13 09:38:53.494 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 7 ms
+2025-02-13 09:38:53.503 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 8 ms
+2025-02-13 09:38:53.510 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 6 ms
+2025-02-13 09:38:53.516 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 5 ms
+2025-02-13 09:38:53.522 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 6 ms
+2025-02-13 09:38:53.528 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 5 ms
+2025-02-13 09:38:53.533 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 4 ms
+2025-02-13 09:38:53.540 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 6 ms
+2025-02-13 09:38:53.545 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 4 ms
+2025-02-13 09:38:54.298 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 5 ms
+2025-02-13 09:38:54.324 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 24 ms
+2025-02-13 09:38:54.330 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 5 ms
+2025-02-13 09:38:54.432 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 4 ms
+2025-02-13 09:38:54.436 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 3 ms
+2025-02-13 09:38:54.442 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 5 ms
+2025-02-13 09:38:54.446 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 09:38:54.455 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 5 ms
+2025-02-13 09:38:54.458 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 09:38:54.465 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 7 ms
+2025-02-13 09:38:54.469 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 09:38:54.474 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 3 ms
+2025-02-13 09:38:54.478 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 3 ms
+2025-02-13 09:39:39.912 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 189 ms
+2025-02-13 09:45:13.443 +07:00 [INF] Command Executed Successfully: SELECT g.UserID, gu.GUserID, gu.GUserName FROM Users as g LEFT JOIN GroupUsers as gu ON g.GUserID = gu.GUserID WHERE g.UserName = @cn with Parameters: {"cn":"Rattana Chomwihok"} in 481 ms
+2025-02-13 09:45:13.514 +07:00 [INF] Command Executed Successfully: SELECT p.PermissionName FROM GroupPermissions as gp INNER JOIN Permissions as p ON gp.PermissionID = p.PermissionID WHERE gp.GUserID = @GUserID AND gp.IsActive = 1 AND gp.PermissionStatus = 1 with Parameters: {"GUserID":"GU01"} in 19 ms
+2025-02-13 09:45:50.658 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":10} in 105 ms
+2025-02-13 09:46:04.690 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 8348 ms
+2025-02-13 09:46:04.706 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000100"} in 13 ms
+2025-02-13 09:46:04.730 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 09:46:04 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 22 ms
+2025-02-13 09:46:04.730 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 09:46:04 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 09:46:46.769 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 8610 ms
+2025-02-13 09:46:46.771 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":true,"MachineID":"M00000100"} in 1 ms
+2025-02-13 09:46:46.773 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 09:46:46 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: False\r\n----------------------------------------------------\r\nNewIsActive : True\r\n","Type":"Info"} in 1 ms
+2025-02-13 09:46:46.773 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 09:46:46 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: False
+----------------------------------------------------
+NewIsActive : True
+
+2025-02-13 09:53:37.472 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 8353 ms
+2025-02-13 09:54:10.302 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":10} in 576 ms
+2025-02-13 09:59:21.199 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 21 ms
+2025-02-13 09:59:28.387 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M0000100"} in 0 ms
+2025-02-13 10:00:23.501 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 5849 ms
+2025-02-13 10:00:23.536 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000100"} in 6 ms
+2025-02-13 10:00:23.539 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:00:23 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 2 ms
+2025-02-13 10:00:23.540 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:00:23 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:02:42.111 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 5729 ms
+2025-02-13 10:02:42.185 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":true,"MachineID":"M00000100"} in 9 ms
+2025-02-13 10:02:42.189 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:02:42 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: False\r\n----------------------------------------------------\r\nNewIsActive : True\r\n","Type":"Info"} in 2 ms
+2025-02-13 10:02:42.190 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:02:42 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: False
+----------------------------------------------------
+NewIsActive : True
+
+2025-02-13 10:13:22.097 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 8706 ms
+2025-02-13 10:13:22.136 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000100"} in 6 ms
+2025-02-13 10:13:22.140 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:13:22 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 3 ms
+2025-02-13 10:13:22.140 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:13:22 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:13:39.030 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 8605 ms
+2025-02-13 10:13:39.032 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":true,"MachineID":"M00000100"} in 1 ms
+2025-02-13 10:13:39.034 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:13:39 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: False\r\n----------------------------------------------------\r\nNewIsActive : True\r\n","Type":"Info"} in 1 ms
+2025-02-13 10:13:39.034 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:13:39 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: False
+----------------------------------------------------
+NewIsActive : True
+
+2025-02-13 10:17:35.790 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M000000100"} in 420 ms
+2025-02-13 10:17:35.841 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M000000100"} in 7 ms
+2025-02-13 10:17:35.847 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:17:35 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000010\r\nMachineName: แม่เหล็กตาชั้่ง B1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 3 ms
+2025-02-13 10:17:35.847 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:17:35 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000010
+MachineName: แม่เหล็กตาชั้่ง B1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:19:57.368 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 443 ms
+2025-02-13 10:20:33.261 +07:00 [INF] Command Executed Successfully: EXEC GetGroupMachinesInPage @ID = @GMachineID with Parameters: {"GMachineID":"M000000100"} in 17 ms
+2025-02-13 10:20:38.189 +07:00 [INF] Command Executed Successfully: EXEC GetGroupMachinesInPage @ID = @GMachineID with Parameters: {"GMachineID":"M00000100"} in 6 ms
+2025-02-13 10:21:15.761 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M000000100"} in 242 ms
+2025-02-13 10:21:15.801 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M000000100"} in 6 ms
+2025-02-13 10:21:15.817 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:21:15 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000010\r\nMachineName: แม่เหล็กตาชั้่ง B1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 15 ms
+2025-02-13 10:21:15.817 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:21:15 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000010
+MachineName: แม่เหล็กตาชั้่ง B1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:21:28.837 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M000000100"} in 4 ms
+2025-02-13 10:21:28.838 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M000000100"} in 1 ms
+2025-02-13 10:21:28.840 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:21:28 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000010\r\nMachineName: แม่เหล็กตาชั้่ง B1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 1 ms
+2025-02-13 10:21:28.840 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:21:28 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000010
+MachineName: แม่เหล็กตาชั้่ง B1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:22:38.819 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M000000100"} in 4 ms
+2025-02-13 10:22:38.820 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M000000100"} in 0 ms
+2025-02-13 10:22:38.822 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:22:38 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000010\r\nMachineName: แม่เหล็กตาชั้่ง B1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 1 ms
+2025-02-13 10:22:38.822 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:22:38 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000010
+MachineName: แม่เหล็กตาชั้่ง B1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:30:04.434 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 502 ms
+2025-02-13 10:30:04.481 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 9 ms
+2025-02-13 10:30:04.488 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 6 ms
+2025-02-13 10:30:04.494 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 5 ms
+2025-02-13 10:30:04.499 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 5 ms
+2025-02-13 10:30:04.504 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 4 ms
+2025-02-13 10:30:04.509 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 4 ms
+2025-02-13 10:30:04.513 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 3 ms
+2025-02-13 10:30:04.518 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 5 ms
+2025-02-13 10:30:04.523 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 5 ms
+2025-02-13 10:30:04.528 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 4 ms
+2025-02-13 10:30:04.537 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 8 ms
+2025-02-13 10:30:04.542 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 5 ms
+2025-02-13 10:30:04.546 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 3 ms
+2025-02-13 10:30:04.551 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 4 ms
+2025-02-13 10:30:09.702 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 10 ms
+2025-02-13 10:30:09.743 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 39 ms
+2025-02-13 10:30:09.756 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 12 ms
+2025-02-13 10:30:09.860 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 4 ms
+2025-02-13 10:30:09.863 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 3 ms
+2025-02-13 10:30:09.868 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 3 ms
+2025-02-13 10:30:09.871 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 10:30:09.883 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 8 ms
+2025-02-13 10:30:09.886 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 10:30:09.895 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 8 ms
+2025-02-13 10:30:09.898 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 2 ms
+2025-02-13 10:30:09.902 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 4 ms
+2025-02-13 10:30:09.905 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 2 ms
+2025-02-13 10:30:34.804 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":100} in 93 ms
+2025-02-13 10:30:42.904 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 6 ms
+2025-02-13 10:30:42.910 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 6 ms
+2025-02-13 10:30:42.916 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 5 ms
+2025-02-13 10:30:42.917 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 10:30:42.917 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 10:30:42.918 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 10:30:42.918 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 18 ms
+2025-02-13 10:30:42.918 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 10:30:42.919 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 10:30:42.919 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 10:30:42.920 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 10:30:42.925 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 5 ms
+2025-02-13 10:30:42.932 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 6 ms
+2025-02-13 10:30:42.938 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 5 ms
+2025-02-13 10:30:42.944 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 5 ms
+2025-02-13 10:30:42.949 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 4 ms
+2025-02-13 10:30:43.822 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 2 ms
+2025-02-13 10:30:43.835 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 11 ms
+2025-02-13 10:30:43.839 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 4 ms
+2025-02-13 10:30:43.840 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 0 ms
+2025-02-13 10:30:43.841 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 0 ms
+2025-02-13 10:30:43.841 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 0 ms
+2025-02-13 10:30:43.842 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 10:30:43.843 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 0 ms
+2025-02-13 10:30:43.844 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 10:30:43.845 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 1 ms
+2025-02-13 10:30:43.846 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 10:30:43.847 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 0 ms
+2025-02-13 10:30:43.847 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 0 ms
+2025-02-13 10:30:48.932 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 143 ms
+2025-02-13 10:31:36.049 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 149 ms
+2025-02-13 10:31:36.052 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 1 ms
+2025-02-13 10:31:36.054 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 1 ms
+2025-02-13 10:31:36.055 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 10:31:36.055 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 10:31:36.056 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 10:31:36.056 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 10:31:36.056 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 10:31:36.057 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 10:31:36.057 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 10:31:36.057 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 10:31:36.057 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 10:31:36.058 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 10:31:36.058 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 10:31:36.058 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 10:31:40.800 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 24 ms
+2025-02-13 10:31:40.865 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 63 ms
+2025-02-13 10:31:40.886 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 20 ms
+2025-02-13 10:31:40.908 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 12 ms
+2025-02-13 10:31:40.921 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 13 ms
+2025-02-13 10:31:40.931 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 9 ms
+2025-02-13 10:31:40.946 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 14 ms
+2025-02-13 10:31:40.968 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 17 ms
+2025-02-13 10:31:40.979 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 10 ms
+2025-02-13 10:31:40.999 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 19 ms
+2025-02-13 10:31:41.010 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 10 ms
+2025-02-13 10:31:41.022 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 11 ms
+2025-02-13 10:31:41.030 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 8 ms
+2025-02-13 10:32:13.864 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 681 ms
+2025-02-13 10:32:13.897 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 712 ms
+2025-02-13 10:32:13.956 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 21 ms
+2025-02-13 10:32:13.970 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 12 ms
+2025-02-13 10:32:13.971 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 10:32:13.973 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 10:32:13.973 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 10:32:13.974 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 10:32:13.974 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 10:32:13.975 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 10:32:13.976 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 10:32:13.977 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 10:32:13.978 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 10:32:13.978 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 10:32:13.979 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 10:32:13.979 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 10:32:54.946 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 478 ms
+2025-02-13 10:32:54.946 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 528 ms
+2025-02-13 10:32:54.992 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 4 ms
+2025-02-13 10:32:54.995 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 1 ms
+2025-02-13 10:32:54.996 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 10:32:54.996 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 10:32:54.997 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 10:32:54.997 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 10:32:54.997 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 10:32:54.998 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 10:32:54.999 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 10:32:54.999 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 10:32:55.000 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 10:32:55.001 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 10:32:55.002 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 10:32:55.002 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 10:32:56.725 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 9 ms
+2025-02-13 10:32:56.771 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 44 ms
+2025-02-13 10:32:56.778 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 6 ms
+2025-02-13 10:32:56.878 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 8 ms
+2025-02-13 10:32:56.884 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 4 ms
+2025-02-13 10:32:56.895 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 10 ms
+2025-02-13 10:32:56.902 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 6 ms
+2025-02-13 10:32:56.911 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 6 ms
+2025-02-13 10:32:56.916 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 4 ms
+2025-02-13 10:32:56.925 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 7 ms
+2025-02-13 10:32:56.926 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 10:32:56.927 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 0 ms
+2025-02-13 10:32:56.927 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 0 ms
+2025-02-13 10:34:13.409 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 78 ms
+2025-02-13 10:34:13.421 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 78 ms
+2025-02-13 10:34:13.432 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 10 ms
+2025-02-13 10:34:13.442 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 9 ms
+2025-02-13 10:34:13.453 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 10 ms
+2025-02-13 10:34:13.462 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 8 ms
+2025-02-13 10:34:13.468 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 5 ms
+2025-02-13 10:34:13.474 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 5 ms
+2025-02-13 10:34:13.480 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 6 ms
+2025-02-13 10:34:13.485 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 4 ms
+2025-02-13 10:34:13.490 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 5 ms
+2025-02-13 10:34:13.496 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 5 ms
+2025-02-13 10:34:13.502 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 5 ms
+2025-02-13 10:34:13.509 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 6 ms
+2025-02-13 10:34:13.517 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 6 ms
+2025-02-13 10:34:13.525 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 5 ms
+2025-02-13 10:34:19.390 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 342 ms
+2025-02-13 10:35:00.340 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000094"} in 24 ms
+2025-02-13 10:35:00.356 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000094"} in 10 ms
+2025-02-13 10:35:00.374 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:35:00 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000094\r\nMachineName: Test V1SS0\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 14 ms
+2025-02-13 10:35:00.375 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:35:00 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000094
+MachineName: Test V1SS0
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:35:00.466 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 41 ms
+2025-02-13 10:35:09.363 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000095"} in 18 ms
+2025-02-13 10:35:14.345 +07:00 [INF] Command Executed Successfully: EXEC GetGroupMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":100} in 61 ms
+2025-02-13 10:35:14.350 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm with Parameters: {"SearchTerm":"D_Test"} in 34 ms
+2025-02-13 10:35:21.487 +07:00 [INF] Command Executed Successfully: EXEC SearchMachinesWithPagination @SearchTerm with Parameters: {"SearchTerm":"M"} in 97 ms
+2025-02-13 10:35:21.951 +07:00 [INF] Command Executed Successfully: EXEC SearchMachinesWithPagination @SearchTerm with Parameters: {"SearchTerm":"M3"} in 23 ms
+2025-02-13 10:35:23.789 +07:00 [INF] Command Executed Successfully: EXEC SearchMachinesWithPagination @SearchTerm with Parameters: {"SearchTerm":"M"} in 135 ms
+2025-02-13 10:38:05.638 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 558 ms
+2025-02-13 10:38:05.654 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 526 ms
+2025-02-13 10:38:05.740 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 22 ms
+2025-02-13 10:38:05.753 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 11 ms
+2025-02-13 10:38:05.754 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 10:38:05.754 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 10:38:05.755 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 10:38:05.755 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 10:38:05.755 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 10:38:05.756 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 10:38:05.756 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 10:38:05.758 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 10:38:05.758 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 10:38:05.759 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 10:38:05.759 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 10:38:05.760 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 10:38:08.588 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 11 ms
+2025-02-13 10:38:08.632 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 43 ms
+2025-02-13 10:38:08.643 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 9 ms
+2025-02-13 10:38:08.745 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 6 ms
+2025-02-13 10:38:08.753 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 7 ms
+2025-02-13 10:38:08.763 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 8 ms
+2025-02-13 10:38:08.771 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 7 ms
+2025-02-13 10:38:08.788 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 11 ms
+2025-02-13 10:38:08.795 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 6 ms
+2025-02-13 10:38:08.808 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 12 ms
+2025-02-13 10:38:08.817 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 8 ms
+2025-02-13 10:38:08.827 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 9 ms
+2025-02-13 10:38:08.828 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 0 ms
+2025-02-13 10:38:23.827 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 15 ms
+2025-02-13 10:38:23.827 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 11 ms
+2025-02-13 10:38:23.831 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 1 ms
+2025-02-13 10:38:23.832 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 0 ms
+2025-02-13 10:38:23.833 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 10:38:23.833 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 10:38:23.833 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 10:38:23.834 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 10:38:23.834 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 10:38:23.834 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 10:38:23.835 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 10:38:23.835 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 10:38:23.836 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 10:38:23.836 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 10:38:23.836 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 10:38:23.837 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 10:38:25.130 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 4 ms
+2025-02-13 10:38:25.154 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 23 ms
+2025-02-13 10:38:25.161 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 5 ms
+2025-02-13 10:38:25.170 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 7 ms
+2025-02-13 10:38:25.175 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 4 ms
+2025-02-13 10:38:25.182 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 7 ms
+2025-02-13 10:38:25.187 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 4 ms
+2025-02-13 10:38:25.192 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 5 ms
+2025-02-13 10:38:25.198 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 5 ms
+2025-02-13 10:38:25.206 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 7 ms
+2025-02-13 10:38:25.211 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 4 ms
+2025-02-13 10:38:25.218 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 6 ms
+2025-02-13 10:38:25.223 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 4 ms
+2025-02-13 10:39:06.739 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 190 ms
+2025-02-13 10:39:06.804 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 252 ms
+2025-02-13 10:39:06.827 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 19 ms
+2025-02-13 10:39:06.842 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 14 ms
+2025-02-13 10:39:06.860 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 17 ms
+2025-02-13 10:39:06.885 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 24 ms
+2025-02-13 10:39:06.901 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 15 ms
+2025-02-13 10:39:06.913 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 10 ms
+2025-02-13 10:39:06.925 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 11 ms
+2025-02-13 10:39:06.936 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 11 ms
+2025-02-13 10:39:06.946 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 8 ms
+2025-02-13 10:39:06.959 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 12 ms
+2025-02-13 10:39:06.970 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 10 ms
+2025-02-13 10:39:06.973 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 1 ms
+2025-02-13 10:39:06.975 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 1 ms
+2025-02-13 10:39:06.975 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 10:39:12.240 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 667 ms
+2025-02-13 10:40:58.034 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000095"} in 7286 ms
+2025-02-13 10:40:58.074 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000095"} in 8 ms
+2025-02-13 10:40:58.091 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:40:58 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000095\r\nMachineName: Test V1SS1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 15 ms
+2025-02-13 10:40:58.091 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:40:58 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000095
+MachineName: Test V1SS1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:41:01.528 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex , @PageSize with Parameters: {"PageIndex":0,"PageSize":1000} in 3241 ms
+2025-02-13 10:41:07.887 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000098"} in 22 ms
+2025-02-13 10:43:52.950 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 823 ms
+2025-02-13 10:43:52.950 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 800 ms
+2025-02-13 10:43:53.060 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 14 ms
+2025-02-13 10:43:53.073 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 10 ms
+2025-02-13 10:43:53.082 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 8 ms
+2025-02-13 10:43:53.089 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 6 ms
+2025-02-13 10:43:53.097 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 7 ms
+2025-02-13 10:43:53.104 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 7 ms
+2025-02-13 10:43:53.105 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 10:43:53.106 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 10:43:53.106 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 10:43:53.106 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 10:43:53.107 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 10:43:53.109 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 10:43:53.109 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 10:43:53.110 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 10:43:54.676 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 4 ms
+2025-02-13 10:43:54.697 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 19 ms
+2025-02-13 10:43:54.706 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 7 ms
+2025-02-13 10:43:54.838 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 5 ms
+2025-02-13 10:43:54.843 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 5 ms
+2025-02-13 10:43:54.853 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 8 ms
+2025-02-13 10:43:54.861 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 7 ms
+2025-02-13 10:43:54.878 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 10 ms
+2025-02-13 10:43:54.882 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 3 ms
+2025-02-13 10:43:54.901 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 18 ms
+2025-02-13 10:43:54.906 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 4 ms
+2025-02-13 10:43:54.912 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 6 ms
+2025-02-13 10:43:54.916 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 3 ms
+2025-02-13 10:44:00.352 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 195 ms
+2025-02-13 10:46:26.650 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 529 ms
+2025-02-13 10:46:26.668 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 545 ms
+2025-02-13 10:46:26.703 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 5 ms
+2025-02-13 10:46:26.705 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 2 ms
+2025-02-13 10:46:26.707 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 0 ms
+2025-02-13 10:46:26.707 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 10:46:26.708 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 10:46:26.708 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 10:46:26.709 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 10:46:26.709 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 10:46:26.709 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 10:46:26.710 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 10:46:26.710 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 10:46:26.710 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 10:46:26.711 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 10:46:26.711 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 10:46:30.009 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 282 ms
+2025-02-13 10:49:01.799 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000098"} in 690 ms
+2025-02-13 10:49:01.837 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000098"} in 6 ms
+2025-02-13 10:49:01.845 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:49:01 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000098\r\nMachineName: M3\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 7 ms
+2025-02-13 10:49:01.846 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:49:01 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000098
+MachineName: M3
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:49:02.042 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 77 ms
+2025-02-13 10:49:06.432 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000099"} in 13 ms
+2025-02-13 10:49:06.434 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000099"} in 1 ms
+2025-02-13 10:49:06.435 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:49:06 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000099\r\nMachineName: MB0\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 1 ms
+2025-02-13 10:49:06.435 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:49:06 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000099
+MachineName: MB0
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:49:06.511 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 48 ms
+2025-02-13 10:49:10.018 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 13 ms
+2025-02-13 10:49:10.020 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000100"} in 1 ms
+2025-02-13 10:49:10.021 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:49:10 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 0 ms
+2025-02-13 10:49:10.021 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:49:10 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:49:10.105 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 48 ms
+2025-02-13 10:49:23.401 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000094"} in 5246 ms
+2025-02-13 10:49:23.404 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":true,"MachineID":"M00000094"} in 2 ms
+2025-02-13 10:49:23.407 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:49:23 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000094\r\nMachineName: Test V1SS0\r\nIsActive: False\r\n----------------------------------------------------\r\nNewIsActive : True\r\n","Type":"Info"} in 2 ms
+2025-02-13 10:49:23.407 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:49:23 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000094
+MachineName: Test V1SS0
+IsActive: False
+----------------------------------------------------
+NewIsActive : True
+
+2025-02-13 10:49:23.558 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 111 ms
+2025-02-13 10:49:28.566 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000095"} in 2124 ms
+2025-02-13 10:49:28.569 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":true,"MachineID":"M00000095"} in 3 ms
+2025-02-13 10:49:28.571 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:49:28 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000095\r\nMachineName: Test V1SS1\r\nIsActive: False\r\n----------------------------------------------------\r\nNewIsActive : True\r\n","Type":"Info"} in 1 ms
+2025-02-13 10:49:28.571 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:49:28 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000095
+MachineName: Test V1SS1
+IsActive: False
+----------------------------------------------------
+NewIsActive : True
+
+2025-02-13 10:49:29.635 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 1033 ms
+2025-02-13 10:55:39.081 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 1687 ms
+2025-02-13 10:55:39.115 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":true,"MachineID":"M00000100"} in 4 ms
+2025-02-13 10:55:39.118 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:55:39 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: False\r\n----------------------------------------------------\r\nNewIsActive : True\r\n","Type":"Info"} in 2 ms
+2025-02-13 10:55:39.118 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:55:39 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: False
+----------------------------------------------------
+NewIsActive : True
+
+2025-02-13 10:55:39.253 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 48 ms
+2025-02-13 10:55:43.094 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000099"} in 9 ms
+2025-02-13 10:55:43.095 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":true,"MachineID":"M00000099"} in 0 ms
+2025-02-13 10:55:43.096 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:55:43 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000099\r\nMachineName: MB0\r\nIsActive: False\r\n----------------------------------------------------\r\nNewIsActive : True\r\n","Type":"Info"} in 0 ms
+2025-02-13 10:55:43.096 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:55:43 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000099
+MachineName: MB0
+IsActive: False
+----------------------------------------------------
+NewIsActive : True
+
+2025-02-13 10:55:43.167 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 45 ms
+2025-02-13 10:55:45.872 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000098"} in 13 ms
+2025-02-13 10:55:45.874 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":true,"MachineID":"M00000098"} in 2 ms
+2025-02-13 10:55:45.875 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:55:45 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000098\r\nMachineName: M3\r\nIsActive: False\r\n----------------------------------------------------\r\nNewIsActive : True\r\n","Type":"Info"} in 1 ms
+2025-02-13 10:55:45.875 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:55:45 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000098
+MachineName: M3
+IsActive: False
+----------------------------------------------------
+NewIsActive : True
+
+2025-02-13 10:55:45.949 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 44 ms
+2025-02-13 10:56:49.420 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @ID = @MachineID with Parameters: {"MachineID":"M00000100"} in 5071 ms
+2025-02-13 10:56:49.424 +07:00 [INF] Command Executed Successfully: UPDATE Machines SET IsActive = @IsActive WHERE MachineID = @MachineID with Parameters: {"IsActive":false,"MachineID":"M00000100"} in 3 ms
+2025-02-13 10:56:49.425 +07:00 [INF] Command Executed Successfully: INSERT INTO Logs (Title, Author, Messages, Type) VALUES (@Title, @Author, @Messages, @Type) with Parameters: {"Title":"Change Success : Change Status Data - Machine","Author":"Rattana Chomwihok","Messages":"Title : Change Success : Change Status Data - Machine \n User : Rattana Chomwihok \n IP Address : 10.99.100.105 \n Date : 2025-02-13 10:56:49 \n Host : 10.99.100.105:5170 \n Change Status\r\n----------------------------------------------------\r\nMachineID: M00000100\r\nMachineName: MB1\r\nIsActive: True\r\n----------------------------------------------------\r\nNewIsActive : False\r\n","Type":"Info"} in 1 ms
+2025-02-13 10:56:49.426 +07:00 [INF] Info Log Inserted: Title : Change Success : Change Status Data - Machine 
+ User : Rattana Chomwihok 
+ IP Address : 10.99.100.105 
+ Date : 2025-02-13 10:56:49 
+ Host : 10.99.100.105:5170 
+ Change Status
+----------------------------------------------------
+MachineID: M00000100
+MachineName: MB1
+IsActive: True
+----------------------------------------------------
+NewIsActive : False
+
+2025-02-13 10:56:49.562 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 99 ms
+2025-02-13 11:01:41.764 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 520 ms
+2025-02-13 11:01:41.764 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 528 ms
+2025-02-13 11:01:41.860 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 14 ms
+2025-02-13 11:01:41.865 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 2 ms
+2025-02-13 11:01:41.866 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 1 ms
+2025-02-13 11:01:41.867 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 11:01:41.867 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 11:01:41.868 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 11:01:41.868 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 11:01:41.869 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 11:01:41.872 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 2 ms
+2025-02-13 11:01:41.880 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 8 ms
+2025-02-13 11:01:41.889 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 8 ms
+2025-02-13 11:01:41.897 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 8 ms
+2025-02-13 11:01:41.906 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 7 ms
+2025-02-13 11:01:41.915 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 8 ms
+2025-02-13 11:01:45.880 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 4 ms
+2025-02-13 11:01:45.896 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 13 ms
+2025-02-13 11:01:45.904 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 6 ms
+2025-02-13 11:01:46.006 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 5 ms
+2025-02-13 11:01:46.009 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 2 ms
+2025-02-13 11:01:46.013 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 3 ms
+2025-02-13 11:01:46.015 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 2 ms
+2025-02-13 11:01:46.023 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 4 ms
+2025-02-13 11:01:46.027 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 4 ms
+2025-02-13 11:01:46.032 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 4 ms
+2025-02-13 11:01:46.034 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 2 ms
+2025-02-13 11:01:46.040 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 5 ms
+2025-02-13 11:01:46.043 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 2 ms
+2025-02-13 11:01:52.289 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 148 ms
+2025-02-13 11:03:36.965 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID with Parameters: {"GUserID":"GU01"} in 703 ms
+2025-02-13 11:03:36.953 +07:00 [INF] Command Executed Successfully: SELECT TOP (1) * FROM AppConfig with Parameters: {"$type":"<>f__AnonymousType0"} in 712 ms
+2025-02-13 11:03:37.040 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":1} in 16 ms
+2025-02-13 11:03:37.045 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":21} in 3 ms
+2025-02-13 11:03:37.047 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":22} in 1 ms
+2025-02-13 11:03:37.047 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":8} in 0 ms
+2025-02-13 11:03:37.048 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":12} in 0 ms
+2025-02-13 11:03:37.048 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":9} in 0 ms
+2025-02-13 11:03:37.049 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":11} in 0 ms
+2025-02-13 11:03:37.050 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":20} in 0 ms
+2025-02-13 11:03:37.051 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":14} in 0 ms
+2025-02-13 11:03:37.052 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":18} in 0 ms
+2025-02-13 11:03:37.052 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":27} in 0 ms
+2025-02-13 11:03:37.053 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":16} in 0 ms
+2025-02-13 11:03:37.054 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":13} in 0 ms
+2025-02-13 11:03:37.055 +07:00 [INF] Command Executed Successfully: EXEC GetMenuPermission @GUserID, @ParentMenuID with Parameters: {"GUserID":"GU01","ParentMenuID":10} in 0 ms
+2025-02-13 11:03:39.794 +07:00 [INF] Command Executed Successfully: SELECT ts.ScheduleID, ts.ScheduleName, ts.Type_schedule, ts.IsActive, ts.Tracking, ts.Custom FROM TimeSchedules AS ts ORDER BY ts.ScheduleID DESC with Parameters: {"$type":"<>f__AnonymousType0"} in 6 ms
+2025-02-13 11:03:39.823 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000007"} in 27 ms
+2025-02-13 11:03:39.830 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000007","TypeSchedule":"Custom"} in 6 ms
+2025-02-13 11:03:39.934 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000006"} in 3 ms
+2025-02-13 11:03:39.936 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000006","TypeSchedule":"Custom"} in 2 ms
+2025-02-13 11:03:39.938 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000004"} in 0 ms
+2025-02-13 11:03:39.939 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000004","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 11:03:39.943 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000003"} in 0 ms
+2025-02-13 11:03:39.943 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000003","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 11:03:39.944 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000002"} in 0 ms
+2025-02-13 11:03:39.945 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000002","TypeSchedule":"Weekly"} in 0 ms
+2025-02-13 11:03:39.945 +07:00 [INF] Command Executed Successfully: EXEC SearchGroupMachinesWithPagination @SearchTerm = @ScheduleID with Parameters: {"ScheduleID":"T00000001"} in 0 ms
+2025-02-13 11:03:39.946 +07:00 [INF] Command Executed Successfully: EXEC GetScheduleData @ScheduleID = @ScheduleID , @TypeSchedule = @TypeSchedule with Parameters: {"ScheduleID":"T00000001","TypeSchedule":"Daily"} in 0 ms
+2025-02-13 11:03:57.780 +07:00 [INF] Command Executed Successfully: EXEC GetMachinesInPage @PageIndex = @page , @PageSize = @pageSize with Parameters: {"page":0,"pageSize":1000} in 391 ms

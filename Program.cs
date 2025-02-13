@@ -2,22 +2,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using PMChecklist_PD_API.Models;
 using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Information()  
+    .MinimumLevel.Information() 
     .WriteTo.Console()  
     .WriteTo.File("logs/myapp.log", rollingInterval: RollingInterval.Day) 
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning) 
     .CreateLogger();
 
 builder.Logging.ClearProviders(); 
 builder.Logging.AddSerilog(); 
-
-builder.Logging.AddFilter("Microsoft", LogLevel.Warning) 
-               .AddFilter("Microsoft.Hosting.Lifetime", LogLevel.None) 
-               .AddFilter("Microsoft.AspNetCore", LogLevel.Warning)
-               .AddFilter("System", LogLevel.Warning); 
 
 builder.Services.AddRazorPages();
 

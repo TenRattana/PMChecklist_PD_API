@@ -20,7 +20,7 @@ public class GroupMachinesController : ControllerBase
         _connection = connection;
     }
 
-    [HttpGet("GetGroupMachines")]
+    [HttpPost("GetGroupMachines/{page}/{pageSize}")]
     public ActionResult<GroupMachines> GetGroupMachines(int page, int pageSize)
     {
         try
@@ -38,7 +38,7 @@ public class GroupMachinesController : ControllerBase
         }
     }
 
-    [HttpGet("SearchGroupMachines")]
+    [HttpPost("SearchGroupMachines/{Messages}")]
     public ActionResult<GroupMachines> SearchGroupMachines(string Messages)
     {
         try
@@ -56,7 +56,7 @@ public class GroupMachinesController : ControllerBase
         }
     }
 
-    [HttpGet("GetGroupMachine")]
+    [HttpPost("GetGroupMachine/{GMachineID}")]
     public ActionResult<GroupMachines> GetGroupMachine(string GMachineID)
     {
         var errors = new List<string>();
@@ -177,7 +177,7 @@ public class GroupMachinesController : ControllerBase
         }
     }
 
-    [HttpDelete("DeleteGroupMachine/{GMachineID}")]
+    [HttpPost("DeleteGroupMachine/{GMachineID}")]
     public IActionResult DeleteGroupMachine(string GMachineID)
     {
         var errors = new List<string>();

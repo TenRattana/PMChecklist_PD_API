@@ -22,7 +22,7 @@ public class AppConfigController : ControllerBase
     /// Select a data display name app and prefix app.
     /// </summary>
     /// <returns></returns>
-    [HttpGet("GetAppConfig")]
+    [HttpPost("GetAppConfig")]
     public ActionResult GetAppConfig()
     {
         try

@@ -20,7 +20,7 @@ public class TimeSchedulesController : ControllerBase
         _timeschedule = timeschedules;
     }
 
-    [HttpGet("GetSchedules")]
+    [HttpPost("GetSchedules")]
     public ActionResult<TimeSchedules> GetSchedules()
     {
         try
